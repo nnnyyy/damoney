@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.dacom.damoney.MainActivity">
-
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"

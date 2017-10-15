@@ -1,16 +1,87 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.dacom.damoney.BMHomeFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:padding="3dp"
+            android:layout_gravity="center_vertical"
+            android:src="@color/colorAccent"
+            android:scaleType="fitCenter"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:src="@color/colorPrimaryDark"
+                android:scaleType="fitCenter"
+                android:padding="0dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:text="10000"/>
+        </LinearLayout>
+    </LinearLayout>
+    <com.dacom.damoney.DamoneyCharacterView
+        android:layout_margin="10dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        />
     <TextView
         android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="배돌 Lv.13"
+        />
+    <Button
+        android:id="@+id/btn_show_ads"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="광고 바로보기"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home Fragment" />
-
-</FrameLayout>
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="고액 보상"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="쿠폰 받기"
+            />
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="친구 추천"
+            />
+    </LinearLayout>
+</LinearLayout>
 </layout>
