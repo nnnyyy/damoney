@@ -1,11 +1,17 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        >
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.dacom.damoney.BMHomeFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
@@ -54,35 +60,44 @@
         android:layout_height="30dp"
         android:text="배돌 Lv.13"
         />
-    <Button
+    <ImageButton
         android:id="@+id/btn_show_ads"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="광고 바로보기"
+        android:src="@drawable/icon_1"
+        android:scaleType="center"
+        android:background="@android:color/transparent"
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-        <Button
+        <ImageButton
             android:id="@+id/btn_go_premium_map"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="고액 보상"
+            android:src="@drawable/icon_2"
+            android:scaleType="center"
+            android:background="@android:color/transparent"
             />
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="쿠폰 받기"
+            android:src="@drawable/icon_3"
+            android:scaleType="center"
+            android:background="@android:color/transparent"
             />
-        <Button
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="친구 추천"
+            android:src="@drawable/icon_4"
+            android:scaleType="center"
+            android:background="@android:color/transparent"
             />
     </LinearLayout>
 </LinearLayout>
+    </RelativeLayout>
 </layout>

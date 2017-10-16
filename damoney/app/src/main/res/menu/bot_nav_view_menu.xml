@@ -5,30 +5,30 @@
         android:id="@+id/act_home"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_alert"
+        android:icon="@drawable/underbar_icon_home"
         android:title="@string/bnvitem_home" />
     <item
         android:id="@+id/act_earn"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/underbar_icon_cash"
         android:title="@string/bnvitem_earn" />
     <item
         android:id="@+id/act_cash"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/underbar_icon_shop"
         android:title="@string/bnvitem_cash" />
     <item
         android:id="@+id/act_comm"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/underbar_icon_community"
         android:title="@string/bnvitem_comm" />
     <item
         android:id="@+id/act_profile"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
-        android:icon="@android:drawable/ic_dialog_info"
+        android:icon="@drawable/underbar_icon_profile"
         android:title="@string/bnvitem_profile" />
 </menu>
