@@ -6,15 +6,11 @@
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dacom.damoney.Advertisement.AdsActivity">
-
+    tools:context="com.dacom.damoney.PremiumRewardActivity">
     <TextView
-        android:id="@+id/ads_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="광고 화면"
-        />
-
+        android:text="고액 보상 맵"/>
 </android.support.constraint.ConstraintLayout>
 </layout>

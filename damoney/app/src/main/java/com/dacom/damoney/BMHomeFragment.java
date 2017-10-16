@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +50,13 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             }
         });
         mBind.btnShowAds.setEnabled(false);
+        mBind.btnGoPremiumMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), PremiumRewardActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -60,6 +68,12 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     public void onAdsFinished(int nRet) {
         if(nRet == -1) {
             Toast.makeText(getContext(), "광고 리워드 받기에 실패 했습니다.", Toast.LENGTH_LONG).show();
+            mBind.btnShowAds.setEnabled(false);
+            adsMan.load();
+        }
+
+        if(nRet == 0) {
+            Toast.makeText(getContext(), "광고 리워드를 받았습니다.", Toast.LENGTH_LONG).show();
             mBind.btnShowAds.setEnabled(false);
             adsMan.load();
         }

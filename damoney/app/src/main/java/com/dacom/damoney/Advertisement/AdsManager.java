@@ -10,9 +10,9 @@ import java.io.Serializable;
  * Created by nnnyy on 2017-10-15.
  */
 
-public class AdsManager implements Serializable{
+public class AdsManager implements Serializable {
     Context mContext;
-    AdsResultListener listener;
+    static AdsResultListener listener;
 
     public AdsManager(Context context) {
         mContext = context;
