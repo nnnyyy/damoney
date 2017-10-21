@@ -38,7 +38,10 @@
         </service>
         <!-- [END firebase_iid_service] -->
         <activity android:name=".Advertisement.AdsActivity" />
-        <activity android:name=".PremiumRewardActivity"></activity>
+        <activity android:name=".PremiumRewardActivity" />
+        <activity android:name=".Sign.SignupActivity">
+        </activity>
+        <activity android:name=".Sign.SigninActivity"></activity>
     </application>
 
 </manifest>
