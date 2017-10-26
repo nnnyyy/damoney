@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         tools:context="com.dacom.damoney.Sign.SignupActivity"
         android:focusableInTouchMode="true"
+        android:background="@color/colorMain"
         >
         <LinearLayout
             android:id="@+id/top_bar"
@@ -27,6 +28,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="회원가입"
+                android:textColor="@color/colorMainFont"
                 android:textSize="24sp" />
         </LinearLayout>
         <ScrollView
@@ -41,17 +43,23 @@
                 android:paddingLeft="36dp"
                 android:paddingRight="36dp"
                 android:orientation="vertical">
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.SignUpEdit">
-                    <EditText
-                        android:id="@+id/et_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:hint="아이디"/>
-                </android.support.design.widget.TextInputLayout>
+                    android:text="아이디"
+                    android:gravity="left"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorMainFont"
+                    />
+                <EditText
+                    android:id="@+id/et_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:inputType="textCapWords"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="center"
+                    style="@style/AppTheme.SignUpEdit"
+                    android:hint="아이디"/>
                 <TextView
                     android:id="@+id/eth_id"
                     android:layout_width="match_parent"
@@ -61,35 +69,38 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.SignUpEdit">
-                    <EditText
-                        android:id="@+id/et_pw"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:hint="비밀번호"
-                        />
-                </android.support.design.widget.TextInputLayout>
+                    android:text="비밀번호"
+                    android:gravity="left"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorMainFont"
+                    />
+                <EditText
+                    android:id="@+id/et_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="center"
+                    android:hint="비밀번호"
+                    style="@style/AppTheme.SignUpEdit"
+                    />
                 <TextView
                     android:id="@+id/eth_pw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/AppTheme.SignUpEditHelper"
                     />
-                <android.support.design.widget.TextInputLayout
+                <EditText
+                    android:id="@+id/et_pwre"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/AppTheme.SignUpEdit">
-                    <EditText
-                        android:id="@+id/et_pwre"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:hint="비밀번호 재확인"/>
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_height="35dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="center"
+                    android:hint="비밀번호 재확인"/>
                 <TextView
                     android:id="@+id/eth_pwre"
                     android:layout_width="match_parent"

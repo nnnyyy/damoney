@@ -11,74 +11,88 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dacom.damoney.Sign.SigninActivity">
+    tools:context="com.dacom.damoney.Sign.SigninActivity"
+    android:background="@color/colorMain"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="56dp"
+        android:gravity="center_vertical"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         >
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
+            android:src="@drawable/damoney_logo"
+            android:scaleType="fitCenter"
+            android:paddingBottom="24dp"
             />
-        <android.support.design.widget.TextInputLayout
+        <EditText
+            android:id="@+id/et_id"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.SignUpEdit">
-            <EditText
-                android:id="@+id/et_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textCapCharacters"
-                android:hint="아이디"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+            android:layout_height="35dp"
+            android:inputType="textCapCharacters"
+            android:hint="아이디"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rounded_edittext"
+            style="@style/AppTheme.SignUpEdit"
+            />
+        <EditText
+            android:id="@+id/et_pw"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.SignUpEdit">
-            <EditText
-                android:id="@+id/et_pw"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="비밀번호"
-                />
-        </android.support.design.widget.TextInputLayout>
-        <Button
-            android:id="@+id/btn_signin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="12dp"
-            android:layout_gravity="center"
-            android:text="Login"
-            android:onClick="@{item::onBtnLogin}"
+            android:layout_height="35dp"
+            android:inputType="textPassword"
+            android:hint="비밀번호"
+            android:gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rounded_edittext"
+            style="@style/AppTheme.SignUpEdit"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Button
+            <ImageButton
                 android:id="@+id/btn_signup"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="회원가입"
+                android:src="@drawable/button_join"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
                 android:onClick="@{item::onBtnSignUp}"
                 />
-            <Button
+            <ImageButton
+                android:id="@+id/btn_signin"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:layout_weight="1"
-                android:text="게스트 로그인"
+                android:src="@drawable/button_login"
+                android:scaleType="fitCenter"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
+                android:text="Login"
+                android:onClick="@{item::onBtnLogin}"
                 />
         </LinearLayout>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:padding="12dp"
+            android:src="@drawable/button_start"
+            android:scaleType="fitCenter"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="center"
+            />
     </LinearLayout>
 </RelativeLayout>
 </layout>
