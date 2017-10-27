@@ -100,7 +100,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
                     }
-                }).Post(0, "http://10.0.2.2:7888/community/posttest", mParams);
+                }).Post(0, "http://192.168.0.30:3000/signup", mParams);
             }
         });
 
