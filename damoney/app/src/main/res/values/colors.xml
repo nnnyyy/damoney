@@ -5,5 +5,6 @@
     <color name="colorAccent">#444444</color>
     <color name="colorAlert">#ff0000</color>
     <color name="colorMain">#f5bf6e</color>
+    <color name="colorSub">#f9dbae</color>
     <color name="colorMainFont">#72512e</color>
 </resources>

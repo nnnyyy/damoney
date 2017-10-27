@@ -110,63 +110,83 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="휴대폰 인증"
+                    android:gravity="left"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorMainFont"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     >
-                    <android.support.design.widget.TextInputLayout
+                    <EditText
+                        android:id="@+id/et_phone_auth"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="7"
-                        style="@style/AppTheme.SignUpEdit">
-                        <EditText
-                            android:id="@+id/et_phone_auth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="textCapWords"
-                            android:hint="휴대폰 인증"/>
-                    </android.support.design.widget.TextInputLayout>
+                        android:layout_height="35dp"
+                        android:inputType="textCapWords"
+                        android:background="@drawable/rounded_edittext"
+                        style="@style/AppTheme.SignUpEdit"
+                        android:hint="휴대폰 인증"/>
                     <Button
                         android:id="@+id/btn_get_authnumber"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_weight="3"
+                        android:background="@drawable/rounded_button"
+                        style="@style/AppTheme.SignUpEdit"
+                        android:layout_marginLeft="5dp"
                         android:text="인증번호 받기"
+                        android:textColor="@color/colorMainFont"
                         />
                 </LinearLayout>
                 <EditText
                     android:id="@+id/et_phone_auth_2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:inputType="textCapWords"
+                    android:background="@drawable/rounded_edittext"
                     android:hint="인증번호 확인"
+                    style="@style/AppTheme.SignUpEdit"
                     />
                 <Button
                     android:id="@+id/btn_verify_authnumber"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="인증번호 확인하기"
+                    android:layout_height="35dp"
+                    android:text="인증번호 확인"
+                    android:background="@drawable/rounded_button"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/colorMainFont"
                     />
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="15dp" />
-                <android.support.design.widget.TextInputLayout
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.SignUpEdit">
-                    <EditText
-                        android:id="@+id/et_recommand"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapWords"
-                        android:hint="추천인"/>
-                </android.support.design.widget.TextInputLayout>
+                    android:text="추천인"
+                    android:gravity="left"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorMainFont"
+                    />
+                <EditText
+                    android:id="@+id/et_recommand"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:inputType="textCapWords"
+                    android:background="@drawable/rounded_edittext"
+                    style="@style/AppTheme.SignUpEdit"
+                    android:hint="추천인"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    >
                     <CheckBox
                         android:id="@+id/cbTerms1"
                         android:layout_width="0dp"
@@ -176,9 +196,13 @@
                         />
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_weight="4"
-                        android:text="이용약관"/>
+                        android:gravity="center"
+                        android:text="이용약관"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@color/colorMainFont"
+                        />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -193,17 +217,24 @@
                         />
                     <TextView
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35dp"
                         android:layout_weight="4"
-                        android:text="이용약관"/>
+                        android:gravity="center"
+                        android:text="이용약관"
+                        android:background="@drawable/rounded_button"
+                        android:textColor="@color/colorMainFont"
+                        />
                 </LinearLayout>
                 <Button
                     android:id="@+id/btn_signup"
                     android:layout_width="200dp"
-                    android:layout_height="80dp"
+                    android:layout_height="35dp"
                     android:text="가입하기"
                     android:layout_gravity="center"
                     android:onClick="@{item::onSignUp}"
+                    android:background="@drawable/rounded_button"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorMainFont"
                     />
             </LinearLayout>
         </ScrollView>
