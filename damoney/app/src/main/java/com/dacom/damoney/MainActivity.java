@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 import android.databinding.DataBindingUtil;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -11,12 +12,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.dacom.damoney.Functional.BottomNavigationViewHelper;
 import com.dacom.damoney.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding mBind;
+    boolean exit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,5 +74,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if(f == null) return false;
         fm.beginTransaction().replace(R.id.content, f).commit();
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            finish(); // finish activity
+        } else {
+            Toast.makeText(this, "한번 더 누르면 종료 됩니다",
+                    Toast.LENGTH_SHORT).show();
+            exit = true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exit = false;
+                }
+            }, 3 * 1000);
+
+        }
     }
 }
