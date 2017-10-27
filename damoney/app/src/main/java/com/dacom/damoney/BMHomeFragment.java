@@ -84,6 +84,8 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         mBind.animationTextureView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
+                if(getActivity() == null ) return;
+
                 mBind.animationTextureView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int width  = mBind.animationTextureView.getMeasuredWidth();
                 int height  = mBind.animationTextureView.getMeasuredHeight();

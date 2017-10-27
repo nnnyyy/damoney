@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.dacom.damoney.Functional.BottomNavigationViewHelper;
 import com.dacom.damoney.databinding.ActivityMainBinding;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding mBind;
@@ -35,7 +36,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMainFont));
+        if (android.os.Build.VERSION.SDK_INT > 19)
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMainFont));
+        else {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(R.color.colorMainFont);
+        }
     }
 
     private void setBotNavView() {

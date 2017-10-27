@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivitySigninBinding;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class SigninActivity extends AppCompatActivity {
     ActivitySigninBinding mBind;
@@ -32,7 +33,14 @@ public class SigninActivity extends AppCompatActivity {
 // add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 // finally change the color
-        window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMain));
+        if (android.os.Build.VERSION.SDK_INT > 19)
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMain));
+        else {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(R.color.colorMain);
+        }
     }
 
     public void onBtnLogin(View v) {
