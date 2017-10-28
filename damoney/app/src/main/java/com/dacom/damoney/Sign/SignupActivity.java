@@ -66,7 +66,9 @@ public class SignupActivity extends AppCompatActivity {
 
                 // 확인 받아서 맞으면 인증 확인 완료 플래그 올림.
                 Map<String, Object> mParams = new HashMap<String, Object>();
-                mParams.put("id", "nnnyyy");
+                mParams.put("id", "test");
+                mParams.put("pw", "testpw");
+                mParams.put("nick", "nnnyyy");
                 new HttpHelper().SetListener(new HttpHelperListener() {
                     @Override
                     public void onResponse(int nType, int nRet, String sResponse) {
@@ -100,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
                     }
-                }).Post(0, "http://192.168.0.30:3000/signup", mParams);
+                }).Post(0, "http://10.0.2.2:3000/signup", mParams);
             }
         });
 
