@@ -3,10 +3,14 @@ package com.dacom.damoney;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.dacom.damoney.Sign.SigninActivity;
 import com.dacom.damoney.databinding.ActivitySplashBinding;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding mBind;
@@ -14,6 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+        setupStatusBar();
 
         new Thread(new Runnable() {
             @Override
@@ -31,5 +36,22 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }).start();
+    }
+
+    private void setupStatusBar() {
+        Window window = getWindow();
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+// finally change the color
+        if (android.os.Build.VERSION.SDK_INT > 19)
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMain));
+        else {
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setNavigationBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(R.color.colorMain);
+        }
     }
 }

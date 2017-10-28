@@ -18,6 +18,9 @@ import com.dacom.damoney.databinding.ActivitySignupBinding;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SignupActivity extends AppCompatActivity {
     private static final String Passwrod_PATTERN = "^(?=.*[a-zA-Z]+)(?=.*[!@#$%^*+=-]|.*[0-9]+).{8,16}$";
     ActivitySignupBinding mBind;
@@ -62,6 +65,8 @@ public class SignupActivity extends AppCompatActivity {
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
                 // 확인 받아서 맞으면 인증 확인 완료 플래그 올림.
+                Map<String, Object> mParams = new HashMap<String, Object>();
+                mParams.put("id", "nnnyyy");
                 new HttpHelper().SetListener(new HttpHelperListener() {
                     @Override
                     public void onResponse(int nType, int nRet, String sResponse) {
@@ -85,8 +90,17 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                             });
                         }
+                        else {
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mBind.circleBar.setVisibility(View.GONE);
+                                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                }
+                            });
+                        }
                     }
-                }).Request(0, "http://4seasonpension.com:3000/list");
+                }).Post(0, "http://192.168.0.30:3000/signup", mParams);
             }
         });
 

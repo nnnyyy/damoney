@@ -4,17 +4,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dacom.damoney.SplashActivity">
-    <TextView
+    tools:context="com.dacom.damoney.SplashActivity"
+    android:background="@color/colorMain"
+    >
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        tools:text="Splash"
-        android:text="Splash"
-        />
-</android.support.constraint.ConstraintLayout>
+        android:src="@drawable/splash"
+        android:scaleType="fitCenter"         />
+</RelativeLayout>
 
 </layout>

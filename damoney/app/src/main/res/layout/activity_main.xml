@@ -8,19 +8,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.dacom.damoney.MainActivity">
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bnv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/colorMainFont"
+        app:menu="@menu/bot_nav_view_menu" />
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
     </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bnv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bot_nav_view_menu" />
 </LinearLayout>
 </layout>
