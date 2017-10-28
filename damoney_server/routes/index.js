@@ -14,12 +14,15 @@ router.post('/signup', function(req, res, next) {
   var nick = req.body['nick'];
   dbhelper.createAccount(id,pw,nick, function(ret){
     res.send(ret);
-  })
+  });
 });
 
 router.post('/signin', function(req,res, next) {
   var id = req.body['id'];
   var pw = req.body['pw'];
-})
+  dbhelper.loginAccount(id,pw, function(ret) {
+    res.send(ret);
+  });
+});
 
 module.exports = router;

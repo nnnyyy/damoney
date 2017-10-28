@@ -14,6 +14,11 @@ import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivitySigninBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SigninActivity extends AppCompatActivity {
     ActivitySigninBinding mBind;
@@ -47,11 +52,21 @@ public class SigninActivity extends AppCompatActivity {
         if(!validate()) {
             return;
         }
-        Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        getApplicationContext().startActivity(intent);
+
+        Map<String, Object> mParams = new HashMap<String, Object>();
+        mParams.put("id", mBind.etId.getText().toString());
+        mParams.put("pw", mBind.etPw.getText().toString());
+
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String sResponse) {
+                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                getApplicationContext().startActivity(intent);
+            }
+        }).Post(0, "http://10.0.2.2:3000/signin", mParams);
     }
 
     public void onBtnSignUp(View v) {
