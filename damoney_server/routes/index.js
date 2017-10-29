@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+// 가입
 router.post('/signup', function(req, res, next) {
   var id = req.body['id'];
   var pw = req.body['pw'];
@@ -17,6 +18,8 @@ router.post('/signup', function(req, res, next) {
   });
 });
 
+// 로그인
+// 토큰 발급을 해줘야 한다.
 router.post('/signin', function(req,res, next) {
   var id = req.body['id'];
   var pw = req.body['pw'];
