@@ -2,6 +2,7 @@
  * Created by nnnyy on 2017-10-28.
  */
 var dbpool = require('./database').db();
+var jwt = require('jsonwebtoken');
 
 // 계정 생성
 exports.createAccount = function(id, pw, nick, cb) {
@@ -23,6 +24,8 @@ exports.loginAccount = function(id, pw, cb) {
             return;
         }
 
-        cb({ret:0, val: rows[0][0].cnt});
+        var token = jwt.sign({_id: id}, 'damoneysecret', {expiresIn: 5 * 60});
+
+        cb({ret:0, access_token: token});
     });
 }
