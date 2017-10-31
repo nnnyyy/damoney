@@ -12,10 +12,14 @@ import android.widget.Toast;
 
 import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
+import com.dacom.damoney.Storage;
 import com.dacom.damoney.databinding.ActivitySigninBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,13 +64,27 @@ public class SigninActivity extends AppCompatActivity {
         new HttpHelper().SetListener(new HttpHelperListener() {
             @Override
             public void onResponse(int nType, int nRet, String sResponse) {
-                Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                getApplicationContext().startActivity(intent);
+                try {
+                    JSONObject obj = new JSONObject(sResponse);
+                    Integer jresult = obj.getInt("ret");
+                    if(jresult != 0) {
+                        Toast.makeText(SigninActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    String sTokenString = obj.getString("access_token");
+                    Storage.save(getApplicationContext(), "AccessToken", sTokenString);
+
+                    Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    getApplicationContext().startActivity(intent);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        }).Post(0, "http://10.0.2.2:3000/signin", mParams);
+        }).Post(0, "http://4seasonpension.com:3003/signin", mParams);
     }
 
     public void onBtnSignUp(View v) {

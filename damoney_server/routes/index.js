@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 var dbhelper = require('../database/dbhelper');
+var authhelper = require('../Auth/AuthHelper');
+var ads = require('../Ads/Ads');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,5 +29,10 @@ router.post('/signin', function(req,res, next) {
     res.send(ret);
   });
 });
+
+router.get('/auth', authhelper.auth, function(req, res) {
+  res.send({ret: 0, msg: 'auth complete'})
+});
+router.get('/ads', authhelper.auth, ads.getAds);
 
 module.exports = router;
