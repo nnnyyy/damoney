@@ -5,12 +5,18 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.dacom.damoney.Sign.SigninActivity;
 import com.dacom.damoney.databinding.ActivitySplashBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding mBind;
@@ -29,11 +35,42 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                Intent intent = new Intent(SplashActivity.this, SigninActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(intent);
+                if(!Storage.have(SplashActivity.this, "AccessToken")) {
+                    Log.i("TestLog", "no have token");
+                    GoSignin();
+                }
+                else {
+                    String sToken = Storage.load(SplashActivity.this, "AccessToken");
+                    new HttpHelper().SetListener(new HttpHelperListener() {
+                        @Override
+                        public void onResponse(int nType, int nRet, String sResponse) {
+                            Log.i("TestLog1", sResponse);
+
+                            if(nRet != 0) {
+                                GoSignin();
+                                return;
+                            }
+
+                            Log.i("TestLog2", sResponse);
+
+                            try {
+                                JSONObject obj = new JSONObject(sResponse);
+                                Integer ret = obj.getInt("ret");
+                                if(ret != 0) {
+                                    GoSignin();
+                                    return;
+                                }
+                                else {
+                                    GoMain();
+                                    return;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).Get(0, "http://4seasonpension.com:3003/auth?token=" + sToken);
+                }
+
             }
         }).start();
     }
@@ -53,5 +90,21 @@ public class SplashActivity extends AppCompatActivity {
             tintManager.setNavigationBarTintEnabled(true);
             tintManager.setStatusBarTintColor(R.color.colorMain);
         }
+    }
+
+    private void GoSignin() {
+        Intent intent = new Intent(SplashActivity.this, SigninActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
+    }
+
+    private void GoMain() {
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(intent);
     }
 }

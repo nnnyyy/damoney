@@ -3,8 +3,11 @@ package com.dacom.damoney.Sign;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -65,14 +68,21 @@ public class SigninActivity extends AppCompatActivity {
             @Override
             public void onResponse(int nType, int nRet, String sResponse) {
                 try {
+                    Log.i("onResponse", sResponse);
                     JSONObject obj = new JSONObject(sResponse);
                     Integer jresult = obj.getInt("ret");
                     if(jresult != 0) {
-                        Toast.makeText(SigninActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(SigninActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         return;
                     }
 
                     String sTokenString = obj.getString("access_token");
+                    Log.i("onResponse", sTokenString);
                     Storage.save(getApplicationContext(), "AccessToken", sTokenString);
 
                     Intent intent = new Intent(SigninActivity.this, MainActivity.class);

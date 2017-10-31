@@ -24,6 +24,11 @@ exports.loginAccount = function(id, pw, cb) {
             return;
         }
 
+        if(rows[0][0].cnt == 0) {
+            cb({ret:-99});
+            return;
+        }
+
         var token = jwt.sign({_id: id}, 'damoneysecret', {expiresIn: 5 * 60});
 
         cb({ret:0, access_token: token});
