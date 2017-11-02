@@ -3,18 +3,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dacom.damoney.Advertisement.AdsActivity">
 
+    <VideoView
+        android:id="@+id/ad_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        />
+
     <TextView
-        android:id="@+id/ads_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="광고 화면"
+        android:text="Test Text"
+        android:textColor="#ff0000"
         />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
 </layout>

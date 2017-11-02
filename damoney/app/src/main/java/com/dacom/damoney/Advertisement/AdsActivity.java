@@ -1,13 +1,18 @@
 package com.dacom.damoney.Advertisement;
 
 import android.databinding.DataBindingUtil;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.MediaController;
 
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsBinding;
+
+import java.net.URL;
 
 public class AdsActivity extends AppCompatActivity {
     ActivityAdsBinding mBind;
@@ -21,40 +26,26 @@ public class AdsActivity extends AppCompatActivity {
     }
 
     private void setupDemoAds() {
-        new Thread(new Runnable() {
+        MediaController mc = new MediaController(this);
+        mBind.adVideo.setMediaController(null);
+        mBind.adVideo.requestFocus();
+        mBind.adVideo.setVideoURI(Uri.parse("http://4seasonpension.com:3003/testads.mp4"));
+        mBind.adVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
-            public void run() {
-                bRunning = true;
-                long nStart = System.currentTimeMillis();
-                while(bRunning) {
-                    final long nDiff = System.currentTimeMillis() - nStart;
-                    if(nDiff >= 3000 && bRunning)
-                    {
-                        finish();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if(AdsManager.listener != null)
-                                    AdsManager.listener.onAdsFinished(0);
-                            }
-                        });
-                        break;
-                    }
-                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mBind.adsText.setText(String.valueOf(nDiff / 1000));
-                        }
-                    });
-
-                    try {
-                        Thread.sleep(30);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mBind.adVideo.seekTo(0);
+                mBind.adVideo.start();
             }
-        }).start();
+        });
+
+        mBind.adVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                finish();
+                if(AdsManager.listener != null)
+                    AdsManager.listener.onAdsFinished(0);
+            }
+        });
     }
 
     @Override
