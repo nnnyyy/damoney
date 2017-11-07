@@ -3,6 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="com.dacom.damoney.Advertisement.AdsActivity" />
+    </data>
+
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -17,14 +23,78 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         />
-
-    <TextView
+    <LinearLayout
+        android:id="@+id/quiz_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Test Text"
-        android:textColor="#ff0000"
-        />
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="이 광고에 나오는 사람은 몇 명인가요?"
+                android:textColor="#222222"
+                />
+            <TextView
+                android:id="@+id/btnSel1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1. 정답 1"
+                android:textColor="#222222"
+                android:onClick="@{item::onBtnSel1}"
+                />
+            <TextView
+                android:id="@+id/btnSel2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="2. 정답 2"
+                android:textColor="#222222"
+                android:onClick="@{item::onBtnSel2}"
+                />
+            <TextView
+                android:id="@+id/btnSel3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="3. 정답 3"
+                android:textColor="#222222"
+                android:onClick="@{item::onBtnSel3}"
+                />
+            <TextView
+                android:id="@+id/btnSel4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="4. 정답 4"
+                android:textColor="#222222"
+                android:onClick="@{item::onBtnSel4}"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#ff0000"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>
 </layout>
