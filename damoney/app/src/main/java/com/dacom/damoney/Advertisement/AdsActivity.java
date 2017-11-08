@@ -4,15 +4,12 @@ import android.databinding.DataBindingUtil;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.MediaController;
 
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsBinding;
-
-import java.net.URL;
 
 public class AdsActivity extends AppCompatActivity {
     ActivityAdsBinding mBind;
@@ -22,10 +19,12 @@ public class AdsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_ads);
+        mBind.setItem(this);
         setupDemoAds();
     }
 
     private void setupDemoAds() {
+        mBind.quizLayout.setVisibility(View.GONE);
         MediaController mc = new MediaController(this);
         mBind.adVideo.setMediaController(null);
         mBind.adVideo.requestFocus();
@@ -41,9 +40,8 @@ public class AdsActivity extends AppCompatActivity {
         mBind.adVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                finish();
-                if(AdsManager.listener != null)
-                    AdsManager.listener.onAdsFinished(0);
+                // 퀴즈 시작
+                mBind.quizLayout.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -54,5 +52,23 @@ public class AdsActivity extends AppCompatActivity {
         bRunning = false;
         if(AdsManager.listener != null)
             AdsManager.listener.onAdsFinished(-1);
+    }
+
+    public void onBtnSel1(View v) {
+        finish();
+        if(AdsManager.listener != null)
+            AdsManager.listener.onAdsFinished(0);
+    }
+
+    public void onBtnSel2(View v) {
+
+    }
+
+    public void onBtnSel3(View v) {
+
+    }
+
+    public void onBtnSel4(View v) {
+
     }
 }
