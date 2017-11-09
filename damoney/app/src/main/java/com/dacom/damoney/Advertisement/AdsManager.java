@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class AdsManager implements Serializable {
     Context mContext;
     static AdsResultListener listener;
+    int mDebugCnt = 0;
 
     public AdsManager(Context context) {
         mContext = context;
@@ -30,8 +31,18 @@ public class AdsManager implements Serializable {
     }
 
     public void startFullAds() {
-        Intent intent = new Intent(mContext, AdsActivity.class);
-        mContext.startActivity(intent);
+        Intent intent = null;
+        switch(mDebugCnt%2) {
+            case 0:
+                //intent = new Intent(mContext, AdsActivity.class);
+                intent = new Intent(mContext, AdsTouchActivity.class);
+                break;
+            case 1:
+                intent = new Intent(mContext, AdsTouchActivity.class);
+                break;
+        }
+        if(intent != null)
+            mContext.startActivity(intent);
     }
 
     private class LoadingTask extends AsyncTask<Long, Long, Long> {
