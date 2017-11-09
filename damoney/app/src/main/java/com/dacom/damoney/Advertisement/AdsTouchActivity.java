@@ -2,17 +2,15 @@ package com.dacom.damoney.Advertisement;
 
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
-import android.media.MediaPlayer;
-import android.net.Uri;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Display;
 import android.view.View;
-import android.widget.MediaController;
 import android.widget.TextView;
 
-import com.dacom.damoney.Functional.NYUtil;
 import com.dacom.damoney.R;
-import com.dacom.damoney.databinding.ActivityAdsBinding;
 import com.dacom.damoney.databinding.ActivityAdsTouchBinding;
 
 import java.util.ArrayList;
@@ -31,13 +29,22 @@ public class AdsTouchActivity extends AppCompatActivity {
     }
 
     private void setupDemoAds() {
-        int[] dx = { 100, 100, 100, 100, 100 };
-        int[] dy = { 100, 130, 160, 190, 220 };
+        float[] dx = { 0.504f, 0.41f, 0.07f, 0.07f, 0.26f };
+        float[] dy = { 0.10f, 0.15f, 0.215f, 0.056f, 0.52f };
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        Log.d("MyLog", size.toString());
+
         for(int i = 0 ; i < 5 ; ++i) {
             TextView tv = new TextView(this);
             tv.setText("Touch " + i);
-            tv.setX(NYUtil.dptopx(this, dx[i]));
-            tv.setY(NYUtil.dptopx(this, dy[i]));
+            int rx = (int)(float)(dx[i] * size.x);
+            int ry = (int)(float)(dy[i] * size.y);
+            Log.d("MyLog", "rx : " + rx + ", ry : " + ry);
+            tv.setX(rx);
+            tv.setY(ry);
             tv.setBackgroundColor(Color.WHITE);
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -53,6 +60,7 @@ public class AdsTouchActivity extends AppCompatActivity {
             });
             mBind.rlTouchArea.addView(tv);
             atvlist.add(tv);
+            CheckClickState();
         }
     }
 
@@ -65,9 +73,13 @@ public class AdsTouchActivity extends AppCompatActivity {
     }
 
     protected boolean CheckClickState() {
+        long nFailedCnt = 0;
         for(TextView tv : atvlist) {
-            if( tv.getVisibility() == View.VISIBLE ) return false;
+            if( tv.getVisibility() == View.VISIBLE ) {
+                nFailedCnt++;
+            }
         }
-        return true;
+        mBind.cnt.setText("" + (atvlist.size() - nFailedCnt) + "/" + atvlist.size());
+        return nFailedCnt == 0;
     }
 }
