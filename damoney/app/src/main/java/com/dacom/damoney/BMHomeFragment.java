@@ -41,6 +41,15 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         setupAds();
         setupButtonEvent();
         setupAnim();
+
+        mBind.btnGoPremiumMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.btn_go_premium_map);
+            }
+        });
+
         return mBind.getRoot();
     }
 

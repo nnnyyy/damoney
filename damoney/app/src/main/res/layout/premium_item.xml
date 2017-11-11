@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.dacom.damoney.PremiumItem" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_vertical"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:layout_margin="8dp"
+        >
+        <ImageView
+            android:id="@+id/iv_thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            app:imgRes = "@{item.iconResId}"
+            />
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                tools:text="Title Title Title Title Title"
+                android:text="@{item.title}"
+                android:gravity="center_vertical"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:text="설치형"
+                    app:typeRes="@{item.type}"
+                    android:gravity="center_vertical"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:pointRes="@{item.point}"
+            tools:text="1100"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</layout>
