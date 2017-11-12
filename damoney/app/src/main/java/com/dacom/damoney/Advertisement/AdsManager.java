@@ -32,13 +32,16 @@ public class AdsManager implements Serializable {
 
     public void startFullAds() {
         Intent intent = null;
-        switch(mDebugCnt%2) {
+        switch(mDebugCnt%3) {
             case 0:
                 //intent = new Intent(mContext, AdsActivity.class);
                 intent = new Intent(mContext, AdsTouchActivity.class);
                 break;
             case 1:
-                intent = new Intent(mContext, AdsTouchActivity.class);
+                intent = new Intent(mContext, AdsTypingActivity.class);
+                break;
+            case 2:
+                intent = new Intent(mContext, AdsActivity.class);
                 break;
         }
         if(intent != null)

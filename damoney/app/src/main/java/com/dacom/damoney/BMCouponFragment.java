@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.FragmentPremiummapBinding;
+import com.dacom.damoney.databinding.FragmentCouponBinding;
 
 import java.util.ArrayList;
 
@@ -18,23 +18,25 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMPremiumMapFragment extends Fragment {
-    FragmentPremiummapBinding mBind;
+public class BMCouponFragment extends Fragment {
+    FragmentCouponBinding mBind;
 
-    public BMPremiumMapFragment() {
+    public BMCouponFragment() {
         // Required empty public constructor
     }
 
     private void setupRecyclerView() {
         mBind.rvPremiumList.setHasFixedSize(true);
         mBind.rvPremiumList.setLayoutManager(new LinearLayoutManager(mBind.getRoot().getContext()));
-        mBind.rvPremiumList.setAdapter(new PremiumMapRecyclerAdapter());
+        mBind.rvPremiumList.setAdapter(new CouponRecyclerAdapter(this));
         mBind.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBtnBack(v);
             }
         });
+
+        mBind.descWnd.setVisibility(View.GONE);
     }
 
     public void onBtnBack(View v) {
@@ -46,7 +48,7 @@ public class BMPremiumMapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_premiummap, container, false);
+        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_coupon, container, false);
         setupRecyclerView();
         return mBind.getRoot();
     }
@@ -56,22 +58,32 @@ public class BMPremiumMapFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         int[] resid = { R.drawable.premium_icon_cjone, R.drawable.premium_icon_coupang, R.drawable.premium_icon_daum };
-        String[] titles = { "CJ ONE", "쿠팡", "다음"};
-        int[] point = { 1100, 2000, 1500 };
-        int[] types = { 0, 1, 2}; // 설치형, 가입형, 실행형
-        ArrayList<PremiumItem> list = new ArrayList<>();
+        String[] titles = { "탐앤탐스", "롯데리아", "도미노피자" };
+        String[] desc = { "무료 사이즈 업그레이드", "단품 주문 시, 세트 제공", "콜라 1.25L 제공"};
+        int[] point = { 50, 30, 100 };
+        ArrayList<CouponItem> list = new ArrayList<>();
         for(int i = 0 ; i < 3 ; ++i) {
-            PremiumItem newItem = new PremiumItem();
+            CouponItem newItem = new CouponItem();
             newItem.iconResId = resid[i];
             newItem.title = titles[i];
+            newItem.desc = desc[i];
             newItem.point = point[i];
-            newItem.type = types[i];
             newItem.sURL = "http://naver.com";
             list.add(newItem);
         }
 
-        PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
+        CouponRecyclerAdapter adapter = (CouponRecyclerAdapter)mBind.rvPremiumList.getAdapter();
         adapter.AddList(list);
         adapter.notifyDataSetChanged();
+    }
+
+    void showCouponUseWnd(/*CouponInfo info*/){
+        mBind.descWnd.setVisibility(View.VISIBLE);
+        mBind.wndClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBind.descWnd.setVisibility(View.GONE);
+            }
+        });
     }
 }

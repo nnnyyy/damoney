@@ -1,7 +1,6 @@
 package com.dacom.damoney;
 
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -42,14 +41,6 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         setupButtonEvent();
         setupAnim();
 
-        mBind.btnGoPremiumMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MainActivity mainAct = (MainActivity)getActivity();
-                mainAct.changeFragment(R.id.btn_go_premium_map);
-            }
-        });
-
         return mBind.getRoot();
     }
 
@@ -82,8 +73,16 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         mBind.btnGoPremiumMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), PremiumRewardActivity.class);
-                getContext().startActivity(intent);
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.btn_go_premium_map);
+            }
+        });
+
+        mBind.btnCoupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.btn_coupon);
             }
         });
     }

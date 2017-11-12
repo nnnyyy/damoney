@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.dacom.damoney.PremiumItem" />
+            type="com.dacom.damoney.CouponItem" />
     </data>
     <LinearLayout
         android:id="@+id/clickable"
@@ -26,7 +26,8 @@
             app:imgRes = "@{item.iconResId}"
             />
         <LinearLayout
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
@@ -46,18 +47,24 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:text="설치형"
-                    app:typeRes="@{item.type}"
+                    tools:text="무료 사이즈 업그레이드"
+                    android:text="@{item.desc}"
                     android:gravity="center_vertical"
                     />
             </LinearLayout>
         </LinearLayout>
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
             app:pointRes="@{item.point}"
             tools:text="1100"
             android:gravity="center"
+            />
+        <ImageButton
+            android:id="@+id/btn_down_coupon"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="#77ff0000"
             />
     </LinearLayout>
 </layout>

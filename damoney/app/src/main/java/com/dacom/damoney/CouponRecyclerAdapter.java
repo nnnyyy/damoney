@@ -1,6 +1,5 @@
 package com.dacom.damoney;
 
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.dacom.damoney.Advertisement.AdsWebView;
-import com.dacom.damoney.databinding.PremiumItemBinding;
+import com.dacom.damoney.databinding.CouponItemBinding;
 
 import java.util.ArrayList;
 
@@ -19,33 +17,34 @@ import java.util.ArrayList;
  * Created by nnnyyy on 2017-09-05.
  */
 
-public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRecyclerAdapter.ArticleItemViewHolder> {
+public class CouponRecyclerAdapter extends RecyclerView.Adapter<CouponRecyclerAdapter.ArticleItemViewHolder> {
 
-    ArrayList<PremiumItem> aItemList = new ArrayList<>();
+    BMCouponFragment fragment;
+    ArrayList<CouponItem> aItemList = new ArrayList<>();
     int mLastPosition = -1;
 
-    public PremiumMapRecyclerAdapter() {
+    public CouponRecyclerAdapter(BMCouponFragment f) {
+        fragment = f;
         setHasStableIds(true);
     }
 
     @Override
-    public PremiumMapRecyclerAdapter.ArticleItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        PremiumItemBinding bind = PremiumItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+    public CouponRecyclerAdapter.ArticleItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        CouponItemBinding bind = CouponItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ArticleItemViewHolder(bind.getRoot());
     }
 
 
 
     @Override
-    public void onBindViewHolder(PremiumMapRecyclerAdapter.ArticleItemViewHolder holder, int position) {
-        final PremiumItem item =  aItemList.get(position);
+    public void onBindViewHolder(CouponRecyclerAdapter.ArticleItemViewHolder holder, int position) {
+        final CouponItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
-        holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
+        holder.mBind.btnDownCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AdsWebView.class);
-                intent.putExtra("url", item.sURL);
-                v.getContext().startActivity(intent);
+                //  쿠폰 다운로드
+                fragment.showCouponUseWnd();
             }
         });
     }
@@ -60,7 +59,7 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
         return aItemList.size();
     }
 
-    public void AddList(ArrayList<PremiumItem> _list) {
+    public void AddList(ArrayList<CouponItem> _list) {
         aItemList.addAll(_list);
     }
 
@@ -70,7 +69,7 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
     }
 
     public class ArticleItemViewHolder extends RecyclerView.ViewHolder {
-        final PremiumItemBinding mBind;
+        final CouponItemBinding mBind;
 
         public ArticleItemViewHolder(View itemView) {
             super(itemView);
@@ -81,19 +80,6 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
     @BindingAdapter({"pointRes"})
     public static void setPointText(TextView tv, int point) {
         tv.setText("" + point + "원");
-    }
-
-    @BindingAdapter({"typeRes"})
-    public static void setTypeText(TextView tv, int type) {
-        String t = null;
-        switch (type) {
-            case 0: t = "설치형"; break;
-            case 1: t = "가입형"; break;
-            case 2: t = "실행형"; break;
-            default:
-                t = "NoData";
-        }
-        tv.setText(t);
     }
 
     @BindingAdapter({"imgRes"})
