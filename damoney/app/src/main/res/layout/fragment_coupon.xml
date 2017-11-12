@@ -18,9 +18,12 @@
                     android:id="@+id/btn_back"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:background="#ff0000"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/btn_back"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
                     />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -67,6 +70,7 @@
                 android:layout_centerInParent="true"
                 >
                 <RelativeLayout
+                    android:background="#ffffff"
                     android:layout_width="match_parent"
                     android:layout_height="48dp">
                     <Button
@@ -74,20 +78,71 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
                         android:layout_marginRight="8dp"
                         android:text="X"
-                        android:textSize="30dp"
+                        android:textSize="28dp"
                         android:background="#00000000"/>
                 </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="112dp"
-                    android:background="#0000ff">
+                    android:background="#ffffff"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="112dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/premium_icon_cjone"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="6"
+                            android:gravity="center_vertical"
+                            tools:text="스타벅스"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="4"
+                            android:gravity="center_vertical"
+                            tools:text="무료 사이즈 업그레이드"/>
+                    </LinearLayout>
                 </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000"
+                    />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#ff0000">
+                    android:background="#ffffff">
+                    <ImageView
+                        android:id="@+id/barcode"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/barcode_example"
+                        android:scaleType="fitCenter"
+                        android:layout_margin="10dp"
+                        android:layout_height="match_parent" />
+                    <TextView
+                        android:text="사용하기"
+                        android:layout_width="96dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

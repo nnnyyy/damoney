@@ -39,7 +39,9 @@
         <!-- [END firebase_iid_service] -->
         <activity android:name=".Advertisement.AdsActivity" />
         <activity android:name=".Advertisement.AdsTouchActivity" />
-        <activity android:name=".Advertisement.AdsTypingActivity" />
+        <activity android:name=".Advertisement.AdsTypingActivity"
+            android:windowSoftInputMode="adjustNothing"
+            />
         <activity android:name=".PremiumRewardActivity" />
         <activity android:name=".Sign.SignupActivity"></activity>
         <activity android:name=".Sign.SigninActivity" />
