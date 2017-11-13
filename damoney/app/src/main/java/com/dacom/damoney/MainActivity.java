@@ -1,5 +1,6 @@
 package com.dacom.damoney;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,8 +16,12 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.dacom.damoney.Functional.BottomNavigationViewHelper;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.ActivityMainBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+import com.tsengvn.typekit.TypekitContextWrapper;
+
+import org.json.JSONException;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding mBind;
@@ -27,6 +32,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
         setupStatusBar();
         setBotNavView();
+        MyPassport.getInstance().init(this);
+        try {
+            MyPassport.getInstance().loadInfo();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
 
     private void setupStatusBar() {

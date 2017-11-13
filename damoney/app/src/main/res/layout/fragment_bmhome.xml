@@ -42,12 +42,13 @@
                     android:scaleType="fitCenter"
                     android:padding="10dp"/>
                 <TextView
+                    android:id="@+id/tvPoint"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:gravity="center_vertical"
                     android:textSize="30dp"
-                    android:text="10000"/>
+                    android:text="0"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -113,6 +114,11 @@
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#777777"
+            ></View>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -121,12 +127,18 @@
         <ImageButton
             android:id="@+id/btn_show_ads"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="84dp"
             android:src="@drawable/icon_1"
             android:scaleType="fitCenter"
             android:background="@android:color/transparent"
-            android:padding="30dp"
+            android:layout_margin="16dp"
+            android:padding="16dp"
             />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#777777"
+            ></View>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -139,8 +151,13 @@
                 android:src="@drawable/icon_2"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:padding="30dp"
+                android:layout_margin="8dp"
                 />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#777777"
+                ></View>
             <ImageButton
                 android:id="@+id/btn_coupon"
                 android:layout_width="0dp"
@@ -149,8 +166,13 @@
                 android:src="@drawable/icon_3"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:padding="30dp"
+                android:layout_margin="8dp"
                 />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#777777"
+                ></View>
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -158,7 +180,7 @@
                 android:src="@drawable/icon_4"
                 android:scaleType="fitCenter"
                 android:background="@android:color/transparent"
-                android:padding="30dp"
+                android:layout_margin="8dp"
                 />
         </LinearLayout>
     </LinearLayout>
