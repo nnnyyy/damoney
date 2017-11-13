@@ -93,6 +93,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
 
     private void setupAnim() {
 
+        mBind.animationTextureView.removeAllChildren();
         mBind.animationTextureView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
