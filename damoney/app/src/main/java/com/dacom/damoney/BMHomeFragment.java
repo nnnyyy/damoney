@@ -92,17 +92,15 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void setupAnim() {
-
-        mBind.animationTextureView.removeAllChildren();
         mBind.animationTextureView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if(getActivity() == null ) return;
-
                 mBind.animationTextureView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int width  = mBind.animationTextureView.getMeasuredWidth();
                 int height  = mBind.animationTextureView.getMeasuredHeight();
 
+                mBind.animationTextureView.removeAllChildren();
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.character_idle);
                 Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap,
                         (int)Util.convertDpToPixel(480f,getContext()),

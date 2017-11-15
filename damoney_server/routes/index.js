@@ -20,6 +20,8 @@ router.post('/signup', function(req, res, next) {
   });
 });
 
+router.use(authhelper.auth);
+
 // 로그인
 // 토큰 발급을 해줘야 한다.
 router.post('/signin', function(req,res, next) {
@@ -30,9 +32,23 @@ router.post('/signin', function(req,res, next) {
   });
 });
 
-router.get('/auth', authhelper.auth, function(req, res) {
+router.get('/auth', function(req, res) {
   res.send({ret: 0, msg: 'auth complete'})
 });
-router.get('/ads', authhelper.auth, ads.getAds);
+
+router.get('/getpoint', function(req, res) {
+  dbhelper.getPoint(req.decoded._id, function(ret) {
+    res.send(ret);
+  })
+})
+
+router.get('/get/premiumlist', function(req, res) {
+  var id = req.decoded._id;
+  dbhelper.getPremiumList(id, function(ret) {
+    res.send(ret);
+  })
+})
+
+router.get('/ads', ads.getAds);
 
 module.exports = router;
