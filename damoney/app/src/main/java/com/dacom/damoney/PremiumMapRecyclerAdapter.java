@@ -1,8 +1,10 @@
 package com.dacom.damoney;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +42,9 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
     public void onBindViewHolder(PremiumMapRecyclerAdapter.ArticleItemViewHolder holder, int position) {
         final PremiumItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
+        AssetManager am = holder.mBind.getRoot().getContext().getAssets();
+        Typeface custom_font = Typeface.createFromAsset(am, "fonts/NanumBarunGothic.ttf");
+        holder.mBind.tvTitle.setTypeface(custom_font);
         holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

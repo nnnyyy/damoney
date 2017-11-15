@@ -14,8 +14,8 @@ public class CustomStartApp extends Application {
         super.onCreate();
 
         Typekit.getInstance()
-                .addNormal(Typekit.createFromAsset(this, "NanumBarunGothic.ttf"))
-                .addBold(Typekit.createFromAsset(this,"NanumBarunGothicBold.ttf"))
-                .addCustom1(Typekit.createFromAsset(this,"NanumBarunGothicLight.ttf"));
+                .addNormal(Typekit.createFromAsset(this, "fonts/NanumBarunGothic.ttf"))
+                .addBold(Typekit.createFromAsset(this,"fonts/NanumBarunGothicBold.ttf"))
+                .addCustom1(Typekit.createFromAsset(this,"fonts/NanumBarunGothicLight.ttf"));
     }
 }

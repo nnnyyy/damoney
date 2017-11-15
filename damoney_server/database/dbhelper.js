@@ -45,7 +45,7 @@ exports.getPoint = function(id, cb) {
         }
 
         if(rows[0] && rows[0].length == 0) {
-            console.log("getPoint Failed : not exist rows");
+            console.log("getPoint Failed : not exist rows - " + id);
             cb({ret:-99});
             return;
         }

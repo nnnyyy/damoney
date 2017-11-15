@@ -21,8 +21,6 @@ import com.dacom.damoney.databinding.ActivityMainBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
-import org.json.JSONException;
-
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding mBind;
     boolean exit = false;
@@ -33,11 +31,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setupStatusBar();
         setBotNavView();
         MyPassport.getInstance().init(this);
-        try {
-            MyPassport.getInstance().loadInfo();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

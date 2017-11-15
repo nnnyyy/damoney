@@ -25,4 +25,11 @@ public class Storage {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.contains(sKey);
     }
+
+    public static void delete(Context context, String sKey) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(sKey);
+        editor.apply();
+    }
 }

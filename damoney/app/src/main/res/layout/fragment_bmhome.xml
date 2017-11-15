@@ -80,9 +80,11 @@
                     android:adjustViewBounds="true"
                     />
                 <TextView
+                    android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Baedol"
+                    android:text="다람쥐 쳇바퀴"
+                    android:textStyle="bold"
                     android:gravity="bottom"
                     android:textSize="18dp"
                     android:layout_marginLeft="5dp"

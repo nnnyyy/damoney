@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
-import com.dacom.damoney.Storage;
 import com.dacom.damoney.databinding.ActivitySigninBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
@@ -83,7 +82,7 @@ public class SigninActivity extends AppCompatActivity {
 
                     String sTokenString = obj.getString("access_token");
                     Log.i("onResponse", sTokenString);
-                    Storage.save(getApplicationContext(), "AccessToken", sTokenString);
+                    MyPassport.getInstance().saveToken(SigninActivity.this, sTokenString);
 
                     MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
                         @Override

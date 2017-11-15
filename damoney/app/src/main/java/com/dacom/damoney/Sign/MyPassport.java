@@ -14,9 +14,9 @@ import org.json.JSONObject;
  */
 
 public class MyPassport {
-    public static final String MP_INFO = "myinfo";
+    public static final String TOKEN_KEY = "AccessToken";
     public int nPoint = 0;
-    public String sToken;
+    protected String sToken;
     protected Context mContext;
     protected static MyPassport obj;
 
@@ -34,28 +34,6 @@ public class MyPassport {
 
     public void init(Context context) {
         mContext = context;
-    }
-    public boolean loadInfo() throws JSONException {
-        if(mContext == null) return false;
-        if(!Storage.have(mContext, MP_INFO)) {
-            // 기본 세팅. 나중에는 어짜피 DB에서 가져온다.
-            nPoint = 0;
-            saveInfo();
-            return true;
-        }
-        String json_myinfo = Storage.load(mContext, MP_INFO);
-        JSONObject loadedData = new JSONObject(json_myinfo);
-        nPoint = loadedData.getInt("point");
-        return true;
-    }
-
-    public boolean saveInfo() throws JSONException {
-        if(mContext == null) return false;
-        JSONObject data = new JSONObject();
-        data.put("point", nPoint);
-        Storage.save(mContext, MP_INFO, data.toString());
-
-        return true;
     }
 
     public void RequestInfo(final RequestInfoListener _listener) {
@@ -81,7 +59,7 @@ public class MyPassport {
                         return;
                     }
 
-                    MyPassport.getInstance().nPoint = obj.getInt("point");
+                    nPoint = obj.getInt("point");
 
                     if(_listener != null) {
                         _listener.onResult(0);
@@ -94,6 +72,23 @@ public class MyPassport {
                     return;
                 }
             }
-        }).Get(0, "http://4seasonpension.com:3003/getpoint?token=" + sToken);
+        }).Get(0, "http://4seasonpension.com:3003/getpoint?token=" + getToken());
     }
+
+    public String loadToken(Context context) {
+        String s = Storage.load(context, TOKEN_KEY);
+        sToken = s;
+        return s;
+    }
+
+    public void saveToken(Context context, String sTokenString) {
+        Storage.save(context, TOKEN_KEY, sTokenString);
+        loadToken(context);
+    }
+
+    public void deleteToken(Context context) {
+        Storage.delete(context, TOKEN_KEY);
+    }
+
+    public String getToken() { return sToken; }
 }

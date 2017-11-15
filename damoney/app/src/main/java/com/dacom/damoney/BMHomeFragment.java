@@ -21,8 +21,6 @@ import com.dacom.damoney.Advertisement.AdsResultListener;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentBmhomeBinding;
 
-import org.json.JSONException;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -157,12 +155,12 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         if(nRet == 0) {
             //  이 과정이 나중에는 서버에서 결과를 수신하는 형태가 되어야한다.
             Toast.makeText(getContext(), "광고 리워드를 받았습니다.", Toast.LENGTH_LONG).show();
-            MyPassport.getInstance().nPoint += 1000;
+            /*MyPassport.getInstance().nPoint += 1000;
             try {
                 MyPassport.getInstance().saveInfo();
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            }*/
             refreshInfo();
             mBind.btnShowAds.setEnabled(false);
             adsMan.load();

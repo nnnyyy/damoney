@@ -3,6 +3,8 @@ package com.dacom.damoney;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentPremiummapBinding;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -55,23 +64,41 @@ public class BMPremiumMapFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        int[] resid = { R.drawable.premium_icon_cjone, R.drawable.premium_icon_coupang, R.drawable.premium_icon_daum };
-        String[] titles = { "CJ ONE", "쿠팡", "다음"};
-        int[] point = { 1100, 2000, 1500 };
-        int[] types = { 0, 1, 2}; // 설치형, 가입형, 실행형
-        ArrayList<PremiumItem> list = new ArrayList<>();
-        for(int i = 0 ; i < 3 ; ++i) {
-            PremiumItem newItem = new PremiumItem();
-            newItem.iconResId = resid[i];
-            newItem.title = titles[i];
-            newItem.point = point[i];
-            newItem.type = types[i];
-            newItem.sURL = "http://naver.com";
-            list.add(newItem);
-        }
+        loadAds();
+    }
 
-        PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
-        adapter.AddList(list);
-        adapter.notifyDataSetChanged();
+    protected void loadAds() {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                final ArrayList<PremiumItem> list = new ArrayList<>();
+                try {
+                    JSONObject root = new JSONObject(s);
+                    JSONArray a = root.getJSONArray("list");
+                    int cnt = a.length();
+                    for(int i = 0 ; i < cnt ; ++i) {
+                        PremiumItem newItem = new PremiumItem();
+                        JSONObject o = a.getJSONObject(i);
+                        newItem.title = o.getString("name");
+                        newItem.sURL = o.getString("link");
+                        newItem.iconResId = R.drawable.premium_icon_cjone;
+                        newItem.type = o.getInt("type");
+                        newItem.point = o.getInt("reward");
+                        list.add(newItem);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
+                        adapter.AddList(list);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        }).Get(0, Global.BASE_URL + "/get/premiumlist?token=" + MyPassport.getInstance().getToken());
     }
 }

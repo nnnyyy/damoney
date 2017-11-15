@@ -41,11 +41,12 @@ public class SplashActivity extends AppCompatActivity {
                     GoSignin();
                 }
                 else {
-                    final String sToken = Storage.load(SplashActivity.this, "AccessToken");
+                    MyPassport.getInstance().loadToken(SplashActivity.this);
                     new HttpHelper().SetListener(new HttpHelperListener() {
                         @Override
                         public void onResponse(int nType, int nRet, String sResponse) {
                             if(nRet != 0) {
+                                MyPassport.getInstance().deleteToken(SplashActivity.this);
                                 GoSignin();
                                 return;
                             }
@@ -53,18 +54,19 @@ public class SplashActivity extends AppCompatActivity {
                                 JSONObject obj = new JSONObject(sResponse);
                                 Integer ret = obj.getInt("ret");
                                 if(ret != 0) {
+                                    MyPassport.getInstance().deleteToken(SplashActivity.this);
                                     GoSignin();
                                     return;
                                 }
                                 else {
-                                    GoMain(sToken);
+                                    GoMain();
                                     return;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
                         }
-                    }).Get(0, "http://4seasonpension.com:3003/auth?token=" + sToken);
+                    }).Get(0, Global.BASE_URL + "/auth?token=" + MyPassport.getInstance().getToken());
                 }
 
             }
@@ -96,7 +98,7 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void GoMain(String sToken) {
+    private void GoMain() {
 
         MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
             @Override
