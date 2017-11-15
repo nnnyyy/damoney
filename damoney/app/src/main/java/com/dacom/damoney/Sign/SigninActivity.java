@@ -85,11 +85,21 @@ public class SigninActivity extends AppCompatActivity {
                     Log.i("onResponse", sTokenString);
                     Storage.save(getApplicationContext(), "AccessToken", sTokenString);
 
-                    Intent intent = new Intent(SigninActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    getApplicationContext().startActivity(intent);
+                    MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+                        @Override
+                        public void onResult(int nRet) {
+                            if(nRet != 0) {
+                                finish();
+                                return;
+                            }
+
+                            Intent intent = new Intent(SigninActivity.this, MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

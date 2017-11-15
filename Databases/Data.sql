@@ -1,0 +1,12 @@
+CALL InsertAds('Syrup Wallet', '', 0, 1100, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=com.skt.skaf.OA00026910', '', 0 );
+CALL InsertAds('Daum', '', 1, 1500, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=net.daum.android.daum', '', 0 );
+CALL InsertAds('CJ ONE', '', 0, 1100, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=kr.co.ivlog.mobile.app.cjonecard.', '', 0 );
+CALL InsertAds('캔디크러쉬사가', '', 0, 1100, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=com.king.candycrushsaga', '', 0 );
+CALL InsertAds('쿠팡', '', 2, 2000, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=com.coupang.mobile', '', 0 );
+CALL InsertAds('세븐나이츠 for kakao', '', 1, 1500, '2017-01-01', '2017-12-31', 'https://play.google.com/store/apps/details?id=com.cjenm.sknights', '', 0 );
+CALL InsertAds('탐앤탐스', '', 3, 50, '2017-01-01', '2017-12-31', '', '무료 사이즈 업그레이드', 0 );
+CALL InsertAds('롯데리아', '', 3, 50, '2017-01-01', '2017-12-31', '', '단품 주문 시, 세트로 제공', 0 );
+CALL InsertAds('7번가피자', '', 3, 50, '2017-01-01', '2017-12-31', '', '콜라 1.25L 제공', 0 );
+CALL InsertAds('스타벅스', '', 3, 50, '2017-01-01', '2017-12-31', '', '무료 사이즈 업그레이드', 0 );
+CALL InsertAds('네네치킨', '', 3, 50, '2017-01-01', '2017-12-31', '', '1000원 할인', 0 );
+CALL InsertAds('sk텔레콤', '', 3, 50, '2017-01-01', '2017-12-31', '', '데이터 1G 제공', 0 );

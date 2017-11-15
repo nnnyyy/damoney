@@ -3,6 +3,8 @@ package com.dacom.damoney.Sign;
 import android.content.Context;
 
 import com.dacom.damoney.Storage;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
+import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,8 +16,13 @@ import org.json.JSONObject;
 public class MyPassport {
     public static final String MP_INFO = "myinfo";
     public int nPoint = 0;
+    public String sToken;
     protected Context mContext;
     protected static MyPassport obj;
+
+    public interface RequestInfoListener {
+        void onResult(int nRet);
+    }
 
     public static MyPassport getInstance() {
         if( obj == null ) {
@@ -49,5 +56,44 @@ public class MyPassport {
         Storage.save(mContext, MP_INFO, data.toString());
 
         return true;
+    }
+
+    public void RequestInfo(final RequestInfoListener _listener) {
+
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String sResponse) {
+                if(nRet != 0) {
+                    if(_listener != null) {
+                        _listener.onResult(nRet);
+                    }
+                    return;
+                }
+
+                JSONObject obj = null;
+                try {
+                    obj = new JSONObject(sResponse);
+                    Integer ret = obj.getInt("ret");
+                    if(ret != 0) {
+                        if(_listener != null) {
+                            _listener.onResult(nRet);
+                        }
+                        return;
+                    }
+
+                    MyPassport.getInstance().nPoint = obj.getInt("point");
+
+                    if(_listener != null) {
+                        _listener.onResult(0);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(_listener != null) {
+                        _listener.onResult(-1);
+                    }
+                    return;
+                }
+            }
+        }).Get(0, "http://4seasonpension.com:3003/getpoint?token=" + sToken);
     }
 }

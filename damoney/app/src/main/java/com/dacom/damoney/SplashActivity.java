@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.Sign.SigninActivity;
 import com.dacom.damoney.databinding.ActivitySplashBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -40,19 +41,14 @@ public class SplashActivity extends AppCompatActivity {
                     GoSignin();
                 }
                 else {
-                    String sToken = Storage.load(SplashActivity.this, "AccessToken");
+                    final String sToken = Storage.load(SplashActivity.this, "AccessToken");
                     new HttpHelper().SetListener(new HttpHelperListener() {
                         @Override
                         public void onResponse(int nType, int nRet, String sResponse) {
-                            Log.i("TestLog1", sResponse);
-
                             if(nRet != 0) {
                                 GoSignin();
                                 return;
                             }
-
-                            Log.i("TestLog2", sResponse);
-
                             try {
                                 JSONObject obj = new JSONObject(sResponse);
                                 Integer ret = obj.getInt("ret");
@@ -61,7 +57,7 @@ public class SplashActivity extends AppCompatActivity {
                                     return;
                                 }
                                 else {
-                                    GoMain();
+                                    GoMain(sToken);
                                     return;
                                 }
                             } catch (JSONException e) {
@@ -100,11 +96,22 @@ public class SplashActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void GoMain() {
-        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivity(intent);
+    private void GoMain(String sToken) {
+
+        MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet != 0) {
+                    GoSignin();
+                    return;
+                }
+
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
+        });
     }
 }
