@@ -90,47 +90,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void setupAnim() {
-        mBind.animationTextureView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                if(getActivity() == null ) return;
-                mBind.animationTextureView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int width  = mBind.animationTextureView.getMeasuredWidth();
-                int height  = mBind.animationTextureView.getMeasuredHeight();
-
-                mBind.animationTextureView.removeAllChildren();
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.character_idle);
-                Bitmap bitmap2 = Bitmap.createScaledBitmap(bitmap,
-                        (int)Util.convertDpToPixel(480f,getContext()),
-                        (int)Util.convertDpToPixel(154f,getContext()),
-                        false
-                        );
-                final float frameWidth = Util.convertDpToPixel(160f, getContext());
-                final float frameHeight = Util.convertDpToPixel(154f, getContext());
-
-                SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
-                        bitmap2,
-                        frameWidth,
-                        frameHeight, 3, 3)
-                        .frequency(10)
-                        .spriteLoop(true);
-
-                DisplayObject bitmapDisplay = new DisplayObject();
-                bitmapDisplay
-                        .with(spriteSheetDrawer)
-                        .tween()
-                        .tweenLoop(true)
-                        .transform((width - frameWidth)/2 - 50, (height - frameHeight)/2)
-                        .toX(500, (width - frameWidth)/2 + 50, Ease.CUBIC_IN)
-                        .toX(500, (width - frameWidth)/2 - 50, Ease.CUBIC_IN)
-                        .end();
-                mBind.animationTextureView
-                        .addChild(bitmapDisplay)
-                        .tickStart();
-            }
-        });
-
-
+        CharacterAnimator.getInstance().init(getContext(), mBind.animationTextureView);
     }
 
     private void refreshInfo() {
