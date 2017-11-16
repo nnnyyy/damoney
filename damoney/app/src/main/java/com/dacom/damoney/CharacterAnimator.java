@@ -4,13 +4,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.util.Log;
 import android.view.ViewTreeObserver;
 
 import com.daasuu.library.DisplayObject;
 import com.daasuu.library.FPSTextureView;
 import com.daasuu.library.drawer.SpriteSheetDrawer;
-import com.daasuu.library.easing.Ease;
 import com.daasuu.library.util.Util;
 
 import java.util.HashMap;
@@ -113,6 +111,8 @@ public class CharacterAnimator {
                 (int)Util.convertPixelsToDp(h, mContext),
                 false
                 );
+
+        bitmap.recycle();
         int count_per_row = cnt_per_row;
         int count_per_col = cnt_per_col;
         int fw = w/count_per_row;
