@@ -49,6 +49,14 @@ router.get('/get/premiumlist', function(req, res) {
   })
 })
 
+router.get('/viewad', function(req, res) {
+  var id = req.decoded._id;
+  var sn = req.query.sn;
+  dbhelper.viewAd(id, sn, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/ads', ads.getAds);
 
 module.exports = router;

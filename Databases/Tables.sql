@@ -34,3 +34,18 @@ CREATE TABLE `adslist` (
   PRIMARY KEY (`sn`),
   KEY `idx_account_sn` (`sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `adviewrecord` (
+  `id` varchar(20) NOT NULL,
+  `adsn` int(11) DEFAULT NULL,  
+  KEY `idx_adviewrecord_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `buylog` (
+  `id` varchar(20) NOT NULL,
+  `buydate` datetime NOT NULL,
+  `itemsn` int(11) DEFAULT NULL,  
+  KEY `idx_buylog_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -14,7 +14,8 @@ database.init = function() {
         host     : 'localhost',
         user     : 'damoney',
         password : 'ekajslqlqjs',
-        database : 'damoneydb'
+        database : 'damoneydb',
+        multipleStatements: true
     });
 }
 

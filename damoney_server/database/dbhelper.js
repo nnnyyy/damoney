@@ -81,3 +81,16 @@ exports.getPremiumList = function(id, cb) {
         cb({ret:0, list:result});
     });
 }
+
+exports.viewAd = function(id, sn, cb) {
+    dbpool.query('CALL ViewAd(?,?,@ret); select @ret;', [id,sn], function(err,rows,fields) {
+        if(err) {
+            cb({ret:-1, err:err});
+            return;
+        }
+
+        var ret = rows[2][0]['@ret'];
+
+        cb({ret: ret});
+    })
+}
