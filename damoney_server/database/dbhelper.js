@@ -67,6 +67,7 @@ exports.getPremiumList = function(id, cb) {
         for(var i = 0 ; i < aData.length ; ++i) {
             var data = aData[i];
             result.push({
+                sn: data.sn,
                 name: data.name,
                 iconpath: data.iconpath,
                 type: data.type,

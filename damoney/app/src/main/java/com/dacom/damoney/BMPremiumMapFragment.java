@@ -68,37 +68,21 @@ public class BMPremiumMapFragment extends Fragment {
     }
 
     protected void loadAds() {
-        new HttpHelper().SetListener(new HttpHelperListener() {
+        final ArrayList<PremiumItem> list = new ArrayList<>();
+        DamoneyHttpHelper.GetPremiumList(list, new DamoneyHttpHelper.MyCallbackInterface() {
             @Override
-            public void onResponse(int nType, int nRet, String s) {
-                final ArrayList<PremiumItem> list = new ArrayList<>();
-                try {
-                    JSONObject root = new JSONObject(s);
-                    JSONArray a = root.getJSONArray("list");
-                    int cnt = a.length();
-                    for(int i = 0 ; i < cnt ; ++i) {
-                        PremiumItem newItem = new PremiumItem();
-                        JSONObject o = a.getJSONObject(i);
-                        newItem.title = o.getString("name");
-                        newItem.sURL = o.getString("link");
-                        newItem.iconResId = R.drawable.premium_icon_cjone;
-                        newItem.type = o.getInt("type");
-                        newItem.point = o.getInt("reward");
-                        list.add(newItem);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
+            public void onResult(int nRet) {
+                if(nRet == 0 ) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
+                            adapter.AddList(list);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
                 }
-
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
-                        adapter.AddList(list);
-                        adapter.notifyDataSetChanged();
-                    }
-                });
             }
-        }).Get(0, Global.BASE_URL + "/get/premiumlist?token=" + MyPassport.getInstance().getToken());
+        });
     }
 }

@@ -5,6 +5,7 @@ package com.dacom.damoney;
  */
 
 public class PremiumItem {
+    public int sn;
     public int iconResId;
     public String title;
     public int type;       // 설치형, 가입형, 실행형
