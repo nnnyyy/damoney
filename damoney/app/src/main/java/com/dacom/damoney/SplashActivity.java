@@ -59,6 +59,8 @@ public class SplashActivity extends AppCompatActivity {
                                     return;
                                 }
                                 else {
+                                    String newToken = obj.getString("token");
+                                    MyPassport.getInstance().saveToken(SplashActivity.this, newToken);
                                     GoMain();
                                     return;
                                 }

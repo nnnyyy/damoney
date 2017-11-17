@@ -12,14 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentPremiummapBinding;
-import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
-import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,7 +30,7 @@ public class BMPremiumMapFragment extends Fragment {
     private void setupRecyclerView() {
         mBind.rvPremiumList.setHasFixedSize(true);
         mBind.rvPremiumList.setLayoutManager(new LinearLayoutManager(mBind.getRoot().getContext()));
-        mBind.rvPremiumList.setAdapter(new PremiumMapRecyclerAdapter());
+        mBind.rvPremiumList.setAdapter(new PremiumMapRecyclerAdapter(this));
         mBind.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +70,7 @@ public class BMPremiumMapFragment extends Fragment {
                         @Override
                         public void run() {
                             PremiumMapRecyclerAdapter adapter = (PremiumMapRecyclerAdapter)mBind.rvPremiumList.getAdapter();
+                            adapter.ClearList();
                             adapter.AddList(list);
                             adapter.notifyDataSetChanged();
                         }

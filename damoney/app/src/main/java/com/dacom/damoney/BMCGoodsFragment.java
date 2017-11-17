@@ -37,7 +37,7 @@ public class BMCGoodsFragment extends Fragment {
     private void setupRecyclerView() {
         mBind.goodsList.setHasFixedSize(true);
         mBind.goodsList.setLayoutManager(new LinearLayoutManager(mBind.getRoot().getContext()));
-        mBind.goodsList.setAdapter(new PremiumMapRecyclerAdapter());
+        mBind.goodsList.setAdapter(new PremiumMapRecyclerAdapter(null));
     }
 
     @Override

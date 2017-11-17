@@ -2,7 +2,7 @@
  * Created by nnnyy on 2017-10-28.
  */
 var dbpool = require('./database').db();
-var jwt = require('jsonwebtoken');
+var authHelper = require('../Auth/AuthHelper');
 
 // 계정 생성
 exports.createAccount = function(id, pw, nick, cb) {
@@ -30,8 +30,7 @@ exports.loginAccount = function(id, pw, cb) {
         }
 
         var curtime = new Date();
-
-        var token = jwt.sign({_id: id, _time: curtime.getSeconds()}, 'damoneysecret', {expiresIn: 60 * 60});
+        var token = authHelper.makeToken(id);
 
         cb({ret:0, access_token: token});
     });
@@ -83,6 +82,31 @@ exports.getPremiumList = function(id, cb) {
     });
 }
 
+exports.getItemList = function(type, cb) {
+    dbpool.query('select * from items where type = ?', [type], function(err,rows,fields) {
+        if (err) {
+            cb({ret: -1, err: err});
+            return;
+        }
+
+        var list = [];
+        for(var i = 0 ; i < rows.length ; ++i) {
+            list.push({
+                sn: rows[i].sn,
+                type: rows[i].type,
+                publisher: rows[i].publisher,
+                name: rows[i].name,
+                iconpath: rows[i].iconpath,
+                price: rows[i].price,
+                regdate: rows[i].regdate,
+                enddate: rows[i].enddate,
+            });
+        }
+
+        cb({ret: 0, list: list});
+    });
+}
+
 exports.viewAd = function(id, sn, cb) {
     dbpool.query('CALL ViewAd(?,?,@ret); select @ret;', [id,sn], function(err,rows,fields) {
         if(err) {
@@ -90,7 +114,7 @@ exports.viewAd = function(id, sn, cb) {
             return;
         }
 
-        var ret = rows[2][0]['@ret'];
+        var ret = rows[3][0]['@ret'];
 
         cb({ret: ret});
     })

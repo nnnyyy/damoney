@@ -33,7 +33,8 @@ router.post('/signin', function(req,res, next) {
 });
 
 router.get('/auth', function(req, res) {
-  res.send({ret: 0, msg: 'auth complete'})
+  var id = req.decoded._id;
+  res.send({ret: 0, token: authhelper.makeToken(id)})
 });
 
 router.get('/getpoint', function(req, res) {
@@ -45,6 +46,14 @@ router.get('/getpoint', function(req, res) {
 router.get('/get/premiumlist', function(req, res) {
   var id = req.decoded._id;
   dbhelper.getPremiumList(id, function(ret) {
+    res.send(ret);
+  })
+})
+
+router.get('/get/itemlist', function(req, res) {
+  var id = req.decoded._id;
+  var type = req.query.type;
+  dbhelper.getItemList(type, function(ret) {
     res.send(ret);
   })
 })

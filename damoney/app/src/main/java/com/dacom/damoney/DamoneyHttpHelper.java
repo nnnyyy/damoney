@@ -1,8 +1,5 @@
 package com.dacom.damoney;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import com.dacom.damoney.Sign.MyPassport;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
@@ -52,5 +49,31 @@ public class DamoneyHttpHelper {
                     callback.onResult(0);
             }
         }).Get(0, Global.BASE_URL + "/get/premiumlist?token=" + MyPassport.getInstance().getToken());
+    }
+
+    public static void ViewAd(int sn, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                if(nRet != 0) {
+                    if(callback != null)
+                        callback.onResult(-99);
+                    return;
+                }
+                int nJSONRet = 0;
+                try {
+                    JSONObject root = new JSONObject(s);
+                    nJSONRet = root.getInt("ret");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(callback != null)
+                        callback.onResult(-1);
+                    return;
+                }
+
+                if(callback != null)
+                    callback.onResult(nJSONRet);
+            }
+        }).Get(0, Global.BASE_URL + "/viewad?sn=" + sn + "&token=" + MyPassport.getInstance().getToken());
     }
 }

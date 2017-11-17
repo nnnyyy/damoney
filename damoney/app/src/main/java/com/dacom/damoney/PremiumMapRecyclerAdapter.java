@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dacom.damoney.Advertisement.AdsWebView;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.PremiumItemBinding;
 
 import java.util.ArrayList;
@@ -24,9 +25,11 @@ import java.util.ArrayList;
 public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRecyclerAdapter.ArticleItemViewHolder> {
 
     ArrayList<PremiumItem> aItemList = new ArrayList<>();
+    BMPremiumMapFragment fragment;
     int mLastPosition = -1;
 
-    public PremiumMapRecyclerAdapter() {
+    public PremiumMapRecyclerAdapter(BMPremiumMapFragment f) {
+        fragment = f;
         setHasStableIds(true);
     }
 
@@ -51,6 +54,20 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
                 Intent intent = new Intent(v.getContext(), AdsWebView.class);
                 intent.putExtra("url", item.sURL);
                 v.getContext().startActivity(intent);
+                DamoneyHttpHelper.ViewAd(item.sn, new DamoneyHttpHelper.MyCallbackInterface() {
+                    @Override
+                    public void onResult(int nRet) {
+                        if(nRet == 0) {
+                            MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+                                @Override
+                                public void onResult(int nRet) {
+
+                                }
+                            });
+                            fragment.loadAds();
+                        }
+                    }
+                });
             }
         });
     }

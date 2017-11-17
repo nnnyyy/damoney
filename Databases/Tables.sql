@@ -49,3 +49,18 @@ CREATE TABLE `buylog` (
   `itemsn` int(11) DEFAULT NULL,  
   KEY `idx_buylog_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `items` (
+  `sn` int NOT NULL auto_increment,
+  `type` int,
+  `publisher` varchar(30),
+  `name` varchar(60),
+  `iconpath` varchar(100) NOT NULL,
+  `price` int,
+  `regdate` datetime,
+  `enddate` datetime,
+  `desc` varchar(200),
+  PRIMARY KEY (`sn`),
+  KEY `idx_items_sn` (`sn`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
