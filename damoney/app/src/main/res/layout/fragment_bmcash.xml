@@ -1,15 +1,44 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="com.dacom.damoney.BMCashFragment" />
+    </data>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.dacom.damoney.BMCashFragment">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="36dp">
-    </LinearLayout>
+        android:layout_height="48dp">
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_back"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"
+            >
+            <ImageView
+                android:layout_width="144dp"
+                android:layout_height="48dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/title_cash"
+                />
+        </LinearLayout>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/llTopMenu"
         android:layout_width="match_parent"
@@ -22,6 +51,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="상품"
+            android:onClick="@{item::onMenuClick}"
+            android:tag = "0"
             />
         <TextView
             android:layout_width="0dp"
@@ -29,6 +60,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="아이템"
+            android:onClick="@{item::onMenuClick}"
+            android:tag = "1"
             />
         <TextView
             android:layout_width="0dp"
@@ -36,6 +69,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="E버스"
+            android:onClick="@{item::onMenuClick}"
+            android:tag = "2"
             />
         <TextView
             android:layout_width="0dp"
@@ -43,6 +78,8 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="환전"
+            android:onClick="@{item::onMenuClick}"
+            android:tag = "3"
             />
     </LinearLayout>
     <FrameLayout

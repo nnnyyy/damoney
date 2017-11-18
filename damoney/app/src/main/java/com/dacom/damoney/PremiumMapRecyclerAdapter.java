@@ -1,10 +1,8 @@
 package com.dacom.damoney;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 import com.dacom.damoney.Advertisement.AdsWebView;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.PremiumItemBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,9 +44,7 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
     public void onBindViewHolder(PremiumMapRecyclerAdapter.ArticleItemViewHolder holder, int position) {
         final PremiumItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
-        AssetManager am = holder.mBind.getRoot().getContext().getAssets();
-        Typeface custom_font = Typeface.createFromAsset(am, "fonts/NanumBarunGothic.ttf");
-        holder.mBind.tvTitle.setTypeface(custom_font);
+        Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
         holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

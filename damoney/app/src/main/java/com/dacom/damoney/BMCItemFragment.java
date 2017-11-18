@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.FragmentGoodsBinding;
+import com.dacom.damoney.databinding.FragmentCitemBinding;
 
 import java.util.ArrayList;
 
@@ -20,10 +20,10 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMCGoodsFragment extends Fragment {
-    FragmentGoodsBinding mBind;
+public class BMCItemFragment extends Fragment {
+    FragmentCitemBinding mBind;
 
-    public BMCGoodsFragment() {
+    public BMCItemFragment() {
         // Required empty public constructor
     }
 
@@ -37,7 +37,7 @@ public class BMCGoodsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_goods, container, false);
+        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_citem, container, false);
         setupRecyclerView();
         return mBind.getRoot();
     }
@@ -51,7 +51,7 @@ public class BMCGoodsFragment extends Fragment {
 
     protected void loadAds() {
         final ArrayList<GoodsItem> list = new ArrayList<>();
-        DamoneyHttpHelper.GetItemList(0, list, new DamoneyHttpHelper.MyCallbackInterface() {
+        DamoneyHttpHelper.GetItemList(1, list, new DamoneyHttpHelper.MyCallbackInterface() {
             @Override
             public void onResult(int nRet) {
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
