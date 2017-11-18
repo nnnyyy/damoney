@@ -36,8 +36,8 @@ exports.loginAccount = function(id, pw, cb) {
     });
 }
 
-exports.getPoint = function(id, cb) {
-    dbpool.query('CALL GetPoint(?)',[id], function(err,rows,fields){
+exports.getInfo = function(id, cb) {
+    dbpool.query('CALL GetInfo(?)',[id], function(err,rows,fields){
         if(err) {
             cb({ret:-1, err:err});
             return;
@@ -48,9 +48,11 @@ exports.getPoint = function(id, cb) {
             cb({ret:-99});
             return;
         }
-        console.log("getPoint Success : " + rows[0][0].id);
 
-        cb({ret:0, point: rows[0][0].point});
+        var result = rows[0][0];
+        console.log("getPoint Success : " + rows[0][0].result);
+
+        cb({ret:0, point: result.point, gacha: result.gacha_cnt });
     });
 }
 

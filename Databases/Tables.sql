@@ -64,3 +64,11 @@ CREATE TABLE `items` (
   PRIMARY KEY (`sn`),
   KEY `idx_items_sn` (`sn`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `userinfo` (
+  `id` varchar(20) NOT NULL,
+  `point` int(11) NOT NULL DEFAULT '0',
+  `gacha_cnt` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_point_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

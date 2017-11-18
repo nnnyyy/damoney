@@ -37,8 +37,8 @@ router.get('/auth', function(req, res) {
   res.send({ret: 0, token: authhelper.makeToken(id)})
 });
 
-router.get('/getpoint', function(req, res) {
-  dbhelper.getPoint(req.decoded._id, function(ret) {
+router.get('/getinfo', function(req, res) {
+  dbhelper.getInfo(req.decoded._id, function(ret) {
     res.send(ret);
   })
 })
