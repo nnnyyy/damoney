@@ -66,6 +66,14 @@ router.get('/viewad', function(req, res) {
   })
 })
 
+router.get('/buy', function(req, res) {
+  var id = req.decoded._id;
+  var itemsn = req.query.itemsn;
+  dbhelper.buyItem(id, itemsn, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/ads', ads.getAds);
 
 module.exports = router;

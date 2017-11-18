@@ -72,3 +72,18 @@ CREATE TABLE `userinfo` (
   PRIMARY KEY (`id`),
   KEY `idx_point_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `itemsn` (
+  `idx` varchar(20) NOT NULL,
+  `sn` bigint(20) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idx`),
+  KEY `idx_userinfo_idx` (`idx`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `useritems` (
+  `id` varchar(20) NOT NULL,
+  `listsn` int(11) NOT NULL,
+  `itemsn` bigint(20) NOT NULL,
+  KEY `idx_useritems_id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

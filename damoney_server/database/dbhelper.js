@@ -116,8 +116,36 @@ exports.viewAd = function(id, sn, cb) {
             return;
         }
 
-        var ret = rows[3][0]['@ret'];
+        var ret = rows[rows.length - 1][0]['@ret'];
 
         cb({ret: ret});
     })
+}
+
+exports.buyItem = function(id, itemsn, cb) {
+    // 가챠 종류와 일반 아이템 종류를 구분하자.
+    dbpool.query('CALL  BuyItem(?,?,@ret); select @ret;', [id, itemsn], function(err, rows) {
+        if(err) {
+            cb({ret: -99});
+            return;
+        }
+
+        console.log(rows);
+        var ret = rows[rows.length - 1][0]['@ret'];
+        console.log("buyitem : " + ret);
+        cb({ret: ret});
+    });
+}
+
+
+exports.getSN = function(cb) {
+    // 아이템 sn
+    dbpool.query('select sn from itemsn where idx = 0', function(err,rows,fields) {
+        if (err) {
+            cb({ret: -1, err: err});
+            return;
+        }
+
+        cb({ret: 0, sn: rows[0].sn});
+    });
 }

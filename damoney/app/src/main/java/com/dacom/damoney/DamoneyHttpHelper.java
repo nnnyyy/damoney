@@ -110,4 +110,30 @@ public class DamoneyHttpHelper {
             }
         }).Get(0, Global.BASE_URL + "/viewad?sn=" + sn + "&token=" + MyPassport.getInstance().getToken());
     }
+
+    public static void BuyItem(int itemsn, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                if(nRet != 0) {
+                    if(callback != null)
+                        callback.onResult(-99);
+                    return;
+                }
+                int nJSONRet = 0;
+                try {
+                    JSONObject root = new JSONObject(s);
+                    nJSONRet = root.getInt("ret");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(callback != null)
+                        callback.onResult(-1);
+                    return;
+                }
+
+                if(callback != null)
+                    callback.onResult(nJSONRet);
+            }
+        }).Get(0, Global.BASE_URL + "/buy?itemsn=" + itemsn + "&token=" + MyPassport.getInstance().getToken());
+    }
 }

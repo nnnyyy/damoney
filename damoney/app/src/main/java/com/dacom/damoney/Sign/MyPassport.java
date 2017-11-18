@@ -16,6 +16,7 @@ import org.json.JSONObject;
 public class MyPassport {
     public static final String TOKEN_KEY = "AccessToken";
     public int nPoint = 0;
+    public int nGachaCnt = 0;
     protected String sToken;
     protected Context mContext;
     protected static MyPassport obj;
@@ -60,6 +61,7 @@ public class MyPassport {
                     }
 
                     nPoint = obj.getInt("point");
+                    nGachaCnt = obj.getInt("gacha");
 
                     if(_listener != null) {
                         _listener.onResult(0);
@@ -72,7 +74,7 @@ public class MyPassport {
                     return;
                 }
             }
-        }).Get(0, "http://4seasonpension.com:3003/getpoint?token=" + getToken());
+        }).Get(0, "http://4seasonpension.com:3003/getinfo?token=" + getToken());
     }
 
     public String loadToken(Context context) {

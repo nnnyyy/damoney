@@ -40,13 +40,16 @@
         <!-- [END firebase_iid_service] -->
         <activity android:name=".Advertisement.AdsActivity" />
         <activity android:name=".Advertisement.AdsTouchActivity" />
-        <activity android:name=".Advertisement.AdsTypingActivity"
-            android:windowSoftInputMode="adjustNothing"
-            />
+        <activity
+            android:name=".Advertisement.AdsTypingActivity"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".PremiumRewardActivity" />
-        <activity android:name=".Sign.SignupActivity"></activity>
+        <activity android:name=".Sign.SignupActivity" />
         <activity android:name=".Sign.SigninActivity" />
-        <activity android:name=".Advertisement.AdsWebView"></activity>
+        <activity android:name=".Advertisement.AdsWebView" />
+        <activity android:name=".GetRewardActivity"
+            android:theme="@style/AppTheme.Translucent"
+            ></activity>
     </application>
 
 </manifest>

@@ -1,14 +1,20 @@
 package com.dacom.damoney;
 
+import android.content.DialogInterface;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dacom.damoney.AlertManager.AlertManager;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.GoodsItemBinding;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +51,13 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
         holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //DamoneyHttpHelper.Purchase(item.sn);
+                AlertManager.ShowYesNo(fragment.getContext(), "알림", "구매 하시겠습니까?", "예", "아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(which == DialogInterface.BUTTON_POSITIVE)
+                            BuyItem(item.sn);
+                    }
+                });
             }
         });
     }
@@ -81,5 +93,30 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
     @BindingAdapter({"pointRes"})
     public static void setPointText(TextView tv, int point) {
         tv.setText("" + point + "원");
+    }
+
+    public void BuyItem(int itemsn) {
+        DamoneyHttpHelper.BuyItem(itemsn, new DamoneyHttpHelper.MyCallbackInterface() {
+            @Override
+            public void onResult(int nRet) {
+                String msg = "";
+                if(nRet != 0) {
+                    msg = "아이템 구매에 실패 했습니다.";
+                }
+                else {
+                    MyPassport.getInstance().RequestInfo(null);
+                    msg = "아이템을 구매 했습니다.";
+                }
+
+                final String sMsgRet = msg;
+
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(fragment.getContext(), sMsgRet, Toast.LENGTH_SHORT);
+                    }
+                });
+            }
+        });
     }
 }
