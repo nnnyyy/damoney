@@ -36,6 +36,8 @@
                 tools:text="Title Title Title Title Title"
                 android:text="@{item.title}"
                 android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="16dp"
                 />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -57,6 +59,7 @@
             app:pointRes="@{item.point}"
             tools:text="1100"
             android:gravity="center"
+            android:textStyle="bold"
             />
     </LinearLayout>
 </layout>
