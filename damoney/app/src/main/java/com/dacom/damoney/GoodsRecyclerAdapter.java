@@ -51,6 +51,10 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
         holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(MyPassport.getInstance().nPoint < item.point) {
+                    AlertManager.ShowOk(fragment.getContext(), "알림", "포인트가 부족합니다", "닫기", null);
+                    return;
+                }
                 AlertManager.ShowYesNo(fragment.getContext(), "알림", "구매 하시겠습니까?", "예", "아니오", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -113,7 +117,7 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(fragment.getContext(), sMsgRet, Toast.LENGTH_SHORT);
+                        Toast.makeText(fragment.getContext(), sMsgRet, Toast.LENGTH_SHORT).show();
                     }
                 });
             }
