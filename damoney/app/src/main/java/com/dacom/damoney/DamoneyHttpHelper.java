@@ -136,4 +136,37 @@ public class DamoneyHttpHelper {
             }
         }).Get(0, Global.BASE_URL + "/buy?itemsn=" + itemsn + "&token=" + MyPassport.getInstance().getToken());
     }
+
+    public static void UseGachaBox(final GachaBoxInfo boxinfo, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                if(nRet != 0) {
+                    if(callback != null)
+                        callback.onResult(-99);
+                    return;
+                }
+                int nJSONRet = 0;
+                try {
+                    JSONObject root = new JSONObject(s);
+                    nJSONRet = root.getInt("ret");
+                    if(nJSONRet == 0 ){
+                        JSONObject gachainfo = root.getJSONObject("gachainfo");
+                        boxinfo.sName = gachainfo.getString("name");
+                        boxinfo.iconpath = gachainfo.getString("iconpath");
+                        boxinfo.nLevel = gachainfo.getInt("level");
+                        boxinfo.nGrade = gachainfo.getInt("grade");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(callback != null)
+                        callback.onResult(-1);
+                    return;
+                }
+
+                if(callback != null)
+                    callback.onResult(nJSONRet);
+            }
+        }).Get(0, Global.BASE_URL + "/useGacha?token=" + MyPassport.getInstance().getToken());
+    }
 }

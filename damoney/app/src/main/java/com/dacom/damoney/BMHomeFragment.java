@@ -4,6 +4,8 @@ package com.dacom.damoney;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,19 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     @Override
     public void onResume() {
         super.onResume();
+        MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet == 0) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshInfo();
+                        }
+                    });
+                }
+            }
+        });
         mBind.animationTextureView.tickStart();
     }
 
@@ -90,6 +105,22 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     private void refreshInfo() {
         String sVal = String.valueOf(MyPassport.getInstance().nPoint);
         mBind.tvPoint.setText(sVal);
+        if( MyPassport.getInstance().nGachaCnt > 0 ) {
+            CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_QUESTION);
+            mBind.gachabox.setVisibility(View.VISIBLE);
+            mBind.gachabox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), GetRewardActivity.class);
+                    getContext().startActivity(intent);
+                }
+            });
+        }
+        else {
+            mBind.gachabox.setVisibility(View.GONE);
+            mBind.gachabox.setOnClickListener(null);
+            CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_IDLE);
+        }
     }
 
     @Override

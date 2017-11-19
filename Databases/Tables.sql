@@ -87,3 +87,16 @@ CREATE TABLE `useritems` (
   `itemsn` bigint(20) NOT NULL,
   KEY `idx_useritems_id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `gachalist` (
+  `itemid` int(11) NOT NULL,  
+  `name` varchar(60) DEFAULT NULL,
+  `iconpath` varchar(100) NOT NULL,
+  `price` int(11) NOT NULL,
+  `droprate` int(11) NOT NULL,
+  `level` int(11) NOT NULL,
+  `grade` int(11) NOT NULL,
+  PRIMARY KEY (`itemid`),
+  KEY `idx_gachalist_sn` (`itemid`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;

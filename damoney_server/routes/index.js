@@ -74,6 +74,13 @@ router.get('/buy', function(req, res) {
   })
 })
 
+router.get('/useGacha', function(req, res) {
+  var id = req.decoded._id;
+  dbhelper.useGacha(id, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/ads', ads.getAds);
 
 module.exports = router;

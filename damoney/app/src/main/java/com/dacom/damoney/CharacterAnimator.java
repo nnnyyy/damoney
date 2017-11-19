@@ -39,6 +39,7 @@ public class CharacterAnimator {
     }
 
     enum CharacterState {
+        CS_NONE,
         CS_IDLE,
         CS_EAT,
         CS_QUESTION,
@@ -48,7 +49,9 @@ public class CharacterAnimator {
     Context mContext;
     FPSTextureView textureView;
     Point ptViewRealSize;
+    DisplayObject currentObject;
     boolean bLoad = false;
+    CharacterState reservState = CharacterState.CS_NONE;
     Map<CharacterState, AnimStateObj> mAnimMan = new HashMap<>();
 
     private CharacterAnimator() {
@@ -60,10 +63,7 @@ public class CharacterAnimator {
         textureView = texview;
 
         if(bLoad)  {
-            getTextureView().removeAllChildren();
-            getTextureView()
-                    .addChild(mAnimMan.get(CharacterState.CS_EAT).dio)
-                    .tickStart();
+            changeAnim(CharacterState.CS_IDLE);
             return;
         }
 
@@ -81,10 +81,8 @@ public class CharacterAnimator {
                 loadAnims();
                 bLoad = true;
 
-                getTextureView().removeAllChildren();
-                getTextureView()
-                        .addChild(mAnimMan.get(CharacterState.CS_QUESTION).dio)
-                        .tickStart();
+                if(reservState != CharacterState.CS_NONE)
+                    changeAnim(reservState);
             }
         });
     }
@@ -137,5 +135,22 @@ public class CharacterAnimator {
         aso.drawer = spriteSheetDrawer;
         aso.dio = bitmapDisplay;
         mAnimMan.put(state, aso);
+    }
+
+    public void changeAnim(CharacterState state) {
+        if(currentObject != null) {
+            getTextureView().tickStop();
+            getTextureView().removeChild(currentObject);
+        }
+
+        if(!bLoad) {
+            reservState = state;
+            return;
+        }
+        currentObject = mAnimMan.get(state).dio;
+
+        getTextureView()
+                .addChild(currentObject)
+                .tickStart();
     }
 }

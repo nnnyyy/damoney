@@ -58,7 +58,7 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
                             MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
                                 @Override
                                 public void onResult(int nRet) {
-
+                                    CustomToast.PointSave(fragment.getContext(), item.point);
                                 }
                             });
                             fragment.loadAds();

@@ -48,7 +48,7 @@ public class BMCashFragment extends Fragment {
 
     public void onBtnBack(View v) {
         MainActivity context = (MainActivity)v.getContext();
-        context.changeFragment(R.id.act_home);
+        context.changeNav(R.id.act_home);
     }
 
     protected void changeChildFragment(int menuid) {

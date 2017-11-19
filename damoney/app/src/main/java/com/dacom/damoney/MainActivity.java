@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         return changeFragment(item.getItemId());
     }
 
+    public void changeNav(int id) {
+        mBind.bnv.setSelectedItemId(id);
+    }
+
     public boolean changeFragment(int id) {
         FragmentManager fm = getSupportFragmentManager();
         Fragment f = null;

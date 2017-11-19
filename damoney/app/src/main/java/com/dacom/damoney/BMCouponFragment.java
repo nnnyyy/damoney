@@ -41,7 +41,7 @@ public class BMCouponFragment extends Fragment {
 
     public void onBtnBack(View v) {
         MainActivity context = (MainActivity)v.getContext();
-        context.changeFragment(R.id.act_home);
+        context.changeNav(R.id.act_home);
     }
 
     @Override

@@ -8,7 +8,19 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+var gacha = require('./Gacha');
+
 var app = express();
+
+gacha.init(function(ret) {
+  if(ret != 0) {
+    console.log('gacha loading failed : ' + gacha_ret);
+    process.exit(1);
+  }
+  else {
+    console.log('gacha loading success');
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -3,6 +3,7 @@
  */
 var dbpool = require('./database').db();
 var authHelper = require('../Auth/AuthHelper');
+var gacha = require('../Gacha');
 
 // 계정 생성
 exports.createAccount = function(id, pw, nick, cb) {
@@ -148,4 +149,45 @@ exports.getSN = function(cb) {
 
         cb({ret: 0, sn: rows[0].sn});
     });
+}
+
+exports.loadGachaList = function(cb) {
+    dbpool.query('select * from gachalist', function(err, rows) {
+        if(err) {
+            cb({ret: -1});
+            return;
+        }
+
+        var gachalist = [];
+        for(var i = 0 ; i < rows.length ; ++i) {
+            gachalist.push({
+                id: rows[i].itemid,
+                name: rows[i].name,
+                iconpath: rows[i].iconpath,
+                price: rows[i].price,
+                droprate: rows[i].droprate,
+                level: rows[i].level,
+                grade: rows[i].grade
+            });
+        }
+
+        cb({ret: 0, list: gachalist});
+    })
+}
+
+exports.useGacha = function(id, cb) {
+    dbpool.query('CALL UseGachaPoint(?, @ret); select @ret;', [id], function(err, rows) {
+        if(err) {
+            cb({ret: -1});
+            return;
+        }
+
+        var ret = rows[rows.length - 1][0]['@ret'];
+        var selected = {};
+        if(ret == 0) {
+            selected = gacha.getGacha();
+        }
+
+        cb({ret: ret, gachainfo: selected});
+    })
 }
