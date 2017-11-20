@@ -19,7 +19,7 @@ public class DamoneyHttpHelper {
         void onResult(int nRet);
     }
 
-    public static void GetPremiumList(final ArrayList<PremiumItem> list, final MyCallbackInterface callback) {
+    public static void  GetPremiumList(final ArrayList<PremiumItem> list, final MyCallbackInterface callback) {
         new HttpHelper().SetListener(new HttpHelperListener() {
             @Override
             public void onResponse(int nType, int nRet, String s) {
@@ -50,6 +50,40 @@ public class DamoneyHttpHelper {
                     callback.onResult(0);
             }
         }).Get(0, Global.BASE_URL + "/get/premiumlist?token=" + MyPassport.getInstance().getToken());
+    }
+
+    public static void GetCouponList(final ArrayList<CouponItem> list, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                try {
+                    JSONObject root = new JSONObject(s);
+                    JSONArray a = root.getJSONArray("list");
+                    int cnt = a.length();
+                    for(int i = 0 ; i < cnt ; ++i) {
+                        CouponItem newItem = new CouponItem();
+                        JSONObject o = a.getJSONObject(i);
+                        newItem.sn = o.getInt("sn");
+                        newItem.title = o.getString("name");
+                        newItem.sURL = o.getString("link");
+                        newItem.iconResId = R.drawable.premium_icon_cjone;
+                        newItem.iconPath = o.getString("iconpath");
+                        newItem.type = o.getInt("type");
+                        newItem.point = o.getInt("reward");
+                        newItem.sDesc =  o.getString("desc");
+                        list.add(newItem);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(callback != null)
+                        callback.onResult(-1);
+                    return;
+                }
+
+                if(callback != null)
+                    callback.onResult(0);
+            }
+        }).Get(0, Global.BASE_URL + "/get/couponlist?token=" + MyPassport.getInstance().getToken());
     }
 
     public static void GetItemList(int type, final ArrayList<GoodsItem> list, final MyCallbackInterface callback) {

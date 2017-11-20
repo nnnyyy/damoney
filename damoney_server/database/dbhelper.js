@@ -90,7 +90,7 @@ exports.getCouponList = function(id, cb) {
             return;
         }
 
-        var aData = rows[rows.length - 1];
+        var aData = rows[0];
         var result = [];
         for(var i = 0 ; i < aData.length ; ++i) {
             var data = aData[i];
@@ -104,6 +104,8 @@ exports.getCouponList = function(id, cb) {
                 desc: data.desc
             });
         }
+
+        console.log(rows);
 
         cb({ret:0, list:result});
     });

@@ -5,9 +5,12 @@ package com.dacom.damoney;
  */
 
 public class CouponItem {
+    public int sn;
+    public String iconPath;
     public int iconResId;
     public String title;
-    public String desc;
-    public int point;      // 할인 포인트
+    public int type;       // 설치형, 가입형, 실행형
+    public int point;      // 얻는 포인트
     public String sURL;    // 연결 될 URL
+    public String sDesc;
 }

@@ -3,6 +3,8 @@ package com.dacom.damoney;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -56,25 +58,27 @@ public class BMCouponFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loadAds();
+    }
 
-        int[] resid = { R.drawable.premium_icon_cjone, R.drawable.premium_icon_coupang, R.drawable.premium_icon_daum };
-        String[] titles = { "탐앤탐스", "롯데리아", "도미노피자" };
-        String[] desc = { "무료 사이즈 업그레이드", "단품 주문 시, 세트 제공", "콜라 1.25L 제공"};
-        int[] point = { 50, 30, 100 };
-        ArrayList<CouponItem> list = new ArrayList<>();
-        for(int i = 0 ; i < 3 ; ++i) {
-            CouponItem newItem = new CouponItem();
-            newItem.iconResId = resid[i];
-            newItem.title = titles[i];
-            newItem.desc = desc[i];
-            newItem.point = point[i];
-            newItem.sURL = "http://naver.com";
-            list.add(newItem);
-        }
-
-        CouponRecyclerAdapter adapter = (CouponRecyclerAdapter)mBind.rvPremiumList.getAdapter();
-        adapter.AddList(list);
-        adapter.notifyDataSetChanged();
+    protected void loadAds() {
+        final ArrayList<CouponItem> list = new ArrayList<>();
+        DamoneyHttpHelper.GetCouponList(list, new DamoneyHttpHelper.MyCallbackInterface() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet == 0 ) {
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            CouponRecyclerAdapter adapter = (CouponRecyclerAdapter)mBind.rvPremiumList.getAdapter();
+                            adapter.ClearList();
+                            adapter.AddList(list);
+                            adapter.notifyDataSetChanged();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     void showCouponUseWnd(/*CouponInfo info*/){

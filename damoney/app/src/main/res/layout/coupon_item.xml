@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         tools:text="무료 사이즈 업그레이드"
-                        android:text="@{item.desc}"
+                        android:text="@{item.sDesc}"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="8dp"
                         />
