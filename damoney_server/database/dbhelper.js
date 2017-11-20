@@ -84,7 +84,7 @@ exports.getPremiumList = function(id, cb) {
 }
 
 exports.getCouponList = function(id, cb) {
-    dbpool.query('CALL GetPremiumList(?)', [id], function(err,rows,fields) {
+    dbpool.query('CALL GetCouponList(?)', [id], function(err,rows,fields) {
         if(err) {
             cb({ret:-1, err:err});
             return;
