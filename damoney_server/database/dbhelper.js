@@ -4,6 +4,7 @@
 var dbpool = require('./database').db();
 var authHelper = require('../Auth/AuthHelper');
 var gacha = require('../Gacha');
+var gameinfo = require('../GameInfo');
 
 // 계정 생성
 exports.createAccount = function(id, pw, nick, cb) {
@@ -51,9 +52,10 @@ exports.getInfo = function(id, cb) {
         }
 
         var result = rows[0][0];
-        console.log("getPoint Success : " + rows[0][0].result);
+        var levelinfo = gameinfo.getLevelInfo(result.exp);
+        console.log(result);
 
-        cb({ret:0, point: result.point, gacha: result.gacha_cnt });
+        cb({ret:0, point: result.point, gacha: result.gacha_cnt, level: levelinfo.level, expMax: levelinfo.nextExpMax, curExp: levelinfo.curExp });
     });
 }
 

@@ -22,6 +22,9 @@ public class MyPassport {
     public static final String COUPON_KEY = "MyCouponList";
     public int nPoint = 0;
     public int nGachaCnt = 0;
+    public int nLevel = 0;
+    public int nExpMax = 0;
+    public int nCurExp = 0;
     protected String sToken;
     protected Context mContext;
     protected static MyPassport obj;
@@ -68,6 +71,9 @@ public class MyPassport {
 
                     nPoint = obj.getInt("point");
                     nGachaCnt = obj.getInt("gacha");
+                    nLevel = obj.getInt("level");
+                    nExpMax = obj.getInt("expMax");
+                    nCurExp = obj.getInt("curExp");
 
                     if(_listener != null) {
                         _listener.onResult(0);

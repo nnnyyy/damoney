@@ -103,9 +103,9 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void refreshInfo() {
-
-        mBind.expbar.setMax(100);
-        mBind.expbar.setProgress(50);
+        mBind.tvLevel.setText("Lv." + MyPassport.getInstance().nLevel);
+        mBind.expbar.setMax(MyPassport.getInstance().nExpMax);
+        mBind.expbar.setProgress(MyPassport.getInstance().nCurExp);
 
         String sVal = String.valueOf(MyPassport.getInstance().nPoint);
         mBind.tvPoint.setText(sVal);

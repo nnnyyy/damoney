@@ -78,6 +78,16 @@
                 android:src="@drawable/gachabox"
                 android:layout_margin="8dp"
                 />
+            <TextView
+                android:id="@+id/tvLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:textSize="24dp"
+                android:text="Lv. 10"
+                />
         </RelativeLayout>
 
         <!--하단 상태바-->
