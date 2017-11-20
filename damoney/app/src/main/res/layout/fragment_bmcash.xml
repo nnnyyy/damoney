@@ -39,6 +39,11 @@
                 />
         </LinearLayout>
     </RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cashshop_bar"
+        />
     <LinearLayout
         android:id="@+id/llTopMenu"
         android:layout_width="match_parent"
@@ -46,6 +51,7 @@
         android:orientation="horizontal"
         >
         <TextView
+            android:id="@+id/btn_menu0"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -54,7 +60,13 @@
             android:onClick="@{item::onMenuClick}"
             android:tag = "0"
             />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#b4b4b4"
+            ></View>
         <TextView
+            android:id="@+id/btn_menu1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -63,7 +75,13 @@
             android:onClick="@{item::onMenuClick}"
             android:tag = "1"
             />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#b4b4b4"
+            ></View>
         <TextView
+            android:id="@+id/btn_menu2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -72,7 +90,13 @@
             android:onClick="@{item::onMenuClick}"
             android:tag = "2"
             />
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#b4b4b4"
+            ></View>
         <TextView
+            android:id="@+id/btn_menu3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -82,7 +106,13 @@
             android:tag = "3"
             />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cashshop_bar2"
+        />
     <FrameLayout
+        android:background="#ececec"
         android:id="@+id/placeholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

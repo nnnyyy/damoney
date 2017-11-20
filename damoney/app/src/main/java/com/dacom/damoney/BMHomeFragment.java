@@ -103,6 +103,10 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void refreshInfo() {
+
+        mBind.expbar.setMax(100);
+        mBind.expbar.setProgress(50);
+
         String sVal = String.valueOf(MyPassport.getInstance().nPoint);
         mBind.tvPoint.setText(sVal);
         if( MyPassport.getInstance().nGachaCnt > 0 ) {

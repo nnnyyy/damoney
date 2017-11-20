@@ -2,6 +2,7 @@ package com.dacom.damoney;
 
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dacom.damoney.databinding.FragmentBmcashBinding;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 
 /**
@@ -19,6 +24,7 @@ import com.dacom.damoney.databinding.FragmentBmcashBinding;
  */
 public class BMCashFragment extends Fragment {
     FragmentBmcashBinding mBind;
+    ArrayList<TextView> aMenus;
 
     public BMCashFragment() {
         // Required empty public constructor
@@ -43,12 +49,21 @@ public class BMCashFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setupMenus();
         changeChildFragment(0);
     }
 
     public void onBtnBack(View v) {
         MainActivity context = (MainActivity)v.getContext();
         context.changeNav(R.id.act_home);
+    }
+
+    protected void setupMenus() {
+        aMenus = new ArrayList<>();
+        aMenus.add(mBind.btnMenu0);
+        aMenus.add(mBind.btnMenu1);
+        aMenus.add(mBind.btnMenu2);
+        aMenus.add(mBind.btnMenu3);
     }
 
     protected void changeChildFragment(int menuid) {
@@ -68,6 +83,17 @@ public class BMCashFragment extends Fragment {
         }
 
         if(f == null) return;
+
+        Iterator<TextView> iter =  aMenus.iterator();
+        while(iter.hasNext()) {
+            TextView tv = iter.next();
+            tv.setBackgroundColor(Color.WHITE);
+            tv.setTextColor(getResources().getColor(R.color.colorMainFont));
+        }
+
+        TextView tvCurrent = aMenus.get(menuid);
+        tvCurrent.setBackgroundResource(R.color.cashshop_selected_back);
+        tvCurrent.setTextColor(getResources().getColor(R.color.cashshop_selected));
 
         FragmentManager childFragMan = getChildFragmentManager();
         FragmentTransaction childFragTrans = childFragMan.beginTransaction();

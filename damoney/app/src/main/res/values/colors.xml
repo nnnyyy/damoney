@@ -6,5 +6,7 @@
     <color name="colorAlert">#ff0000</color>
     <color name="colorMain">#f5bf6e</color>
     <color name="colorSub">#f9dbae</color>
-    <color name="colorMainFont">#72512e</color>
+    <color name="colorMainFont">#9b6949</color>
+    <color name="cashshop_selected">#624949</color>
+    <color name="cashshop_selected_back">#ececec</color>
 </resources>
