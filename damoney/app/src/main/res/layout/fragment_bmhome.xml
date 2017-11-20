@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
-                android:layout_weight="6">
+                android:layout_weight="8">
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
@@ -131,9 +131,10 @@
                 android:id="@+id/expbar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
                 app:rcBackgroundColor="#777777"
                 app:rcProgressColor="#ffffff"
+                app:rcRadius="2dp"
                 ></com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar>
         </LinearLayout>
     </LinearLayout>
