@@ -9,62 +9,80 @@
             type="com.dacom.damoney.CouponItem" />
     </data>
     <LinearLayout
-        android:id="@+id/clickable"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center_vertical"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:layout_margin="8dp"
-        >
-        <ImageView
-            android:id="@+id/iv_thumbnail"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            app:imgRes = "@{item.iconResId}"
-            />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:id="@+id/clickable"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_vertical"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
             >
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
-                android:layout_height="32dp"
-                tools:text="Title Title Title Title Title"
-                android:text="@{item.title}"
-                android:gravity="center_vertical"
+            <ImageView
+                android:id="@+id/iv_thumbnail"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:imgRes = "@{item.iconResId}"
+                android:layout_gravity="center_vertical"
                 />
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
                 <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:textStyle="bold"
+                    tools:text="Title Title Title Title Title"
+                    android:text="@{item.title}"
+                    android:gravity="center_vertical"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="8dp"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:text="무료 사이즈 업그레이드"
-                    android:text="@{item.desc}"
-                    android:gravity="center_vertical"
-                    />
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:text="무료 사이즈 업그레이드"
+                        android:text="@{item.desc}"
+                        android:gravity="center_vertical"
+                        android:layout_marginLeft="8dp"
+                        />
+                </LinearLayout>
             </LinearLayout>
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                app:pointRes="@{item.point}"
+                tools:text="1100"
+                android:gravity="center"
+                />
+            <ImageButton
+                android:id="@+id/btn_down_coupon"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/btn_down_coupon"
+                android:layout_gravity="center_vertical"
+                />
         </LinearLayout>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            app:pointRes="@{item.point}"
-            tools:text="1100"
-            android:gravity="center"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cashshop_bar2"
             />
-        <ImageButton
-            android:id="@+id/btn_down_coupon"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:background="#77ff0000"
-            />
+
     </LinearLayout>
 </layout>

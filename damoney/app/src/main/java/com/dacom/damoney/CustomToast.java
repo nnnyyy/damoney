@@ -2,11 +2,14 @@ package com.dacom.damoney;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.dacom.damoney.databinding.ToastPointBinding;
+
+import java.util.logging.Handler;
 
 /**
  * Created by nnnyy on 2017-11-19.

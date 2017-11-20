@@ -50,6 +50,13 @@ router.get('/get/premiumlist', function(req, res) {
   })
 })
 
+router.get('/get/couponlist', function(req, res) {
+  var id = req.decoded._id;
+  dbhelper.getCouponList(id, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/get/itemlist', function(req, res) {
   var id = req.decoded._id;
   var type = req.query.type;

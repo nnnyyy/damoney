@@ -3,6 +3,8 @@ package com.dacom.damoney;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +60,12 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
                             MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
                                 @Override
                                 public void onResult(int nRet) {
-                                    CustomToast.PointSave(fragment.getContext(), item.point);
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            CustomToast.PointSave(fragment.getContext(), item.point);
+                                        }
+                                    });
                                 }
                             });
                             fragment.loadAds();

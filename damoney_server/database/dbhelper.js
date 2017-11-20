@@ -79,7 +79,31 @@ exports.getPremiumList = function(id, cb) {
             });
         }
 
-        console.log(result);
+        cb({ret:0, list:result});
+    });
+}
+
+exports.getCouponList = function(id, cb) {
+    dbpool.query('CALL GetPremiumList(?)', [id], function(err,rows,fields) {
+        if(err) {
+            cb({ret:-1, err:err});
+            return;
+        }
+
+        var aData = rows[rows.length - 1];
+        var result = [];
+        for(var i = 0 ; i < aData.length ; ++i) {
+            var data = aData[i];
+            result.push({
+                sn: data.sn,
+                name: data.name,
+                iconpath: data.iconpath,
+                type: data.type,
+                reward: data.reward,
+                link: data.link,
+                desc: data.desc
+            });
+        }
 
         cb({ret:0, list:result});
     });
