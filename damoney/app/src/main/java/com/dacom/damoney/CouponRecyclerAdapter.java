@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.CouponItemBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -37,14 +40,26 @@ public class CouponRecyclerAdapter extends RecyclerView.Adapter<CouponRecyclerAd
 
 
     @Override
-    public void onBindViewHolder(CouponRecyclerAdapter.ArticleItemViewHolder holder, int position) {
+    public void onBindViewHolder(final CouponRecyclerAdapter.ArticleItemViewHolder holder, int position) {
         final CouponItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
+        Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
+        if(MyPassport.getInstance().isExistCoupon(item.sn)) {
+            holder.mBind.btnDownCoupon.setImageResource(R.drawable.btn_show_coupon);
+        }
         holder.mBind.btnDownCoupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //  쿠폰 다운로드
-                fragment.showCouponUseWnd();
+                //  이것도 서버에서 처리해야 하나 시간이 없으니 이렇게 일단 처리
+                if(MyPassport.getInstance().isExistCoupon(item.sn)) {
+                    fragment.showCouponUseWnd();
+                }
+                else {
+                    Toast.makeText(fragment.getContext(), "쿠폰을 다운로드 했습니다.", Toast.LENGTH_SHORT).show();
+                    holder.mBind.btnDownCoupon.setImageResource(R.drawable.btn_show_coupon);
+                    MyPassport.getInstance().saveCoupon(item.sn);
+                }
             }
         });
     }
@@ -80,10 +95,5 @@ public class CouponRecyclerAdapter extends RecyclerView.Adapter<CouponRecyclerAd
     @BindingAdapter({"pointRes"})
     public static void setPointText(TextView tv, int point) {
         tv.setText("" + point + "원");
-    }
-
-    @BindingAdapter({"imgRes"})
-    public static void setIcon(ImageView iv, int resid) {
-        iv.setImageResource(resid);
     }
 }

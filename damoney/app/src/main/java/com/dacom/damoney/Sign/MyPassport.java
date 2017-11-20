@@ -6,8 +6,12 @@ import com.dacom.damoney.Storage;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Created by nnnyyy on 2017-11-13.
@@ -15,11 +19,13 @@ import org.json.JSONObject;
 
 public class MyPassport {
     public static final String TOKEN_KEY = "AccessToken";
+    public static final String COUPON_KEY = "MyCouponList";
     public int nPoint = 0;
     public int nGachaCnt = 0;
     protected String sToken;
     protected Context mContext;
     protected static MyPassport obj;
+    protected static HashSet<Integer> mCoupon = new HashSet<>();
 
     public interface RequestInfoListener {
         void onResult(int nRet);
@@ -38,7 +44,7 @@ public class MyPassport {
     }
 
     public void RequestInfo(final RequestInfoListener _listener) {
-
+        loadCoupon();
         new HttpHelper().SetListener(new HttpHelperListener() {
             @Override
             public void onResponse(int nType, int nRet, String sResponse) {
@@ -87,10 +93,35 @@ public class MyPassport {
         Storage.save(context, TOKEN_KEY, sTokenString);
         loadToken(context);
     }
-
     public void deleteToken(Context context) {
         Storage.delete(context, TOKEN_KEY);
     }
-
     public String getToken() { return sToken; }
+
+    public void saveCoupon(int sn) {
+        mCoupon.add(sn);
+        Iterator<Integer> iter = mCoupon.iterator();
+        JSONArray arr = new JSONArray();
+        while(iter.hasNext()) {
+            Integer couponSN = iter.next();
+            arr.put(couponSN);
+        }
+        Storage.save(mContext, COUPON_KEY ,arr.toString());
+    }
+
+    public void loadCoupon() {
+        String sJsonList = Storage.load(mContext, COUPON_KEY);
+        try {
+            JSONArray arr = new JSONArray(sJsonList);
+            for(int i = 0 ; i < arr.length() ; ++i) {
+                mCoupon.add(arr.getInt(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isExistCoupon(int sn) {
+        return mCoupon.contains(sn);
+    }
 }

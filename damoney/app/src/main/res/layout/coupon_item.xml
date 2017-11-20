@@ -10,13 +10,13 @@
     </data>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/clickable"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="56dp"
             android:gravity="center_vertical"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -28,7 +28,6 @@
                 android:layout_height="56dp"
                 android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
-                app:imgRes = "@{item.iconResId}"
                 android:layout_gravity="center_vertical"
                 />
             <LinearLayout
@@ -74,8 +73,10 @@
                 android:id="@+id/btn_down_coupon"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:background="@drawable/btn_down_coupon"
+                android:src="@drawable/btn_down_coupon"
                 android:layout_gravity="center_vertical"
+                android:scaleType="fitCenter"
+                android:background="@android:color/transparent"
                 />
         </LinearLayout>
         <ImageView

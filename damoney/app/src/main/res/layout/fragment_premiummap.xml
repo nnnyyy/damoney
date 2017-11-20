@@ -40,8 +40,13 @@
                         android:src="@drawable/title_premium"
                         />
                 </LinearLayout>
-
             </RelativeLayout>
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cashshop_bar"
+                />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_premium_list"
                 android:layout_width="match_parent"

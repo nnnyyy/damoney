@@ -25,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_splash);
+        MyPassport.getInstance().init(this);
         setupStatusBar();
 
         new Thread(new Runnable() {
