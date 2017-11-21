@@ -20,7 +20,17 @@ public class GetRewardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_get_reward);
         mBind.llResult.setVisibility(View.GONE);
-        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        mBind.gachabox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBind.gachabox.setOnClickListener(null);
+                open();
+            }
+        });
+    }
+
+    public void open() {
+        Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
         shake.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -36,6 +46,7 @@ public class GetRewardActivity extends AppCompatActivity {
                     public void onResult(int nRet) {
                         if(nRet != 0 ) {
                             // 실패
+                            finish();
                             return;
                         }
 
@@ -65,7 +76,7 @@ public class GetRewardActivity extends AppCompatActivity {
 
             }
         });
-        mBind.gachabox.setAnimation(shake);
+        mBind.gachabox.startAnimation(shake);
     }
 
     @Override

@@ -4,14 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
-import java.io.Serializable;
-
 /**
  * Created by nnnyy on 2017-10-15.
  */
 
-public class AdsManager implements Serializable {
+public class AdsManager {
     Context mContext;
+    static String mSerial;
     static AdsResultListener listener;
     int mDebugCnt = 0;
 
@@ -30,7 +29,8 @@ public class AdsManager implements Serializable {
         listener = _listener;
     }
 
-    public void startFullAds() {
+    public void startFullAds(String sSerial) {
+        mSerial= sSerial;
         Intent intent = null;
         switch(mDebugCnt%3) {
             case 0:

@@ -153,15 +153,15 @@ exports.viewAd = function(id, sn, cb) {
 }
 
 exports.viewMainAd = function(id, cb) {
-    dbpool.query('CALL ViewMainAd(?,@ret); select @ret;', [id], function(err,rows,fields) {
+    dbpool.query('CALL ViewMainAd(?,@ret, @incExp); select @ret, @incExp;', [id], function(err,rows,fields) {
         if(err) {
             cb({ret:-1, err:err});
             return;
         }
 
         var ret = rows[rows.length - 1][0]['@ret'];
-
-        cb({ret: ret});
+        var incExp = rows[rows.length - 1][0]['@incExp'];
+        cb({ret: ret, incExp: incExp});
     })
 }
 

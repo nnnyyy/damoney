@@ -10,6 +10,7 @@ import android.view.Display;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dacom.damoney.DamoneyHttpHelper;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsTouchBinding;
 
@@ -35,7 +36,6 @@ public class AdsTouchActivity extends AppCompatActivity {
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        Log.d("MyLog", size.toString());
 
         for(int i = 0 ; i < 5 ; ++i) {
             TextView tv = new TextView(this);
@@ -52,9 +52,14 @@ public class AdsTouchActivity extends AppCompatActivity {
                     view.setVisibility(View.GONE);
                     view.setOnClickListener(null);
                     if(CheckClickState()) {
-                        finish();
-                        if(AdsManager.listener != null)
-                            AdsManager.listener.onAdsFinished(0);
+                        DamoneyHttpHelper.ViewMainAd(AdsManager.mSerial, new DamoneyHttpHelper.MyCallbackInterface() {
+                            @Override
+                            public void onResult(int nRet) {
+                                finish();
+                                if(nRet == 0 && AdsManager.listener != null)
+                                    AdsManager.listener.onAdsFinished(0);
+                            }
+                        });
                     }
                 }
             });

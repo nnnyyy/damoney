@@ -48,10 +48,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:textSize="35dp"
+                        android:textSize="30dp"
                         android:text="0"
                         tools:text="10000"
-                        app:font="custom2"
+                        android:textStyle="bold"
                         />
                 </LinearLayout>
             </RelativeLayout>
@@ -78,23 +78,20 @@
                 android:src="@drawable/gachabox"
                 android:layout_margin="8dp"
                 />
-            <TextView
-                android:id="@+id/tvLevel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:textSize="24dp"
-                android:text="Lv. 10"
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/home_user_profile"
+                android:layout_marginLeft="8dp"
                 />
         </RelativeLayout>
 
         <!--하단 상태바-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="50dp"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,14 +99,29 @@
                 android:orientation="horizontal"
                 android:layout_weight="8">
                 <TextView
+                    android:id="@+id/tvLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:textSize="18dp"
+                    android:text="Lv. 10"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#624949"
+
+                    />
+                <TextView
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="다람쥐 쳇바퀴"
                     android:textStyle="bold"
-                    android:gravity="bottom"
+                    android:gravity="center_vertical"
                     android:textSize="18dp"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="8dp"
+                    android:textColor="#624949"
                     />
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -120,9 +132,10 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="8dp"
-                        android:text="다음 레벨업까지 30 남음"
-                        android:textColor="#aaaaaa"
+                        android:text="다음 레벨업까지 30xp 남음"
+                        android:textColor="#54a48c"
                         android:gravity="bottom"
+                        android:textStyle="bold"
                         />
                 </RelativeLayout>
             </LinearLayout>
