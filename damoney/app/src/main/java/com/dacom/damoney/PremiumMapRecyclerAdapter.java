@@ -106,7 +106,7 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
 
     @BindingAdapter({"pointRes"})
     public static void setPointText(TextView tv, int point) {
-        tv.setText("" + point + "원");
+        tv.setText("" + point);
     }
 
     @BindingAdapter({"typeRes"})

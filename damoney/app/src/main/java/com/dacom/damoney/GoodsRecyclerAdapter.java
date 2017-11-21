@@ -96,7 +96,7 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
 
     @BindingAdapter({"pointRes"})
     public static void setPointText(TextView tv, int point) {
-        tv.setText("" + point + "원");
+        tv.setText("" + point);
     }
 
     public void BuyItem(int itemsn) {
