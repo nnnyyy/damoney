@@ -100,14 +100,13 @@ public class CharacterAnimator {
         if(mAnimMan.containsKey(state)) return;
 
         BitmapFactory.Options option = new BitmapFactory.Options();
-        option.inSampleSize = 1;
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
         Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
                 (int)Util.convertPixelsToDp(w, mContext),
                 (int)Util.convertPixelsToDp(h, mContext),
-                false
+                true
                 );
 
         bitmap.recycle();
@@ -121,15 +120,18 @@ public class CharacterAnimator {
                 bitmapScaled,
                 frameWidth,
                 frameHeight, frameCnt, count_per_row)
-                .frequency(4)
+                .frequency(2)
                 .spriteLoop(true);
         DisplayObject bitmapDisplay = new DisplayObject();
         bitmapDisplay
                 .with(spriteSheetDrawer)
                 .tween()
                 .tweenLoop(true)
-                .transform((ptViewRealSize.x - frameWidth)/2, (ptViewRealSize.y - frameHeight)/2)
+                .transform((ptViewRealSize.x - frameWidth * 2)/2, (ptViewRealSize.y - frameHeight * 2)/2)
                 .end();
+
+        bitmapDisplay.getAnimParameter().scaleX = 2;
+        bitmapDisplay.getAnimParameter().scaleY = 2;
 
         AnimStateObj aso = new AnimStateObj();
         aso.drawer = spriteSheetDrawer;

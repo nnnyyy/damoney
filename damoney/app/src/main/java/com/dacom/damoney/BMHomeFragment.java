@@ -17,6 +17,8 @@ import com.dacom.damoney.Advertisement.AdsResultListener;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentBmhomeBinding;
 
+import java.text.NumberFormat;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -77,7 +79,16 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         mBind.btnShowAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adsMan.startFullAds();
+                final StringBuilder buf = new StringBuilder();
+                DamoneyHttpHelper.GetAd(buf, new DamoneyHttpHelper.MyCallbackInterface() {
+                    @Override
+                    public void onResult(int nRet) {
+                        if(nRet == 0) {
+                            String sSerial = buf.toString();
+                            adsMan.startFullAds(sSerial);
+                        }
+                    }
+                });
             }
         });
         mBind.btnShowAds.setEnabled(false);
@@ -106,8 +117,12 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         mBind.tvLevel.setText("Lv." + MyPassport.getInstance().nLevel);
         mBind.expbar.setMax(MyPassport.getInstance().nExpMax);
         mBind.expbar.setProgress(MyPassport.getInstance().nCurExp);
+        String sNextLevel = "다음 레벨업까지 " + (MyPassport.getInstance().nExpMax - MyPassport.getInstance().nCurExp) + "xp 남음";
+        mBind.expLevelup.setText(sNextLevel);
 
-        String sVal = String.valueOf(MyPassport.getInstance().nPoint);
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setMaximumIntegerDigits(7); //최대수 지정
+        String sVal = nf.format(MyPassport.getInstance().nPoint);
         mBind.tvPoint.setText(sVal);
         if( MyPassport.getInstance().nGachaCnt > 0 ) {
             CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_QUESTION);
@@ -115,8 +130,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             mBind.gachabox.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), GetRewardActivity.class);
-                    getContext().startActivity(intent);
+                    Global.OpenGacha(getContext());
                 }
             });
         }
@@ -124,6 +138,11 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             mBind.gachabox.setVisibility(View.GONE);
             mBind.gachabox.setOnClickListener(null);
             CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_IDLE);
+        }
+        if(MyPassport.getInstance().bLevelup) {
+            MyPassport.getInstance().bLevelup = false;
+            Intent intent = new Intent(getContext(), LevelUpActivity.class);
+            getContext().startActivity(intent);
         }
     }
 
@@ -136,25 +155,26 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     public void onAdsFinished(int nRet) {
         setupAnim();
         if(nRet == -1) {
-            Toast.makeText(getContext(), "광고 리워드 받기에 실패 했습니다.", Toast.LENGTH_LONG).show();
-            mBind.btnShowAds.setEnabled(false);
-            adsMan.load();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getContext(), "광고 리워드 받기에 실패 했습니다.", Toast.LENGTH_LONG).show();
+                    mBind.btnShowAds.setEnabled(false);
+                    adsMan.load();
+                }
+            });
         }
 
         if(nRet == 0) {
-            Intent intent = new Intent(getContext(), GetRewardActivity.class);
-            getActivity().startActivity(intent);
-            //  이 과정이 나중에는 서버에서 결과를 수신하는 형태가 되어야한다.
-            Toast.makeText(getContext(), "광고 리워드를 받았습니다.", Toast.LENGTH_LONG).show();
-            /*MyPassport.getInstance().nPoint += 1000;
-            try {
-                MyPassport.getInstance().saveInfo();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }*/
-            refreshInfo();
-            mBind.btnShowAds.setEnabled(false);
-            adsMan.load();
+            Global.OpenGacha(getContext());
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshInfo();
+                    mBind.btnShowAds.setEnabled(false);
+                    adsMan.load();
+                }
+            });
         }
     }
 }

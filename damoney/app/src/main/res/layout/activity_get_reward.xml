@@ -14,6 +14,7 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         android:src="@drawable/gachabox"
+        android:focusableInTouchMode="true"
         />
     <LinearLayout
         android:id="@+id/ll_result"
@@ -22,57 +23,67 @@
         android:orientation="vertical"
         android:layout_centerInParent="true"
         >
-        <LinearLayout
-            android:background="@drawable/border"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="80dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="아이템 획득!"
+            android:textSize="36dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:background="@drawable/getitem_box"
             >
             <ImageView
-                android:background="@drawable/border"
                 android:id="@+id/iconimage"
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icon_1"
-                android:layout_margin="8dp"
-                android:padding="8dp"
-                />
-            <LinearLayout
+                android:src="@drawable/premium_icon_cjone"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"
+                />
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/tvGrade"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    tools:text="등급 : 레어"
-                    android:gravity="center_vertical"
-                    />
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    tools:text="피노키오 도마뱀"
-                    android:gravity="center_vertical"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
+                android:layout_height="wrap_content"
+                android:src="@drawable/cashshop_bar2"/>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="하프 물범"
+                android:layout_marginTop="8dp"
+                android:textSize="24dp"
+                android:textColor="#6f6f6f"/>
+            <TextView
+                android:id="@+id/tvGrade"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="등급 : 레어"
+                android:textSize="18dp"
+                android:textColor="#624949"/>
         </LinearLayout>
         <Button
             android:id="@+id/btn_close"
             android:layout_marginTop="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:width="240dp"
             android:layout_gravity="center_horizontal"
+            android:textColor="#624949"
+            android:textStyle="bold"
+            android:textSize="18dp"
             android:text="닫기"/>
     </LinearLayout>
 </RelativeLayout>

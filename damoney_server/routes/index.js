@@ -65,14 +65,6 @@ router.get('/get/itemlist', function(req, res) {
   })
 })
 
-router.get('/viewad', function(req, res) {
-  var id = req.decoded._id;
-  var sn = req.query.sn;
-  dbhelper.viewAd(id, sn, function(ret) {
-    res.send(ret);
-  })
-})
-
 router.get('/buy', function(req, res) {
   var id = req.decoded._id;
   var itemsn = req.query.itemsn;
@@ -88,6 +80,10 @@ router.get('/useGacha', function(req, res) {
   })
 })
 
+//  광고 관련 로직
 router.get('/ads', ads.getAds);
+router.get('/viewad', ads.viewAd);
+router.get('/getmainad', ads.getMainAd);
+router.get('/viewmainad', ads.viewMainAd);
 
 module.exports = router;
