@@ -26,10 +26,30 @@
             android:layout_width="200dp"
             android:layout_height="72dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/damoney_logo"
+            android:src="@drawable/login_title"
             android:scaleType="fitCenter"
             android:paddingBottom="24dp"
             />
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/login_char_bot"
+                android:layout_alignParentBottom="true"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/login_char"
+                android:layout_marginBottom="28dp"
+                />
+        </RelativeLayout>
         <EditText
             android:id="@+id/et_id"
             android:layout_width="match_parent"
