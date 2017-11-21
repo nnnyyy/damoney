@@ -80,6 +80,10 @@ public class BMCashFragment extends Fragment {
             case 2:
                 f = new BMCEBusFragment();
                 break;
+
+            case 3:
+                f = new BMCExchangeFragment();
+                break;
         }
 
         if(f == null) return;
