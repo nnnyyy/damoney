@@ -15,4 +15,14 @@ public class Global {
         Intent intent = new Intent(context, GetRewardActivity.class);
         context.startActivity(intent);
     }
+
+    public static String GetGradeName(int grade) {
+        switch(grade) {
+            case 0: return "일반";
+            case 1: return "레어";
+            case 2: return "전설";
+        }
+
+        return "일반";
+    }
 }

@@ -140,15 +140,16 @@ exports.getItemList = function(type, cb) {
 }
 
 exports.viewAd = function(id, sn, cb) {
-    dbpool.query('CALL ViewAd(?,?,@ret); select @ret;', [id,sn], function(err,rows,fields) {
+    dbpool.query('CALL ViewAd(?,?,@ret, @incExp); select @ret, @incExp;', [id,sn], function(err,rows,fields) {
         if(err) {
             cb({ret:-1, err:err});
             return;
         }
 
         var ret = rows[rows.length - 1][0]['@ret'];
+        var incExp = rows[rows.length - 1][0]['@incExp'];
 
-        cb({ret: ret});
+        cb({ret: ret, incExp: incExp});
     })
 }
 

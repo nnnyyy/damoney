@@ -50,6 +50,9 @@
         <activity android:name=".GetRewardActivity"
             android:theme="@style/AppTheme.Translucent"
             ></activity>
+        <activity android:name=".LevelUpActivity"
+            android:theme="@style/AppTheme.Translucent"
+            ></activity>
     </application>
 
 </manifest>

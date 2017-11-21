@@ -55,7 +55,7 @@ public class GetRewardActivity extends AppCompatActivity {
                             public void run() {
                                 MyPassport.getInstance().RequestInfo(null);
                                 mBind.tvName.setText(boxinfo.sName);
-                                mBind.tvGrade.setText(String.valueOf(boxinfo.nGrade));
+                                mBind.tvGrade.setText(Global.GetGradeName(boxinfo.nGrade));
                                 Picasso.with(getApplicationContext()).load(Global.BASE_URL + boxinfo.iconpath).into(mBind.iconimage);
                                 mBind.btnClose.setOnClickListener(new View.OnClickListener() {
                                     @Override

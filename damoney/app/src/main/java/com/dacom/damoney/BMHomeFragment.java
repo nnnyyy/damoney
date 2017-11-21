@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -138,6 +139,11 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             mBind.gachabox.setOnClickListener(null);
             CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_IDLE);
         }
+        if(MyPassport.getInstance().bLevelup) {
+            MyPassport.getInstance().bLevelup = false;
+            Intent intent = new Intent(getContext(), LevelUpActivity.class);
+            getContext().startActivity(intent);
+        }
     }
 
     @Override
@@ -149,15 +155,26 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     public void onAdsFinished(int nRet) {
         setupAnim();
         if(nRet == -1) {
-            Toast.makeText(getContext(), "광고 리워드 받기에 실패 했습니다.", Toast.LENGTH_LONG).show();
-            mBind.btnShowAds.setEnabled(false);
-            adsMan.load();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getContext(), "광고 리워드 받기에 실패 했습니다.", Toast.LENGTH_LONG).show();
+                    mBind.btnShowAds.setEnabled(false);
+                    adsMan.load();
+                }
+            });
         }
 
         if(nRet == 0) {
             Global.OpenGacha(getContext());
-            mBind.btnShowAds.setEnabled(false);
-            adsMan.load();
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    refreshInfo();
+                    mBind.btnShowAds.setEnabled(false);
+                    adsMan.load();
+                }
+            });
         }
     }
 }
