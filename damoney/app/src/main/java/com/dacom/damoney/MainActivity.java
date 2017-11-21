@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 // finally change the color
         if (android.os.Build.VERSION.SDK_INT > 19)
-            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorMainFont));
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.colorHomeNavBack));
         else {
             SystemBarTintManager tintManager = new SystemBarTintManager(this);
             tintManager.setStatusBarTintEnabled(true);
