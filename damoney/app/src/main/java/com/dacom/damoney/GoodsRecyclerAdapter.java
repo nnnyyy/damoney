@@ -108,7 +108,14 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
                     msg = "아이템 구매에 실패 했습니다.";
                 }
                 else {
-                    MyPassport.getInstance().RequestInfo(null);
+                    MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+                        @Override
+                        public void onResult(int nRet) {
+                            if(nRet == 0 && MyPassport.getInstance().nGachaCnt > 0) {
+                                Global.OpenGacha(fragment.getContext());
+                            }
+                        }
+                    });
                     msg = "아이템을 구매 했습니다.";
                 }
 

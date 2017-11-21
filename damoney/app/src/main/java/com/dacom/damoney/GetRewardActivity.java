@@ -19,7 +19,12 @@ public class GetRewardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_get_reward);
+        init();
+    }
+
+    public void init() {
         mBind.llResult.setVisibility(View.GONE);
+        mBind.gachabox.setVisibility(View.VISIBLE);
         mBind.gachabox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,18 +58,32 @@ public class GetRewardActivity extends AppCompatActivity {
                         new Handler(Looper.getMainLooper()).post(new Runnable() {
                             @Override
                             public void run() {
-                                MyPassport.getInstance().RequestInfo(null);
                                 mBind.tvName.setText(boxinfo.sName);
                                 mBind.tvGrade.setText(Global.GetGradeName(boxinfo.nGrade));
                                 Picasso.with(getApplicationContext()).load(Global.BASE_URL + boxinfo.iconpath).into(mBind.iconimage);
-                                mBind.btnClose.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        finish();
-                                    }
-                                });
                                 mBind.gachabox.setVisibility(View.GONE);
                                 mBind.llResult.setVisibility(View.VISIBLE);
+                                MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+                                    @Override
+                                    public void onResult(int nRet) {
+                                        if(nRet == 0 && MyPassport.getInstance().nGachaCnt > 0) {
+                                            mBind.btnClose.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    init();
+                                                }
+                                            });
+                                        }
+                                        else {
+                                            mBind.btnClose.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    finish();
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
                             }
                         });
                     }
