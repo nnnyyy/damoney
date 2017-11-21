@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.MediaController;
 
+import com.dacom.damoney.Global;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsBinding;
 
@@ -28,7 +29,7 @@ public class AdsActivity extends AppCompatActivity {
         MediaController mc = new MediaController(this);
         mBind.adVideo.setMediaController(null);
         mBind.adVideo.requestFocus();
-        mBind.adVideo.setVideoURI(Uri.parse("http://4seasonpension.com:3003/testads.mp4"));
+        mBind.adVideo.setVideoURI(Uri.parse(Global.BASE_URL + "/testads.mp4"));
         mBind.adVideo.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {

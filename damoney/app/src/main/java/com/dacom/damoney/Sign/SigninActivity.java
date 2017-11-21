@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.dacom.damoney.Global;
 import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivitySigninBinding;
@@ -103,7 +104,7 @@ public class SigninActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }).Post(0, "http://4seasonpension.com:3003/signin", mParams);
+        }).Post(0, Global.BASE_URL + "/signin", mParams);
     }
 
     public void onBtnSignUp(View v) {

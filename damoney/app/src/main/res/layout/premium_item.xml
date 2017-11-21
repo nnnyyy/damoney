@@ -75,7 +75,7 @@
                     android:src="@drawable/icon_coin"
                     />
                 <TextView
-                    android:layout_width="70dp"
+                    android:layout_width="36dp"
                     android:layout_height="match_parent"
                     app:pointRes="@{item.point}"
                     tools:text="1100"

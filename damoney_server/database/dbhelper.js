@@ -22,6 +22,7 @@ exports.createAccount = function(id, pw, nick, cb) {
 exports.loginAccount = function(id, pw, cb) {
     dbpool.query('CALL LoginAccount(?,?)',[id, pw], function(err,rows,fields){
         if(err) {
+            console.log("LoginAccount Failed : " + err);
             cb({ret:-1, err:err});
             return;
         }
@@ -140,6 +141,19 @@ exports.getItemList = function(type, cb) {
 
 exports.viewAd = function(id, sn, cb) {
     dbpool.query('CALL ViewAd(?,?,@ret); select @ret;', [id,sn], function(err,rows,fields) {
+        if(err) {
+            cb({ret:-1, err:err});
+            return;
+        }
+
+        var ret = rows[rows.length - 1][0]['@ret'];
+
+        cb({ret: ret});
+    })
+}
+
+exports.viewMainAd = function(id, cb) {
+    dbpool.query('CALL ViewMainAd(?,@ret); select @ret;', [id], function(err,rows,fields) {
         if(err) {
             cb({ret:-1, err:err});
             return;

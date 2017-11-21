@@ -2,6 +2,7 @@ package com.dacom.damoney.Sign;
 
 import android.content.Context;
 
+import com.dacom.damoney.Global;
 import com.dacom.damoney.Storage;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
@@ -86,7 +87,7 @@ public class MyPassport {
                     return;
                 }
             }
-        }).Get(0, "http://4seasonpension.com:3003/getinfo?token=" + getToken());
+        }).Get(0, Global.BASE_URL + "/getinfo?token=" + getToken());
     }
 
     public String loadToken(Context context) {
@@ -117,6 +118,7 @@ public class MyPassport {
 
     public void loadCoupon() {
         String sJsonList = Storage.load(mContext, COUPON_KEY);
+        if(sJsonList == "") return;
         try {
             JSONArray arr = new JSONArray(sJsonList);
             for(int i = 0 ; i < arr.length() ; ++i) {
