@@ -31,7 +31,7 @@ public class BMPBuyListFragment extends Fragment {
     private void setupRecyclerView() {
         mBind.goodsList.setHasFixedSize(true);
         mBind.goodsList.setLayoutManager(new LinearLayoutManager(mBind.getRoot().getContext()));
-        mBind.goodsList.setAdapter(new GoodsRecyclerAdapter(this));
+        mBind.goodsList.setAdapter(new BuyListRecyclerAdapter(this));
     }
 
     @Override
@@ -47,10 +47,10 @@ public class BMPBuyListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        loadAds();
+        loadList();
     }
 
-    protected void loadAds() {
+    protected void loadList() {
         final ArrayList<GoodsItem> list = new ArrayList<>();
         DamoneyHttpHelper.GetBuyList(list, new DamoneyHttpHelper.MyCallbackInterface() {
             @Override

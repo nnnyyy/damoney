@@ -59,6 +59,7 @@ public class BMProfileFragment extends Fragment {
             case 0:
                 f = new BMPProfieldMainFragment();
                 ((BMPProfieldMainFragment)f).setPrarent(this);
+                mBind.tvProfileTitle.setText("프로필");
                 mBind.btnBack.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -68,7 +69,8 @@ public class BMProfileFragment extends Fragment {
                 break;
 
             case 1:
-                f = new BMCEBusFragment();
+                f = new BMPBuyListFragment();
+                mBind.tvProfileTitle.setText("프로필 > 구매목록");
                 mBind.btnBack.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
