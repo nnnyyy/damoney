@@ -72,6 +72,13 @@ router.get('/get/buylist', function(req, res) {
   })
 })
 
+router.get('/get/mygachalist', function(req, res) {
+  var id = req.decoded._id;
+  dbhelper.getMyGacha(id, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/buy', function(req, res) {
   var id = req.decoded._id;
   var itemsn = req.query.itemsn;
