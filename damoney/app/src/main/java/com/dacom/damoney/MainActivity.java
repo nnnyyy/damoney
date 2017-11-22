@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.act_home:
                 f = new BMHomeFragment();
                 break;
-            case R.id.act_earn:
-                f = new BMEarnFragment();
-                break;
             case R.id.act_cash:
                 f = new BMCashFragment();
                 break;

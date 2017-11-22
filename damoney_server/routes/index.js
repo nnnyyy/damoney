@@ -65,6 +65,13 @@ router.get('/get/itemlist', function(req, res) {
   })
 })
 
+router.get('/get/buylist', function(req, res) {
+  var id = req.decoded._id;
+  dbhelper.getBuyList(id, function(ret) {
+    res.send(ret);
+  })
+})
+
 router.get('/buy', function(req, res) {
   var id = req.decoded._id;
   var itemsn = req.query.itemsn;

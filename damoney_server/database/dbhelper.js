@@ -139,6 +139,31 @@ exports.getItemList = function(type, cb) {
     });
 }
 
+exports.getBuyList = function(id, cb) {
+    dbpool.query('select * from useritems a, items b where a.listsn = b.sn and id = ?', [id], function(err,rows,fields) {
+        if (err) {
+            cb({ret: -1, err: err});
+            return;
+        }
+
+        var list = [];
+        for(var i = 0 ; i < rows.length ; ++i) {
+            list.push({
+                sn: rows[i].sn,
+                type: rows[i].type,
+                publisher: rows[i].publisher,
+                name: rows[i].name,
+                iconpath: rows[i].iconpath,
+                price: rows[i].price,
+                regdate: rows[i].regdate,
+                enddate: rows[i].enddate,
+            });
+        }
+
+        cb({ret: 0, list: list});
+    });
+}
+
 exports.viewAd = function(id, sn, cb) {
     dbpool.query('CALL ViewAd(?,?,@ret, @incExp); select @ret, @incExp;', [id,sn], function(err,rows,fields) {
         if(err) {

@@ -9,13 +9,6 @@
         android:title="@string/bnvitem_home"
          />
     <item
-        android:id="@+id/act_earn"
-        android:showAsAction="ifRoom|withText"
-        android:enabled="true"
-        android:icon="@drawable/underbar_icon_cash"
-        android:title="@string/bnvitem_earn"
-         />
-    <item
         android:id="@+id/act_cash"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"

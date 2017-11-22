@@ -119,6 +119,39 @@ public class DamoneyHttpHelper {
         }).Get(0, Global.BASE_URL + "/get/itemlist?type="+type+"&token=" + MyPassport.getInstance().getToken());
     }
 
+    public static void GetBuyList(final ArrayList<GoodsItem> list, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                try {
+                    JSONObject root = new JSONObject(s);
+                    JSONArray a = root.getJSONArray("list");
+                    int cnt = a.length();
+                    for(int i = 0 ; i < cnt ; ++i) {
+                        GoodsItem newItem = new GoodsItem();
+                        JSONObject o = a.getJSONObject(i);
+                        newItem.sn = o.getInt("sn");
+                        newItem.title = o.getString("name");
+                        newItem.publisher = o.getString("publisher");
+                        newItem.iconResId = R.drawable.premium_icon_coupang;
+                        newItem.iconPath = o.getString("iconpath");
+                        newItem.point = o.getInt("price");
+                        list.add(newItem);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if(callback != null) {
+                        callback.onResult(-99);
+                    }
+                }
+
+                if(callback != null) {
+                    callback.onResult(0);
+                }
+            }
+        }).Get(0, Global.BASE_URL + "/get/buylist?token=" + MyPassport.getInstance().getToken());
+    }
+
     public static void ViewAd(int sn, final MyCallbackInterface callback) {
         new HttpHelper().SetListener(new HttpHelperListener() {
             @Override
