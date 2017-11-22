@@ -21,12 +21,14 @@ import org.json.JSONObject;
 
 public class SplashActivity extends AppCompatActivity {
     ActivitySplashBinding mBind;
+    IntroAnimator animator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_splash);
         MyPassport.getInstance().init(this);
         setupStatusBar();
+        setupIntroAnim();
 
         new Thread(new Runnable() {
             @Override
@@ -91,6 +93,11 @@ public class SplashActivity extends AppCompatActivity {
             tintManager.setNavigationBarTintEnabled(true);
             tintManager.setStatusBarTintColor(R.color.colorMain);
         }
+    }
+
+    private void setupIntroAnim() {
+        animator = new IntroAnimator(this, mBind.animview);
+        animator.init();
     }
 
     private void GoSignin() {

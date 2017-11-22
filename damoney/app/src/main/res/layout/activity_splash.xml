@@ -10,11 +10,12 @@
     tools:context="com.dacom.damoney.SplashActivity"
     android:background="@color/colorMain"
     >
-    <ImageView
+    <com.daasuu.library.FPSTextureView
+        android:id="@+id/animview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash"
-        android:scaleType="fitCenter"         />
+        app:FPSAnimator_fps="24"
+        />
 </RelativeLayout>
 
 </layout>
