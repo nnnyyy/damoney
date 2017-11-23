@@ -47,12 +47,13 @@
         <activity android:name=".Sign.SignupActivity" />
         <activity android:name=".Sign.SigninActivity" />
         <activity android:name=".Advertisement.AdsWebView" />
-        <activity android:name=".GetRewardActivity"
-            android:theme="@style/AppTheme.Translucent"
-            ></activity>
-        <activity android:name=".LevelUpActivity"
-            android:theme="@style/AppTheme.Translucent"
-            ></activity>
+        <activity
+            android:name=".GetRewardActivity"
+            android:theme="@style/AppTheme.Translucent" />
+        <activity
+            android:name=".LevelUpActivity"
+            android:theme="@style/AppTheme.Translucent" />
+        <activity android:name=".CreateCharacterActivity"></activity>
     </application>
 
 </manifest>
