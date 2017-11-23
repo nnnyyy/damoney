@@ -12,32 +12,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.FragmentBmprofileBinding;
+import com.dacom.damoney.databinding.FragmentBmbonusmainBinding;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMProfileFragment extends FragmentEx {
-    FragmentBmprofileBinding mBind;
+public class BMBonusMainFragment extends FragmentEx {
+    FragmentBmbonusmainBinding mBind;
 
-    public BMProfileFragment() {
+    public BMBonusMainFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_bmprofile, container, false);
+        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_bmbonusmain, container, false);
+        mBind.setItem(this);
+        mBind.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBtnBack(v);
+            }
+        });
         return mBind.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         changeChildFragment(0);
     }
 
@@ -46,40 +51,11 @@ public class BMProfileFragment extends FragmentEx {
         onBack(context);
     }
 
-    @Override
-    public void onBack(Context context) {
-        super.onBack(context);
-        ((MainActivity)context).changeNav(R.id.act_home);
-    }
-
-    public void onBtnReturn(View v) {
-        changeChildFragment(0);
-    }
-
     protected void changeChildFragment(int menuid) {
         Fragment f = null;
         switch(menuid) {
             case 0:
-                f = new BMPProfieldMainFragment();
-                ((BMPProfieldMainFragment)f).setPrarent(this);
-                mBind.tvProfileTitle.setText("프로필");
-                mBind.btnBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBtnBack(v);
-                    }
-                });
-                break;
-
-            case 1:
-                f = new BMPBuyListFragment();
-                mBind.tvProfileTitle.setText("프로필 > 구매목록");
-                mBind.btnBack.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        onBtnReturn(v);
-                    }
-                });
+                f = new BMBonusItemFragment();
                 break;
         }
 
@@ -89,5 +65,11 @@ public class BMProfileFragment extends FragmentEx {
         FragmentTransaction childFragTrans = childFragMan.beginTransaction();
         childFragTrans.replace(R.id.placeholder, f);
         childFragTrans.commit();
+    }
+
+    @Override
+    public void onBack(Context context) {
+        super.onBack(context);
+        ((MainActivity)context).changeNav(R.id.act_home);
     }
 }

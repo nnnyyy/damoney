@@ -70,12 +70,12 @@
                 android:layout_gravity="center"
                 />
             <ImageView
-                android:id="@+id/gachabox"
+                android:id="@+id/bonus_item"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/gachabox"
+                android:src="@drawable/main_gift_box"
                 android:layout_margin="8dp"
                 />
             <ImageView

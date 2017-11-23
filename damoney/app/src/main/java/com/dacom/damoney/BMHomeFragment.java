@@ -107,6 +107,14 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 mainAct.changeFragment(R.id.btn_coupon);
             }
         });
+
+        mBind.bonusItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.bonus_item);
+            }
+        });
     }
 
     private void setupAnim() {
@@ -124,21 +132,8 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         nf.setMaximumIntegerDigits(7); //최대수 지정
         String sVal = nf.format(MyPassport.getInstance().nPoint);
         mBind.tvPoint.setText(sVal);
-        if( MyPassport.getInstance().nGachaCnt > 0 ) {
-            CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_QUESTION);
-            mBind.gachabox.setVisibility(View.VISIBLE);
-            mBind.gachabox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Global.OpenGacha(getContext());
-                }
-            });
-        }
-        else {
-            mBind.gachabox.setVisibility(View.GONE);
-            mBind.gachabox.setOnClickListener(null);
-            CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_IDLE);
-        }
+
+        CharacterAnimator.getInstance().changeAnim(CharacterAnimator.CharacterState.CS_IDLE);
         if(MyPassport.getInstance().bLevelup) {
             MyPassport.getInstance().bLevelup = false;
             Intent intent = new Intent(getContext(), LevelUpActivity.class);

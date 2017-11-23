@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMCashFragment extends Fragment {
+public class BMCashFragment extends FragmentEx {
     FragmentBmcashBinding mBind;
     ArrayList<TextView> aMenus;
 
@@ -55,7 +56,13 @@ public class BMCashFragment extends Fragment {
 
     public void onBtnBack(View v) {
         MainActivity context = (MainActivity)v.getContext();
-        context.changeNav(R.id.act_home);
+        onBack(context);
+    }
+
+    @Override
+    public void onBack(Context context) {
+        super.onBack(context);
+        ((MainActivity)context).changeNav(R.id.act_home);
     }
 
     protected void setupMenus() {

@@ -23,6 +23,7 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     ActivityMainBinding mBind;
+    Fragment curFragment;
     boolean exit = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,29 +96,39 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.btn_coupon:
                 f = new BMCouponFragment();
                 break;
+            case R.id.bonus_item:
+                f = new BMBonusMainFragment();
+                break;
             default:
                 return false;
         }
         if(f == null) return false;
+        curFragment = f;
         fm.beginTransaction().replace(R.id.content, f).commit();
         return true;
     }
 
     @Override
     public void onBackPressed() {
-        if (exit) {
-            finish(); // finish activity
-        } else {
-            Toast.makeText(this, "한번 더 누르면 종료 됩니다",
-                    Toast.LENGTH_SHORT).show();
-            exit = true;
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    exit = false;
-                }
-            }, 3 * 1000);
+        if(curFragment instanceof BMHomeFragment) {
+            if (exit) {
+                finish(); // finish activity
+            } else {
+                Toast.makeText(this, "한번 더 누르면 종료 됩니다",
+                        Toast.LENGTH_SHORT).show();
+                exit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        exit = false;
+                    }
+                }, 3 * 1000);
 
+            }
+        }
+        else if(curFragment instanceof FragmentEx) {
+            FragmentEx f = (FragmentEx)curFragment;
+            f.onBack(this);
         }
     }
 }

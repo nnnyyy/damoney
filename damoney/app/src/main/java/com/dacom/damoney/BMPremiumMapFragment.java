@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMPremiumMapFragment extends Fragment {
+public class BMPremiumMapFragment extends FragmentEx {
     FragmentPremiummapBinding mBind;
 
     public BMPremiumMapFragment() {
@@ -41,7 +42,13 @@ public class BMPremiumMapFragment extends Fragment {
 
     public void onBtnBack(View v) {
         MainActivity context = (MainActivity)v.getContext();
-        context.changeNav(R.id.act_home);
+        onBack(context);
+    }
+
+    @Override
+    public void onBack(Context context) {
+        super.onBack(context);
+        ((MainActivity)context).changeNav(R.id.act_home);
     }
 
     @Override
