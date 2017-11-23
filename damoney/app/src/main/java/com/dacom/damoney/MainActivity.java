@@ -89,6 +89,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.btn_go_premium_map:
                 f = new BMPremiumMapFragment();
                 break;
+            case R.id.act_recommfriend:
+                f = new BMRecommandFriend();
+                break;
             case R.id.btn_coupon:
                 f = new BMCouponFragment();
                 break;

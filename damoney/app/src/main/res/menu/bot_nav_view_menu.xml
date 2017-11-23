@@ -23,6 +23,13 @@
         android:title="@string/bnvitem_comm"
          />
     <item
+        android:id="@+id/act_recommfriend"
+        android:showAsAction="ifRoom|withText"
+        android:enabled="true"
+        android:icon="@drawable/underbar_icon_community"
+        android:title="@string/bnvitem_recommand_friend"
+        />
+    <item
         android:id="@+id/act_profile"
         android:showAsAction="ifRoom|withText"
         android:enabled="true"
