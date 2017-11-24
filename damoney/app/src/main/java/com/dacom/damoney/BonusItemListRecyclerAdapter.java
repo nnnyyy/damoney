@@ -60,6 +60,7 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     private void bindDataHolder(BonusItemDataHolder holder, BonusItemData item) {
+        holder.mBind.setItem(item);
         Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
     }
 

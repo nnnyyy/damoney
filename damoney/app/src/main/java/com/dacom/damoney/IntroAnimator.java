@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 
 import com.daasuu.library.DisplayObject;
@@ -43,46 +44,52 @@ public class IntroAnimator {
     }
 
     protected void loadAnim(int resId, int cnt_per_row, int cnt_per_col, int frameCnt) {
+        try {
+            BitmapFactory.Options option = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
+            int w = bitmap.getWidth();
+            int h = bitmap.getHeight();
+            int count_per_row = cnt_per_row;
+            int count_per_col = cnt_per_col;
+            int fw = w / count_per_row;
+            int fh = h / count_per_col;
+            float fRatio = (float) fw / (float) fh;   //  캐릭터 프레임 종횡
 
-        BitmapFactory.Options option = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-        int count_per_row = cnt_per_row;
-        int count_per_col = cnt_per_col;
-        int fw = w/count_per_row;
-        int fh = h/count_per_col;
-        float fRatio = (float)fw / (float)fh;   //  캐릭터 프레임 종횡
+            // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
+            // 인트로 하나당 width 가 170dp 를 차지하는게 가장 이상적
+            int nRecommFrameW = (int) Util.convertDpToPixel(170, mContext);
+            ;
+            int nRecommFrameH = (int) ((float) nRecommFrameW * (1.0 / fRatio));
+            int nRecommW = nRecommFrameW * count_per_row;
+            int nRecommH = nRecommFrameH * count_per_col;
 
-        // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
-        // 인트로 하나당 width 가 170dp 를 차지하는게 가장 이상적
-        int nRecommFrameW = (int)Util.convertDpToPixel(170, mContext);;
-        int nRecommFrameH = (int)((float)nRecommFrameW * ( 1.0 / fRatio));
-        int nRecommW = nRecommFrameW * count_per_row;
-        int nRecommH = nRecommFrameH * count_per_col;
+            Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
+                    nRecommW,
+                    nRecommH,
+                    true
+            );
+            bitmap.recycle();
+            SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
+                    bitmapScaled,
+                    nRecommFrameW,
+                    nRecommFrameH, frameCnt, count_per_row)
+                    .frequency(2)
+                    .spriteLoop(false);
+            DisplayObject bitmapDisplay = new DisplayObject();
+            bitmapDisplay
+                    .with(spriteSheetDrawer)
+                    .tween()
+                    .tweenLoop(true)
+                    .transform((ptViewRealSize.x - nRecommFrameW) / 2, (ptViewRealSize.y - nRecommFrameH) / 2)
+                    .end();
 
-        Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
-                nRecommW,
-                nRecommH,
-                true
-        );
-        bitmap.recycle();
-        SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
-                bitmapScaled,
-                nRecommFrameW,
-                nRecommFrameH, frameCnt, count_per_row)
-                .frequency(2)
-                .spriteLoop(false);
-        DisplayObject bitmapDisplay = new DisplayObject();
-        bitmapDisplay
-                .with(spriteSheetDrawer)
-                .tween()
-                .tweenLoop(true)
-                .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH )/2)
-                .end();
+            mTexView
+                    .addChild(bitmapDisplay)
+                    .tickStart();
 
-        mTexView
-                .addChild(bitmapDisplay)
-                .tickStart();
+        } catch (OutOfMemoryError err) {
+            Log.e("IntroAnimator","Loading Failed : " + err);
+            return;
+        }
     }
 }

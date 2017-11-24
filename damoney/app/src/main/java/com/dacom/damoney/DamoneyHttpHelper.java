@@ -335,8 +335,8 @@ public class DamoneyHttpHelper {
                     ArrayList<Integer> aMyGachaList = new ArrayList<>();
                     int mllen = aMyList.length();
                     for(int i = 0 ; i < mllen ; ++i) {
-                        JSONObject myitem = aBonusInfo.getJSONObject(i);
-                        int sn = myitem.getInt("no");
+                        JSONObject myitem = aMyList.getJSONObject(i);
+                        int sn = myitem.getInt("sn");
                         int itemid = myitem.getInt("itemid");
                         man.addMyGacha(sn, itemid);
                     }

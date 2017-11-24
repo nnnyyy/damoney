@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onBackPressed() {
         if(curFragment instanceof BMHomeFragment) {
             if (exit) {
+                CharacterAnimator.getInstance().clear();
                 finish(); // finish activity
             } else {
                 Toast.makeText(this, "한번 더 누르면 종료 됩니다",

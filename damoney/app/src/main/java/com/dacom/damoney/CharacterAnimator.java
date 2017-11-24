@@ -158,4 +158,11 @@ public class CharacterAnimator {
                 .addChild(currentObject)
                 .tickStart();
     }
+
+    public void clear() {
+        bLoad = false;
+        textureView.clearAnimation();
+        textureView.removeAllChildren();
+        mAnimMan.clear();;
+    }
 }
