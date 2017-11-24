@@ -116,7 +116,7 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="다람쥐 쳇바퀴"
+                    android:text="noname"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
                     android:textSize="18dp"

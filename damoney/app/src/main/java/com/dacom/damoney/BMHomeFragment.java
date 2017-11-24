@@ -131,6 +131,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
 
     private void refreshInfo() {
         mBind.tvLevel.setText("Lv." + MyPassport.getInstance().nLevel);
+        mBind.tvName.setText(MyPassport.getInstance().sNick);
         mBind.expbar.setMax(MyPassport.getInstance().nExpMax);
         mBind.expbar.setProgress(MyPassport.getInstance().nCurExp);
         String sNextLevel = "다음 레벨업까지 " + (MyPassport.getInstance().nExpMax - MyPassport.getInstance().nCurExp) + "xp 남음";
