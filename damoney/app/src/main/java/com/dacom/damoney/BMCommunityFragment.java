@@ -68,7 +68,7 @@ public class BMCommunityFragment extends FragmentEx implements AdvancedWebView.L
 
     public void setupWebView() {
         mBind.webview.setListener(getActivity(), this);
-        mBind.webview.loadUrl("http://www.naver.com/");
+        mBind.webview.loadUrl("http://gae9.com/");
     }
 
     @Override

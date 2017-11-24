@@ -7,19 +7,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dacom.damoney.DamoneyHttpHelper;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsTouchBinding;
+import com.dacom.damoney.databinding.AdsTouchAreaBinding;
+import com.dacom.damoney.databinding.BonusSectionBinding;
 
 import java.util.ArrayList;
 
 public class AdsTouchActivity extends AppCompatActivity {
     ActivityAdsTouchBinding mBind;
     boolean bRunning = false;
-    ArrayList<TextView> atvlist = new ArrayList<>();
+    ArrayList<View> atvlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,15 +41,14 @@ public class AdsTouchActivity extends AppCompatActivity {
         display.getSize(size);
 
         for(int i = 0 ; i < 5 ; ++i) {
-            TextView tv = new TextView(this);
-            tv.setText("Touch " + i);
+            AdsTouchAreaBinding bind = AdsTouchAreaBinding.inflate(LayoutInflater.from(getApplicationContext()), mBind.rlTouchArea, false);
             int rx = (int)(float)(dx[i] * size.x);
             int ry = (int)(float)(dy[i] * size.y);
             Log.d("MyLog", "rx : " + rx + ", ry : " + ry);
-            tv.setX(rx);
-            tv.setY(ry);
-            tv.setBackgroundColor(Color.WHITE);
-            tv.setOnClickListener(new View.OnClickListener() {
+            bind.getRoot().setX(rx);
+            bind.getRoot().setY(ry);
+            //bind.getRoot().setBackgroundColor(Color.WHITE);
+            bind.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     view.setVisibility(View.GONE);
@@ -63,8 +65,8 @@ public class AdsTouchActivity extends AppCompatActivity {
                     }
                 }
             });
-            mBind.rlTouchArea.addView(tv);
-            atvlist.add(tv);
+            mBind.rlTouchArea.addView(bind.getRoot());
+            atvlist.add(bind.getRoot());
             CheckClickState();
         }
     }
@@ -79,7 +81,7 @@ public class AdsTouchActivity extends AppCompatActivity {
 
     protected boolean CheckClickState() {
         long nFailedCnt = 0;
-        for(TextView tv : atvlist) {
+        for(View tv : atvlist) {
             if( tv.getVisibility() == View.VISIBLE ) {
                 nFailedCnt++;
             }

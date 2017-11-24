@@ -115,6 +115,14 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 mainAct.changeFragment(R.id.bonus_item);
             }
         });
+
+        mBind.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
+                getContext().startActivity(intent);
+            }
+        });
     }
 
     private void setupAnim() {
