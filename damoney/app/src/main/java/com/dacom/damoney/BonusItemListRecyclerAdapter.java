@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dacom.damoney.databinding.BonusDataBinding;
 import com.dacom.damoney.databinding.BonusSectionBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -55,10 +56,11 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     private void bindSectionHolder(BonusItemSectionHolder holder, BonusItemSection item) {
-        holder.mBind.tvTitle.setText("레벨 " + item.level);
+        holder.mBind.tvTitle.setText("요구레벨: " + item.level);
     }
 
     private void bindDataHolder(BonusItemDataHolder holder, BonusItemData item) {
+        Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
     }
 
     @Override

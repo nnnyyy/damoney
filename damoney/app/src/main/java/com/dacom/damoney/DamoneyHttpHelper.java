@@ -292,4 +292,65 @@ public class DamoneyHttpHelper {
             }
         }).Get(0, Global.BASE_URL + "/viewmainad?sn="+sSerial+"&token=" + MyPassport.getInstance().getToken());
     }
+
+    public static void getBonusInfo(final BonusManager man, final MyCallbackInterface callback) {
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String s) {
+                if (nRet != 0) {
+                    if (callback != null)
+                        callback.onResult(-99);
+                    return;
+                }
+                int nJSONRet = 0;
+                try {
+                    JSONObject root = new JSONObject(s);
+                    nJSONRet = root.getInt("ret");
+                    if(nJSONRet != 0) {
+                        callback.onResult(nJSONRet);
+                        return;
+                    }
+
+                    man.clear();
+
+                    JSONArray aBonusInfo = root.getJSONArray("bonusinfo");
+                    int bilen = aBonusInfo.length();
+                    for(int i = 0 ; i < bilen ; ++i) {
+                        JSONObject bitem = aBonusInfo.getJSONObject(i);
+                        int no = bitem.getInt("no");
+                        String pub = bitem.getString("pub");
+                        String name = bitem.getString("name");
+                        int reqLevel = bitem.getInt("reqLevel");
+                        String ipath = bitem.getString("iconpath");
+                        JSONArray reqGachaList = bitem.getJSONArray("reqGachaList");
+                        ArrayList<Integer> aList = new ArrayList<>();
+                        for(int i2 = 0 ; i2 < reqGachaList.length() ; ++i2) {
+                            aList.add(reqGachaList.getInt(i2));
+                        }
+                        man.addSection(reqLevel);
+                        man.add(no, pub, name, reqLevel, ipath, aList);
+                    }
+
+                    JSONArray aMyList = root.getJSONArray("mygachalist");
+                    ArrayList<Integer> aMyGachaList = new ArrayList<>();
+                    int mllen = aMyList.length();
+                    for(int i = 0 ; i < mllen ; ++i) {
+                        JSONObject myitem = aBonusInfo.getJSONObject(i);
+                        int sn = myitem.getInt("no");
+                        int itemid = myitem.getInt("itemid");
+                        man.addMyGacha(sn, itemid);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    if (callback != null)
+                        callback.onResult(-1);
+                    return;
+                }
+
+                if (callback != null)
+                    callback.onResult(nJSONRet);
+            }
+        }).Get(0, Global.BASE_URL + "/get/bonusinfo?token=" + MyPassport.getInstance().getToken());
+    }
 }

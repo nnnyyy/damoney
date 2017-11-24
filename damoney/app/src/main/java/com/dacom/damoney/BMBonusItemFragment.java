@@ -48,38 +48,10 @@ public class BMBonusItemFragment extends Fragment {
     }
 
     protected void loadList() {
-        final ArrayList<BonusItemBase> list = new ArrayList<>();
-        BonusItemSection section = new BonusItemSection();
-        section.level = 1;
-        list.add(section);
-
-        BonusItemData data = new BonusItemData();
-        list.add(data);
-
-        section = new BonusItemSection();
-        section.level = 4;
-        list.add(section);
-
-        data = new BonusItemData();
-        list.add(data);
-
-        data = new BonusItemData();
-        list.add(data);
+        BMBonusMainFragment f = (BMBonusMainFragment)getParentFragment();
 
         BonusItemListRecyclerAdapter adapter = (BonusItemListRecyclerAdapter)mBind.goodsList.getAdapter();
-        adapter.AddList(list);
+        adapter.AddList(f.getBM().getBonusList());
         adapter.notifyDataSetChanged();
-
-        /*DamoneyHttpHelper.GetBuyList(list, new DamoneyHttpHelper.MyCallbackInterface() {
-            @Override
-            public void onResult(int nRet) {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                });
-            }
-        });*/
     }
 }
