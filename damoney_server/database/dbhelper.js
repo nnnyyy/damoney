@@ -319,6 +319,7 @@ exports.getBonusInfo = function(id, cb) {
         var list = [];
         for(var i = 0 ; i < rows.length ; ++i) {
             list.push({
+                sn: rows[i].sn,
                 itemid: rows[i].itemid,
                 regdate: rows[i].regdate,
             });
