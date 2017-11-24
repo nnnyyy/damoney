@@ -9,9 +9,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var gacha = require('./Gacha');
+var gameinfo = require('./GameInfo');
 
 var app = express();
 
+gameinfo.initBonusItemInfo();
 gacha.init(function(ret) {
   if(ret != 0) {
     console.log('gacha loading failed : ' + gacha_ret);

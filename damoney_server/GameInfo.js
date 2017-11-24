@@ -73,3 +73,7 @@ exports.initBonusItemInfo = function() {
 function createBonusItemInfo(no, publisher, name, reqLevel, iconpath, reqGachaList) {
     return {no: no, pub: publisher, name: name, reqLevel: reqLevel, iconpath: iconpath, reqGachaList: reqGachaList};
 }
+
+exports.getBonusItemInfo = function() {
+    return bonusItemInfo;
+}

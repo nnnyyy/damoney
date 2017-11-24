@@ -3,6 +3,8 @@ package com.dacom.damoney;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -101,6 +103,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void GoSignin() {
+        mBind.animview.removeAllChildren();
         Intent intent = new Intent(SplashActivity.this, SigninActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -118,6 +121,8 @@ public class SplashActivity extends AppCompatActivity {
                     return;
                 }
 
+                mBind.animview.removeAllChildren();
+
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -125,5 +130,17 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mBind.animview.tickStart();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mBind.animview.tickStop();
     }
 }

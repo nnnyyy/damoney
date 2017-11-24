@@ -307,3 +307,24 @@ exports.useGacha = function(id, cb) {
         }
     });
 }
+
+exports.getBonusInfo = function(id, cb) {
+    var bonusinfo = gameinfo.getBonusItemInfo();
+    dbpool.query('select * from usergacha where id = ?', [id], function (err, rows) {
+        if (err) {
+            console.log(err);
+            return callback({ret: -1});
+        }
+
+        var list = [];
+        for(var i = 0 ; i < rows.length ; ++i) {
+            list.push({
+                itemid: rows[i].itemid,
+                regdate: rows[i].regdate,
+            });
+        }
+
+        console.log("getBonusInfo - success");
+        cb({ret:0, bonusinfo: bonusinfo, mygachalist: list})
+    });
+}

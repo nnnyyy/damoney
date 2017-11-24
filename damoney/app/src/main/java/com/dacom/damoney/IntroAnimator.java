@@ -48,24 +48,29 @@ public class IntroAnimator {
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
-                (int) Util.convertPixelsToDp(w, mContext),
-                (int)Util.convertPixelsToDp(h, mContext),
-                true
-        );
-
-        bitmap.recycle();
-        int scale = 5;
         int count_per_row = cnt_per_row;
         int count_per_col = cnt_per_col;
         int fw = w/count_per_row;
         int fh = h/count_per_col;
-        final float frameWidth = Util.convertPixelsToDp(fw, mContext);
-        final float frameHeight = Util.convertPixelsToDp(fh, mContext);
+        float fRatio = (float)fw / (float)fh;   //  캐릭터 프레임 종횡
+
+        // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
+        // 인트로 하나당 width 가 170dp 를 차지하는게 가장 이상적
+        int nRecommFrameW = (int)Util.convertDpToPixel(170, mContext);;
+        int nRecommFrameH = (int)((float)nRecommFrameW * ( 1.0 / fRatio));
+        int nRecommW = nRecommFrameW * count_per_row;
+        int nRecommH = nRecommFrameH * count_per_col;
+
+        Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
+                nRecommW,
+                nRecommH,
+                true
+        );
+        bitmap.recycle();
         SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
                 bitmapScaled,
-                frameWidth,
-                frameHeight, frameCnt, count_per_row)
+                nRecommFrameW,
+                nRecommFrameH, frameCnt, count_per_row)
                 .frequency(2)
                 .spriteLoop(false);
         DisplayObject bitmapDisplay = new DisplayObject();
@@ -73,11 +78,8 @@ public class IntroAnimator {
                 .with(spriteSheetDrawer)
                 .tween()
                 .tweenLoop(true)
-                .transform((ptViewRealSize.x - frameWidth * scale)/2, (ptViewRealSize.y - frameHeight * scale)/2)
+                .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH )/2)
                 .end();
-
-        bitmapDisplay.getAnimParameter().scaleX = scale;
-        bitmapDisplay.getAnimParameter().scaleY = scale;
 
         mTexView
                 .addChild(bitmapDisplay)
