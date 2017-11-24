@@ -10,31 +10,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.FragmentRecommandFriendBinding;
+import com.dacom.damoney.databinding.FragmentBmadsdistBinding;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class BMRecommandFriend extends FragmentEx {
-    FragmentRecommandFriendBinding mBind;
+public class BMAdsDistFragment extends FragmentEx {
+    FragmentBmadsdistBinding mBind;
 
-    public BMRecommandFriend() {
+    public BMAdsDistFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_recommand_friend, container, false);
+        mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_bmadsdist, container, false);
         return mBind.getRoot();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void onBtnBack(View v) {
+        MainActivity context = (MainActivity)v.getContext();
+        onBack(context);
     }
 
     @Override

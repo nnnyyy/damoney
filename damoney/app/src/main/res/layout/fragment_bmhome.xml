@@ -217,6 +217,7 @@
                     android:background="#777777"
                     ></View>
                 <ImageButton
+                    android:id="@+id/btn_ads_distribute"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

@@ -88,7 +88,7 @@ public class BMCouponFragment extends FragmentEx {
         });
     }
 
-    void showCouponUseWnd(/*CouponInfo info*/){
+    void showCouponUseWnd(CouponItem info){
         mBind.descWnd.setVisibility(View.VISIBLE);
         mBind.wndClose.setOnClickListener(new View.OnClickListener() {
             @Override

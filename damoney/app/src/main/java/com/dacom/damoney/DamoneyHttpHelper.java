@@ -39,7 +39,8 @@ public class DamoneyHttpHelper {
                         newItem.iconPath = o.getString("iconpath");
                         newItem.type = o.getInt("type");
                         newItem.point = o.getInt("reward");
-                        newItem.isUsed = o.getString("id") != null ? true : false;
+                        String sId = o.getString("id");
+                        newItem.isUsed = sId == "null" ? false : true;
                         list.add(newItem);
                     }
                 } catch (JSONException e) {

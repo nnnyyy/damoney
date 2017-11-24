@@ -32,18 +32,16 @@ public class AdsManager {
     public void startFullAds(String sSerial) {
         mSerial= sSerial;
         Intent intent = null;
-        switch(mDebugCnt%3) {
+        switch(mDebugCnt%2) {
             case 0:
                 //intent = new Intent(mContext, AdsActivity.class);
                 intent = new Intent(mContext, AdsTouchActivity.class);
                 break;
             case 1:
-                intent = new Intent(mContext, AdsTypingActivity.class);
-                break;
-            case 2:
-                intent = new Intent(mContext, AdsTypingActivity.class);
+                intent = new Intent(mContext, AdsActivity.class);
                 break;
         }
+        mDebugCnt++;
         if(intent != null)
             mContext.startActivity(intent);
     }

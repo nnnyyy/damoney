@@ -3,7 +3,6 @@ package com.dacom.damoney;
 import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.widget.RecyclerView;
@@ -49,10 +48,11 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
         holder.mBind.setItem(item);
         Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
         if(item.isUsed) {
-            holder.mBind.tvTitle.setTextColor(Color.DKGRAY);
+            holder.mBind.usedwnd.setVisibility(View.VISIBLE);
             holder.mBind.clickable.setOnClickListener(null);
         }
         else{
+            holder.mBind.usedwnd.setVisibility(View.GONE);
             holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

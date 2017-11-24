@@ -123,6 +123,14 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 getContext().startActivity(intent);
             }
         });
+
+        mBind.btnAdsDistribute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.btn_ads_distribute);
+            }
+        });
     }
 
     private void setupAnim() {

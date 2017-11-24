@@ -54,6 +54,9 @@
             android:name=".LevelUpActivity"
             android:theme="@style/AppTheme.Translucent" />
         <activity
+            android:name=".CouponUseActivity"
+            android:theme="@style/AppTheme.Translucent" />
+        <activity
             android:name=".CharacterInfoActivity"
             android:theme="@style/AppTheme.Translucent" />
         <activity android:name=".CreateCharacterActivity"></activity>

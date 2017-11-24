@@ -1,7 +1,6 @@
 package com.dacom.damoney.Advertisement;
 
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,20 +8,20 @@ import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.dacom.damoney.DamoneyHttpHelper;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsTouchBinding;
 import com.dacom.damoney.databinding.AdsTouchAreaBinding;
-import com.dacom.damoney.databinding.BonusSectionBinding;
 
 import java.util.ArrayList;
 
 public class AdsTouchActivity extends AppCompatActivity {
     ActivityAdsTouchBinding mBind;
     boolean bRunning = false;
+    boolean bSuccess = false;
     ArrayList<View> atvlist = new ArrayList<>();
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +29,7 @@ public class AdsTouchActivity extends AppCompatActivity {
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_ads_touch);
         mBind.setItem(this);
         setupDemoAds();
+        start();
     }
 
     private void setupDemoAds() {
@@ -54,6 +54,8 @@ public class AdsTouchActivity extends AppCompatActivity {
                     view.setVisibility(View.GONE);
                     view.setOnClickListener(null);
                     if(CheckClickState()) {
+                        bSuccess = true;
+                        bRunning = false;
                         DamoneyHttpHelper.ViewMainAd(AdsManager.mSerial, new DamoneyHttpHelper.MyCallbackInterface() {
                             @Override
                             public void onResult(int nRet) {
@@ -73,10 +75,13 @@ public class AdsTouchActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         bRunning = false;
-        if(AdsManager.listener != null)
-            AdsManager.listener.onAdsFinished(-1);
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        super.onBackPressed();
     }
 
     protected boolean CheckClickState() {
@@ -88,5 +93,44 @@ public class AdsTouchActivity extends AppCompatActivity {
         }
         mBind.cnt.setText("" + (atvlist.size() - nFailedCnt) + "/" + atvlist.size());
         return nFailedCnt == 0;
+    }
+
+    protected void start() {
+        bRunning = true;
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int n = 0;
+                while(bRunning && n != 15) {
+                    try {
+                        Thread.sleep(1000);
+                        n++;
+                        final int value = (int)((float)100 * (float)n / 15.0);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mBind.bar.setProgress(value);
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBind.bar.setProgress(100);
+                    }
+                });
+                if(!bSuccess) {
+                    finish();
+                    if(AdsManager.listener != null)
+                        AdsManager.listener.onAdsFinished(-1);
+                }
+            }
+        });
+        thread.start();
     }
 }
