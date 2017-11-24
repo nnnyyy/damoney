@@ -57,7 +57,7 @@ exports.getInfo = function(id, cb) {
         var levelinfo = gameinfo.getLevelInfo(result.exp);
         console.log(result);
 
-        cb({ret:0, point: result.point, gacha: result.gacha_cnt, level: levelinfo.level, expMax: levelinfo.nextExpMax, curExp: levelinfo.curExp });
+        cb({ret:0, point: result.point, nick: result.nick, gacha: result.gacha_cnt, level: levelinfo.level, expMax: levelinfo.nextExpMax, curExp: levelinfo.curExp });
     });
 }
 

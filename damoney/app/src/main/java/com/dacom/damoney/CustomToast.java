@@ -2,14 +2,11 @@ package com.dacom.damoney;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import com.dacom.damoney.databinding.ToastPointBinding;
-
-import java.util.logging.Handler;
 
 /**
  * Created by nnnyy on 2017-11-19.
@@ -26,5 +23,9 @@ public class CustomToast {
         toast.setDuration(Toast.LENGTH_SHORT);
         toast.setView(bind.getRoot());
         toast.show();
+    }
+
+    public static void Alert(Context context, String sAlertMsg) {
+        Toast.makeText(context, sAlertMsg, Toast.LENGTH_SHORT).show();
     }
 }

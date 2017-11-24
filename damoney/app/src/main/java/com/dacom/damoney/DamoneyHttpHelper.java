@@ -9,6 +9,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by nnnyyy on 2017-11-17.
@@ -352,5 +354,18 @@ public class DamoneyHttpHelper {
                     callback.onResult(nJSONRet);
             }
         }).Get(0, Global.BASE_URL + "/get/bonusinfo?token=" + MyPassport.getInstance().getToken());
+    }
+
+    public static void Signup(String id, String pw, String nick , final MyCallbackInterface callback) {
+        Map<String, Object> mParams = new HashMap<String, Object>();
+        mParams.put("id", id);
+        mParams.put("pw", pw);
+        mParams.put("nick", nick);
+        new HttpHelper().SetListener(new HttpHelperListener() {
+            @Override
+            public void onResponse(int nType, int nRet, String sResponse) {
+                callback.onResult(nRet);
+            }
+        }).Post(0, Global.BASE_URL + "/signup", mParams);
     }
 }
