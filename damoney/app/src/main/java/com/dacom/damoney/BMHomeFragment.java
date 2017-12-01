@@ -117,11 +117,16 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             }
         });
 
+        mBind.animationTextureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoCharacterInfo();
+            }
+        });
         mBind.tvName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
-                getContext().startActivity(intent);
+                GoCharacterInfo();
             }
         });
 
@@ -206,5 +211,10 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
 
     public void setViewAdsByNoti() {
         bDirectShowAds = true;
+    }
+
+    private void GoCharacterInfo() {
+        Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
+        getContext().startActivity(intent);
     }
 }

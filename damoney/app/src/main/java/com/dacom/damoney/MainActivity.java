@@ -1,11 +1,7 @@
 package com.dacom.damoney;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -20,7 +16,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.dacom.damoney.Functional.BottomNavigationViewHelper;
-import com.dacom.damoney.Push.PushBroadcastReceiver;
+import com.dacom.damoney.Push.DamoneyPushManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.ActivityMainBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -41,22 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         boolean bAds = getIntent().getBooleanExtra("Ads", false);
 
         if(!bAds) {
-            AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-            Intent intent = new Intent(MainActivity.this, PushBroadcastReceiver.class);
-
-            PendingIntent sender = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-            //알람 예약
-            // 1분뒤에 AlarmOneMinuteBroadcastReceiver 호출 한다.
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, sender);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, sender);
-            } else {
-                am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 10000, sender);
-            }
-        }
-        else {
-
+            DamoneyPushManager.Reserv(getApplicationContext(), DamoneyPushManager.FIVE_MIN);
         }
     }
 
@@ -104,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.act_home:
                 f = new BMHomeFragment();
                 boolean bAds = getIntent().getBooleanExtra("Ads", false);
+                getIntent().removeExtra("Ads");
                 if(bAds) {
                     ((BMHomeFragment)f).setViewAdsByNoti();
                 }

@@ -1,6 +1,5 @@
 package com.dacom.damoney.Sign;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -60,9 +59,9 @@ public class SignupActivity extends AppCompatActivity {
                 // 확인 받아서 맞으면 인증 확인 완료 플래그 올림.
                 mBind.circleBar.setVisibility(View.GONE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                AlertManager.ShowOk(SignupActivity.this, "알림", "인증이 완료 되었습니다.", "닫기", new DialogInterface.OnClickListener() {
+                AlertManager.ShowOk(SignupActivity.this, "알림", "인증이 완료 되었습니다.", "닫기", new AlertManager.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(View v) {
                         mBind.etPhoneAuth.setEnabled(false);
                         mBind.etPhoneAuth2.setEnabled(false);
                         mBind.btnVerifyAuthnumber.setEnabled(false);

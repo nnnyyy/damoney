@@ -59,9 +59,16 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
     }
 
     private void setupIntroAnim() {
-        animator = new IntroAnimator(this, mBind.animview);
-        animator.setListener(this);
-        animator.init();
+        boolean bAdsByNoti = getIntent().getBooleanExtra("Ads", false);
+
+        if(bAdsByNoti) {
+            CheckAction();
+        }
+        else {
+            animator = new IntroAnimator(this, mBind.animview);
+            animator.setListener(this);
+            animator.init();
+        }
     }
 
     private void GoSignin() {
@@ -74,7 +81,12 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
     }
 
     private void GoMain() {
-
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                CharacterAnimator.getInstance().clear();
+            }
+        });
         MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
             @Override
             public void onResult(int nRet) {
@@ -85,7 +97,12 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
 
                 mBind.animview.removeAllChildren();
 
+                boolean bAdsByNoti = getIntent().getBooleanExtra("Ads", false);
+
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                if(bAdsByNoti) {
+                    intent.putExtra("Ads", true);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -117,42 +134,46 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
                     e.printStackTrace();
                 }
 
-                if(!Storage.have(SplashActivity.this, "AccessToken")) {
-                    Log.i("TestLog", "no have token");
-                    GoSignin();
-                }
-                else {
-                    MyPassport.getInstance().loadToken(SplashActivity.this);
-                    new HttpHelper().SetListener(new HttpHelperListener() {
-                        @Override
-                        public void onResponse(int nType, int nRet, String sResponse) {
-                            if(nRet != 0) {
-                                MyPassport.getInstance().deleteToken(SplashActivity.this);
-                                GoSignin();
-                                return;
-                            }
-                            try {
-                                JSONObject obj = new JSONObject(sResponse);
-                                Integer ret = obj.getInt("ret");
-                                if(ret != 0) {
-                                    MyPassport.getInstance().deleteToken(SplashActivity.this);
-                                    GoSignin();
-                                    return;
-                                }
-                                else {
-                                    String newToken = obj.getString("token");
-                                    MyPassport.getInstance().saveToken(SplashActivity.this, newToken);
-                                    GoMain();
-                                    return;
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).Get(0, Global.BASE_URL + "/auth?token=" + MyPassport.getInstance().getToken());
-                }
+                CheckAction();
 
             }
         }).start();
+    }
+
+    private void CheckAction() {
+        if(!Storage.have(SplashActivity.this, "AccessToken")) {
+            Log.i("TestLog", "no have token");
+            GoSignin();
+        }
+        else {
+            MyPassport.getInstance().loadToken(SplashActivity.this);
+            new HttpHelper().SetListener(new HttpHelperListener() {
+                @Override
+                public void onResponse(int nType, int nRet, String sResponse) {
+                    if(nRet != 0) {
+                        MyPassport.getInstance().deleteToken(SplashActivity.this);
+                        GoSignin();
+                        return;
+                    }
+                    try {
+                        JSONObject obj = new JSONObject(sResponse);
+                        Integer ret = obj.getInt("ret");
+                        if(ret != 0) {
+                            MyPassport.getInstance().deleteToken(SplashActivity.this);
+                            GoSignin();
+                            return;
+                        }
+                        else {
+                            String newToken = obj.getString("token");
+                            MyPassport.getInstance().saveToken(SplashActivity.this, newToken);
+                            GoMain();
+                            return;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).Get(0, Global.BASE_URL + "/auth?token=" + MyPassport.getInstance().getToken());
+        }
     }
 }

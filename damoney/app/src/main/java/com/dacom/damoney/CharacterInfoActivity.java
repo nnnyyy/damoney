@@ -1,6 +1,5 @@
 package com.dacom.damoney;
 
-import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.view.View;
 
 import com.dacom.damoney.AlertManager.AlertManager;
 import com.dacom.damoney.databinding.ActivityCharInfoBinding;
-import com.dacom.damoney.databinding.ActivityLevelUpBinding;
 
 import java.util.ArrayList;
 
@@ -67,10 +65,10 @@ public class CharacterInfoActivity extends AppCompatActivity {
         mBind.btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertManager.ShowOk(CharacterInfoActivity.this, "", "캐릭터가 변경 되었습니다.", "닫기", new DialogInterface.OnClickListener() {
+                AlertManager.ShowOk(CharacterInfoActivity.this, "", "캐릭터가 변경 되었습니다.", "닫기", new AlertManager.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
+                    public void onClick(View v) {
+                        finish();
                     }
                 });
             }

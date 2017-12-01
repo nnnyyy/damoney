@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.util.DisplayMetrics;
 import android.view.ViewTreeObserver;
 
 import com.daasuu.library.DisplayObject;
@@ -39,6 +38,19 @@ public class CharacterAnimator {
         Point ptFrameSize;         //  프레임 당 사이즈
     }
 
+    public static class AnimInfo {
+        public AnimInfo(int _ri, int _colcnt, int _rowcnt, int _framecnt) {
+            resId = _ri;
+            colCnt = _colcnt;
+            rowCnt = _rowcnt;
+            frameCnt = _framecnt;
+        }
+        public int resId;
+        public int colCnt;
+        public int rowCnt;
+        public int frameCnt;
+    }
+
     enum CharacterState {
         CS_NONE,
         CS_IDLE,
@@ -48,12 +60,13 @@ public class CharacterAnimator {
     };
 
     Context mContext;
-    FPSTextureView textureView;
+    FPSTextureView textureView = null;
     Point ptViewRealSize;
     DisplayObject currentObject;
     boolean bLoad = false;
     CharacterState reservState = CharacterState.CS_NONE;
-    Map<CharacterState, AnimStateObj> mAnimMan = new HashMap<>();
+    CharacterState curState = CharacterState.CS_NONE;
+    Map<CharacterState, AnimInfo> mAnimMan = new HashMap<>();
 
     private CharacterAnimator() {
     }
@@ -99,13 +112,36 @@ public class CharacterAnimator {
 
     protected void loadAnim(CharacterState state, int resId, int cnt_per_row, int cnt_per_col, int frameCnt) {
         if(mAnimMan.containsKey(state)) return;
+        mAnimMan.put(state, new AnimInfo(resId, cnt_per_row, cnt_per_col, frameCnt));
+    }
+
+    public void changeAnim(CharacterState state) {
+        if( curState == state ) {
+            getTextureView().removeAllChildren();
+            getTextureView()
+                    .addChild(currentObject)
+                    .tickStart();
+            return;
+        }
+        if(currentObject != null) {
+            getTextureView().tickStop();
+            getTextureView().removeChild(currentObject);
+        }
+
+        if(!bLoad) {
+            reservState = state;
+            return;
+        }
+
+        AnimInfo info = mAnimMan.get(state);
+        if(info == null) return;
 
         BitmapFactory.Options option = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), info.resId, option);
         int w = bitmap.getWidth();
         int h = bitmap.getHeight();
-        int count_per_row = cnt_per_row;
-        int count_per_col = cnt_per_col;
+        int count_per_row = info.colCnt;
+        int count_per_col = info.rowCnt;
         int fw = w/count_per_row;
         int fh = h/count_per_col;
         float fRatio = (float)fw / (float)fh;   //  캐릭터 프레임 종횡
@@ -122,12 +158,12 @@ public class CharacterAnimator {
                 nRecommW,
                 nRecommH,
                 true
-               );
+        );
         bitmap.recycle();
         SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
                 bitmapScaled,
                 nRecommFrameW,
-                nRecommFrameH, frameCnt, count_per_row)
+                nRecommFrameH, info.frameCnt, count_per_row)
                 .frequency(2)
                 .spriteLoop(true);
         DisplayObject bitmapDisplay = new DisplayObject();
@@ -138,23 +174,8 @@ public class CharacterAnimator {
                 .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH )/2)
                 .end();
 
-        AnimStateObj aso = new AnimStateObj();
-        aso.drawer = spriteSheetDrawer;
-        aso.dio = bitmapDisplay;
-        mAnimMan.put(state, aso);
-    }
-
-    public void changeAnim(CharacterState state) {
-        if(currentObject != null) {
-            getTextureView().tickStop();
-            getTextureView().removeChild(currentObject);
-        }
-
-        if(!bLoad) {
-            reservState = state;
-            return;
-        }
-        currentObject = mAnimMan.get(state).dio;
+        currentObject = bitmapDisplay;
+        curState = state;
 
         getTextureView()
                 .addChild(currentObject)
@@ -163,8 +184,12 @@ public class CharacterAnimator {
 
     public void clear() {
         bLoad = false;
-        textureView.clearAnimation();
-        textureView.removeAllChildren();
-        mAnimMan.clear();;
+        if(textureView != null) {
+            textureView.clearAnimation();
+            textureView.removeAllChildren();
+        }
+        mAnimMan.clear();
+        currentObject = null;
+        curState = CharacterState.CS_NONE;
     }
 }

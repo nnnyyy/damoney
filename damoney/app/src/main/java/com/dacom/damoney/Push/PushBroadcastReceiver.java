@@ -7,8 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.dacom.damoney.MainActivity;
 import com.dacom.damoney.R;
+import com.dacom.damoney.SplashActivity;
 
 /**
  * Created by nnnyy on 2017-12-01.
@@ -18,7 +18,7 @@ public class PushBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        Intent i = new Intent(context, MainActivity.class);
+        Intent i = new Intent(context, SplashActivity.class);
         i.putExtra("Ads", true);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = new Notification.Builder(context);
