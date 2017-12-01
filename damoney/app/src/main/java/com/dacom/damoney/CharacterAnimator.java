@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.util.DisplayMetrics;
 import android.view.ViewTreeObserver;
 
 import com.daasuu.library.DisplayObject;
@@ -110,8 +111,9 @@ public class CharacterAnimator {
         float fRatio = (float)fw / (float)fh;   //  캐릭터 프레임 종횡
 
         // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
-        // 캐릭터 하나당 width 가 90dp 를 차지하는게 가장 이상적
-        int nRecommFrameW = (int)Util.convertDpToPixel(90, mContext);;
+        // 캐릭터 하나당 width 가 1/4를 차지하는게 가장 이상적
+        int ptd = (int) Util.convertPixelsToDp(ptViewRealSize.x, mContext);
+        int nRecommFrameW = (int)Util.convertDpToPixel(ptd / 5 * 2, mContext);;
         int nRecommFrameH = (int)((float)nRecommFrameW * ( 1.0 / fRatio));
         int nRecommW = nRecommFrameW * count_per_row;
         int nRecommH = nRecommFrameH * count_per_col;

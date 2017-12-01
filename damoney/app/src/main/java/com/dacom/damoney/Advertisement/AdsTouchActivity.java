@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.dacom.damoney.DamoneyHttpHelper;
 import com.dacom.damoney.R;
@@ -21,6 +23,7 @@ public class AdsTouchActivity extends AppCompatActivity {
     boolean bRunning = false;
     boolean bSuccess = false;
     ArrayList<View> atvlist = new ArrayList<>();
+    int curIdx = 0;
     Thread thread;
 
     @Override
@@ -47,11 +50,17 @@ public class AdsTouchActivity extends AppCompatActivity {
             Log.d("MyLog", "rx : " + rx + ", ry : " + ry);
             bind.getRoot().setX(rx);
             bind.getRoot().setY(ry);
-            //bind.getRoot().setBackgroundColor(Color.WHITE);
             bind.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     view.setVisibility(View.GONE);
+                    ++curIdx;
+                    if(curIdx < atvlist.size()) {
+                        View nextView = atvlist.get(curIdx);
+                        nextView.setVisibility(View.VISIBLE);
+                        Animation repeat_scale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.repeat_scale);
+                        nextView.findViewById(R.id.img).startAnimation(repeat_scale);
+                    }
                     view.setOnClickListener(null);
                     if(CheckClickState()) {
                         bSuccess = true;
@@ -68,9 +77,15 @@ public class AdsTouchActivity extends AppCompatActivity {
                 }
             });
             mBind.rlTouchArea.addView(bind.getRoot());
+            bind.getRoot().setVisibility(View.GONE);
             atvlist.add(bind.getRoot());
             CheckClickState();
         }
+
+        Animation repeat_scale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.repeat_scale);
+        View view = atvlist.get(curIdx);
+        view.findViewById(R.id.img).startAnimation(repeat_scale);
+        view.setVisibility(View.VISIBLE);
     }
 
     @Override

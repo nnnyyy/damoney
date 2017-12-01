@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 
 import com.daasuu.library.DisplayObject;
 import com.daasuu.library.FPSTextureView;
+import com.daasuu.library.callback.AnimCallBack;
 import com.daasuu.library.drawer.SpriteSheetDrawer;
 import com.daasuu.library.util.Util;
 
@@ -20,6 +21,11 @@ public class IntroAnimator {
     Context mContext;
     FPSTextureView mTexView;
     Point ptViewRealSize;
+    AnimEventListener aelistener;
+
+    public interface AnimEventListener {
+        public void onAnimationEnd();
+    }
 
     public IntroAnimator(Context context, FPSTextureView texview) {
         mContext = context;
@@ -41,6 +47,10 @@ public class IntroAnimator {
                 loadAnim(R.drawable.intro, 7, 5, 31);
             }
         });
+    }
+
+    public void setListener(AnimEventListener listener) {
+        aelistener = listener;
     }
 
     protected void loadAnim(int resId, int cnt_per_row, int cnt_per_col, int frameCnt) {
@@ -75,6 +85,16 @@ public class IntroAnimator {
                     nRecommFrameH, frameCnt, count_per_row)
                     .frequency(2)
                     .spriteLoop(false);
+
+            spriteSheetDrawer.spriteAnimationEndCallBack(new AnimCallBack() {
+                @Override
+                public void call() {
+                    if( aelistener != null ) {
+                        aelistener.onAnimationEnd();
+                    }
+                }
+            });
+
             DisplayObject bitmapDisplay = new DisplayObject();
             bitmapDisplay
                     .with(spriteSheetDrawer)
