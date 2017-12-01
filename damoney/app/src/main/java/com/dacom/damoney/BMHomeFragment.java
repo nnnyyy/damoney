@@ -26,6 +26,7 @@ import java.text.NumberFormat;
 public class BMHomeFragment extends Fragment implements AdsResultListener{
     FragmentBmhomeBinding mBind;
     AdsManager adsMan;
+    boolean bDirectShowAds = false;
     public BMHomeFragment() {
         // Required empty public constructor
     }
@@ -161,6 +162,19 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     @Override
     public void onAdsLoaded() {
         mBind.btnShowAds.setEnabled(true);
+        if(bDirectShowAds) {
+            bDirectShowAds = false;
+            final StringBuilder buf = new StringBuilder();
+            DamoneyHttpHelper.GetAd(buf, new DamoneyHttpHelper.MyCallbackInterface() {
+                @Override
+                public void onResult(int nRet) {
+                    if(nRet == 0) {
+                        String sSerial = buf.toString();
+                        adsMan.startFullAds(sSerial);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -188,5 +202,9 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 }
             });
         }
+    }
+
+    public void setViewAdsByNoti() {
+        bDirectShowAds = true;
     }
 }
