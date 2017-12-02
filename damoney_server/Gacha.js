@@ -18,6 +18,10 @@ exports.init = function(cb) {
     });
 }
 
+exports.getGachaList = function() {
+    return gachalist;
+}
+
 exports.getGacha = function() {
 
     var temp = probsum;

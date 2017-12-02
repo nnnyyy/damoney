@@ -19,6 +19,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
 import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -166,6 +167,8 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
                         else {
                             String newToken = obj.getString("token");
                             MyPassport.getInstance().saveToken(SplashActivity.this, newToken);
+                            JSONArray aGachaList = obj.getJSONArray("gachalist");
+                            BonusManager.loadGachaList(aGachaList);
                             GoMain();
                             return;
                         }

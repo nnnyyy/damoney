@@ -21,6 +21,8 @@ import com.dacom.damoney.databinding.FragmentBmbonusmainBinding;
 public class BMBonusMainFragment extends FragmentEx {
     FragmentBmbonusmainBinding mBind;
     BonusManager bm;
+    int curchildFragmentIdx = -1;
+    int selectedGachaNo = -1;
 
     public BMBonusMainFragment() {
         // Required empty public constructor
@@ -58,15 +60,30 @@ public class BMBonusMainFragment extends FragmentEx {
     }
 
     public void onBtnBack(View v) {
-        MainActivity context = (MainActivity)v.getContext();
-        onBack(context);
+        if(curchildFragmentIdx == 1) {
+            changeChildFragment(0);
+        }
+        else {
+            MainActivity context = (MainActivity)v.getContext();
+            onBack(context);
+        }
     }
+
+    public void setGachaNo(int no) {
+        selectedGachaNo = no;
+    }
+
+    public int getGachaNo() { return selectedGachaNo; }
 
     protected void changeChildFragment(int menuid) {
         Fragment f = null;
         switch(menuid) {
             case 0:
                 f = new BMBonusItemFragment();
+                break;
+
+            case 1:
+                f = new BMBonusItemDetailFragment();
                 break;
         }
 
@@ -76,6 +93,7 @@ public class BMBonusMainFragment extends FragmentEx {
         FragmentTransaction childFragTrans = childFragMan.beginTransaction();
         childFragTrans.replace(R.id.placeholder, f);
         childFragTrans.commit();
+        curchildFragmentIdx = menuid;
     }
 
     @Override

@@ -59,9 +59,16 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         holder.mBind.tvTitle.setText("요구레벨: " + item.level);
     }
 
-    private void bindDataHolder(BonusItemDataHolder holder, BonusItemData item) {
+    private void bindDataHolder(BonusItemDataHolder holder, final BonusItemData item) {
         holder.mBind.setItem(item);
         Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
+        holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((BMBonusMainFragment)fragment).setGachaNo(item.no);
+                ((BMBonusMainFragment)fragment).changeChildFragment(1);
+            }
+        });
     }
 
     @Override

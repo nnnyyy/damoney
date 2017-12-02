@@ -4,6 +4,7 @@ var router = express.Router();
 var dbhelper = require('../database/dbhelper');
 var authhelper = require('../Auth/AuthHelper');
 var ads = require('../Ads/Ads');
+var gacha = require('../Gacha');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -34,7 +35,9 @@ router.post('/signin', function(req,res, next) {
 
 router.get('/auth', function(req, res) {
   var id = req.decoded._id;
-  res.send({ret: 0, token: authhelper.makeToken(id)})
+  //  가챠 리스트는 여기서 주는건 에바세바참치꽁치지만
+  //  일단 귀찮으니까..
+  res.send({ret: 0, token: authhelper.makeToken(id), gachalist: gacha.getGachaList()})
 });
 
 router.get('/getinfo', function(req, res) {
@@ -71,6 +74,11 @@ router.get('/get/buylist', function(req, res) {
     res.send(ret);
   })
 })
+
+router.get('/get/gachalist', function(req, res) {
+  res.send({list: gacha.getGachaList() });
+})
+
 
 router.get('/get/mygachalist', function(req, res) {
   var id = req.decoded._id;

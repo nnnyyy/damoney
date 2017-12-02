@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 
 import com.dacom.damoney.databinding.FragmentPbuylistBinding;
 
-import java.util.ArrayList;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +26,7 @@ public class BMBonusItemFragment extends Fragment {
     private void setupRecyclerView() {
         mBind.goodsList.setHasFixedSize(true);
         mBind.goodsList.setLayoutManager(new LinearLayoutManager(mBind.getRoot().getContext()));
-        mBind.goodsList.setAdapter(new BonusItemListRecyclerAdapter(this));
+        mBind.goodsList.setAdapter(new BonusItemListRecyclerAdapter(getParentFragment()));
     }
 
     @Override
