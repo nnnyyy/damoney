@@ -38,6 +38,19 @@ public class CharacterAnimator {
         Point ptFrameSize;         //  프레임 당 사이즈
     }
 
+    public static class AnimInfo {
+        public AnimInfo(int _ri, int _colcnt, int _rowcnt, int _framecnt) {
+            resId = _ri;
+            colCnt = _colcnt;
+            rowCnt = _rowcnt;
+            frameCnt = _framecnt;
+        }
+        public int resId;
+        public int colCnt;
+        public int rowCnt;
+        public int frameCnt;
+    }
+
     enum CharacterState {
         CS_NONE,
         CS_IDLE,
@@ -47,12 +60,13 @@ public class CharacterAnimator {
     };
 
     Context mContext;
-    FPSTextureView textureView;
+    FPSTextureView textureView = null;
     Point ptViewRealSize;
     DisplayObject currentObject;
     boolean bLoad = false;
     CharacterState reservState = CharacterState.CS_NONE;
-    Map<CharacterState, AnimStateObj> mAnimMan = new HashMap<>();
+    CharacterState curState = CharacterState.CS_NONE;
+    Map<CharacterState, AnimInfo> mAnimMan = new HashMap<>();
 
     private CharacterAnimator() {
     }
@@ -98,48 +112,17 @@ public class CharacterAnimator {
 
     protected void loadAnim(CharacterState state, int resId, int cnt_per_row, int cnt_per_col, int frameCnt) {
         if(mAnimMan.containsKey(state)) return;
-
-        BitmapFactory.Options option = new BitmapFactory.Options();
-        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), resId, option);
-        int w = bitmap.getWidth();
-        int h = bitmap.getHeight();
-        Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
-                (int)Util.convertPixelsToDp(w, mContext),
-                (int)Util.convertPixelsToDp(h, mContext),
-                true
-                );
-
-        bitmap.recycle();
-        int count_per_row = cnt_per_row;
-        int count_per_col = cnt_per_col;
-        int fw = w/count_per_row;
-        int fh = h/count_per_col;
-        final float frameWidth = Util.convertPixelsToDp(fw, mContext);
-        final float frameHeight = Util.convertPixelsToDp(fh, mContext);
-        SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
-                bitmapScaled,
-                frameWidth,
-                frameHeight, frameCnt, count_per_row)
-                .frequency(2)
-                .spriteLoop(true);
-        DisplayObject bitmapDisplay = new DisplayObject();
-        bitmapDisplay
-                .with(spriteSheetDrawer)
-                .tween()
-                .tweenLoop(true)
-                .transform((ptViewRealSize.x - frameWidth * 2)/2, (ptViewRealSize.y - frameHeight * 2)/2)
-                .end();
-
-        bitmapDisplay.getAnimParameter().scaleX = 2;
-        bitmapDisplay.getAnimParameter().scaleY = 2;
-
-        AnimStateObj aso = new AnimStateObj();
-        aso.drawer = spriteSheetDrawer;
-        aso.dio = bitmapDisplay;
-        mAnimMan.put(state, aso);
+        mAnimMan.put(state, new AnimInfo(resId, cnt_per_row, cnt_per_col, frameCnt));
     }
 
     public void changeAnim(CharacterState state) {
+        if( curState == state ) {
+            getTextureView().removeAllChildren();
+            getTextureView()
+                    .addChild(currentObject)
+                    .tickStart();
+            return;
+        }
         if(currentObject != null) {
             getTextureView().tickStop();
             getTextureView().removeChild(currentObject);
@@ -149,10 +132,64 @@ public class CharacterAnimator {
             reservState = state;
             return;
         }
-        currentObject = mAnimMan.get(state).dio;
+
+        AnimInfo info = mAnimMan.get(state);
+        if(info == null) return;
+
+        BitmapFactory.Options option = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), info.resId, option);
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        int count_per_row = info.colCnt;
+        int count_per_col = info.rowCnt;
+        int fw = w/count_per_row;
+        int fh = h/count_per_col;
+        float fRatio = (float)fw / (float)fh;   //  캐릭터 프레임 종횡
+
+        // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
+        // 캐릭터 하나당 width 가 1/4를 차지하는게 가장 이상적
+        int ptd = (int) Util.convertPixelsToDp(ptViewRealSize.x, mContext);
+        int nRecommFrameW = (int)Util.convertDpToPixel(ptd / 5 * 2, mContext);;
+        int nRecommFrameH = (int)((float)nRecommFrameW * ( 1.0 / fRatio));
+        int nRecommW = nRecommFrameW * count_per_row;
+        int nRecommH = nRecommFrameH * count_per_col;
+
+        Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
+                nRecommW,
+                nRecommH,
+                true
+        );
+        bitmap.recycle();
+        SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
+                bitmapScaled,
+                nRecommFrameW,
+                nRecommFrameH, info.frameCnt, count_per_row)
+                .frequency(2)
+                .spriteLoop(true);
+        DisplayObject bitmapDisplay = new DisplayObject();
+        bitmapDisplay
+                .with(spriteSheetDrawer)
+                .tween()
+                .tweenLoop(true)
+                .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH )/2)
+                .end();
+
+        currentObject = bitmapDisplay;
+        curState = state;
 
         getTextureView()
                 .addChild(currentObject)
                 .tickStart();
+    }
+
+    public void clear() {
+        bLoad = false;
+        if(textureView != null) {
+            textureView.clearAnimation();
+            textureView.removeAllChildren();
+        }
+        mAnimMan.clear();
+        currentObject = null;
+        curState = CharacterState.CS_NONE;
     }
 }

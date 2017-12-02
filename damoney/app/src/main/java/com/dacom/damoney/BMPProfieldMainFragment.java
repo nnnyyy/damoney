@@ -7,15 +7,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.FragmentEbusBinding;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentPprofileMainBinding;
-
-import java.util.ArrayList;
 
 
 /**
@@ -40,6 +37,20 @@ public class BMPProfieldMainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet != 0) return;
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mBind.tvNick.setText(MyPassport.getInstance().sNick);
+                        mBind.tvCoin.setText(String.valueOf(MyPassport.getInstance().nPoint));
+                    }
+                });
+            }
+        });
 
         mBind.btnBuyList.setOnClickListener(new View.OnClickListener() {
             @Override

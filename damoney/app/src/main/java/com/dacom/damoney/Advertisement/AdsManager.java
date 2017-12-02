@@ -32,18 +32,16 @@ public class AdsManager {
     public void startFullAds(String sSerial) {
         mSerial= sSerial;
         Intent intent = null;
-        switch(mDebugCnt%3) {
+        switch(mDebugCnt%2) {
             case 0:
                 //intent = new Intent(mContext, AdsActivity.class);
                 intent = new Intent(mContext, AdsTouchActivity.class);
                 break;
             case 1:
-                intent = new Intent(mContext, AdsTypingActivity.class);
-                break;
-            case 2:
-                intent = new Intent(mContext, AdsTypingActivity.class);
+                intent = new Intent(mContext, AdsActivity.class);
                 break;
         }
+        mDebugCnt++;
         if(intent != null)
             mContext.startActivity(intent);
     }
@@ -58,7 +56,7 @@ public class AdsManager {
         @Override
         protected Long doInBackground(Long... longs) {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 return Long.valueOf(-1);

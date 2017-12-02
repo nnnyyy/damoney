@@ -23,6 +23,7 @@ exports.getGacha = function() {
     var temp = probsum;
     var selected;
     for(var i = 0 ; i < gachalist.length ; ++i) {
+        console.log(temp);
         var rnd = rn.generator({
             min: 0,
             max: temp,
@@ -34,7 +35,7 @@ exports.getGacha = function() {
             break;
         }
 
-        temp -= rnd;
+        temp -= gachalist[i].droprate;
     }
 
     return selected;

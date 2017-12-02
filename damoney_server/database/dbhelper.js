@@ -57,7 +57,7 @@ exports.getInfo = function(id, cb) {
         var levelinfo = gameinfo.getLevelInfo(result.exp);
         console.log(result);
 
-        cb({ret:0, point: result.point, gacha: result.gacha_cnt, level: levelinfo.level, expMax: levelinfo.nextExpMax, curExp: levelinfo.curExp });
+        cb({ret:0, point: result.point, nick: result.nick, gacha: result.gacha_cnt, level: levelinfo.level, expMax: levelinfo.nextExpMax, curExp: levelinfo.curExp });
     });
 }
 
@@ -73,6 +73,7 @@ exports.getPremiumList = function(id, cb) {
         for(var i = 0 ; i < aData.length ; ++i) {
             var data = aData[i];
             result.push({
+                id: data.id,
                 sn: data.sn,
                 name: data.name,
                 iconpath: data.iconpath,
@@ -305,5 +306,27 @@ exports.useGacha = function(id, cb) {
         if(err) {
             cb(err);
         }
+    });
+}
+
+exports.getBonusInfo = function(id, cb) {
+    var bonusinfo = gameinfo.getBonusItemInfo();
+    dbpool.query('select * from usergacha where id = ?', [id], function (err, rows) {
+        if (err) {
+            console.log(err);
+            return callback({ret: -1});
+        }
+
+        var list = [];
+        for(var i = 0 ; i < rows.length ; ++i) {
+            list.push({
+                sn: rows[i].sn,
+                itemid: rows[i].itemid,
+                regdate: rows[i].regdate,
+            });
+        }
+
+        console.log("getBonusInfo - success");
+        cb({ret:0, bonusinfo: bonusinfo, mygachalist: list})
     });
 }

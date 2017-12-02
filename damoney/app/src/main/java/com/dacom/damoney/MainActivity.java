@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.dacom.damoney.Functional.BottomNavigationViewHelper;
+import com.dacom.damoney.Push.DamoneyPushManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.ActivityMainBinding;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -32,6 +33,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setupStatusBar();
         setBotNavView();
         MyPassport.getInstance().init(this);
+
+        boolean bAds = getIntent().getBooleanExtra("Ads", false);
+
+        if(!bAds) {
+            DamoneyPushManager.Reserv(getApplicationContext(), DamoneyPushManager.FIVE_MIN);
+        }
     }
 
     @Override
@@ -77,6 +84,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         switch(id) {
             case R.id.act_home:
                 f = new BMHomeFragment();
+                boolean bAds = getIntent().getBooleanExtra("Ads", false);
+                getIntent().removeExtra("Ads");
+                if(bAds) {
+                    ((BMHomeFragment)f).setViewAdsByNoti();
+                }
                 break;
             case R.id.act_cash:
                 f = new BMCashFragment();
@@ -89,6 +101,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 break;
             case R.id.btn_go_premium_map:
                 f = new BMPremiumMapFragment();
+                break;
+            case R.id.btn_ads_distribute:
+                f = new BMAdsDistFragment();
                 break;
             case R.id.act_recommfriend:
                 f = new BMRecommandFriend();
@@ -112,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void onBackPressed() {
         if(curFragment instanceof BMHomeFragment) {
             if (exit) {
+                CharacterAnimator.getInstance().clear();
                 finish(); // finish activity
             } else {
                 Toast.makeText(this, "한번 더 누르면 종료 됩니다",

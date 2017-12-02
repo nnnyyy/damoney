@@ -1,25 +1,17 @@
 package com.dacom.damoney.Sign;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.dacom.damoney.AlertManager.AlertManager;
+import com.dacom.damoney.CreateCharacterActivity;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivitySignupBinding;
-import com.yaong.nnnyyy.nyhttphelper.HttpHelper;
-import com.yaong.nnnyyy.nyhttphelper.HttpHelperListener;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
     private static final String Passwrod_PATTERN = "^(?=.*[a-zA-Z]+)(?=.*[!@#$%^*+=-]|.*[0-9]+).{8,16}$";
@@ -65,7 +57,20 @@ public class SignupActivity extends AppCompatActivity {
                         WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
                 // 확인 받아서 맞으면 인증 확인 완료 플래그 올림.
-                Map<String, Object> mParams = new HashMap<String, Object>();
+                mBind.circleBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                AlertManager.ShowOk(SignupActivity.this, "알림", "인증이 완료 되었습니다.", "닫기", new AlertManager.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mBind.etPhoneAuth.setEnabled(false);
+                        mBind.etPhoneAuth2.setEnabled(false);
+                        mBind.btnVerifyAuthnumber.setEnabled(false);
+                        mBind.btnGetAuthnumber.setEnabled(false);
+                        isAuthed = true;
+                    }
+                });
+
+                /*Map<String, Object> mParams = new HashMap<String, Object>();
                 mParams.put("id", "test");
                 mParams.put("pw", "testpw");
                 mParams.put("nick", "nnnyyy");
@@ -102,7 +107,7 @@ public class SignupActivity extends AppCompatActivity {
                             });
                         }
                     }
-                }).Post(0, "http://10.0.2.2:3000/signup", mParams);
+                }).Post(0, "http://10.0.2.2:3000/signup", mParams);*/
             }
         });
 
@@ -159,15 +164,12 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        AlertManager.ShowOk(SignupActivity.this, "알림", "가입이 완료 되었습니다", "닫기", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                getApplicationContext().startActivity(intent);
-            }
-        });
+        String sId = mBind.etId.getText().toString();
+        String sPw = mBind.etPw.getText().toString();
+        Intent intent = new Intent(SignupActivity.this, CreateCharacterActivity.class);
+        intent.putExtra("id", sId);
+        intent.putExtra("pw", sPw);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplicationContext().startActivity(intent);
     }
 }

@@ -26,6 +26,7 @@ public class MyPassport {
     public int nLevel = 0;
     public int nExpMax = 0;
     public int nCurExp = 0;
+    public String sNick = "";
     public boolean bLevelup = false;
     protected String sToken;
     protected Context mContext;
@@ -74,6 +75,7 @@ public class MyPassport {
                     nPoint = obj.getInt("point");
                     nGachaCnt = obj.getInt("gacha");
                     int level = obj.getInt("level");
+                    sNick = obj.getString("nick");
                     if(nLevel != 0 && nLevel < level) {
                         bLevelup = true;
                     }

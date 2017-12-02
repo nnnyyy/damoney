@@ -12,4 +12,5 @@ public class PremiumItem {
     public int type;       // 설치형, 가입형, 실행형
     public int point;      // 얻는 포인트
     public String sURL;    // 연결 될 URL
+    public boolean isUsed = false; // 사용한 광고
 }

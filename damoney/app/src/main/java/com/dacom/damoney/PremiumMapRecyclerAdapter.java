@@ -47,33 +47,40 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
         final PremiumItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
         Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
-        holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), AdsWebView.class);
-                intent.putExtra("url", item.sURL);
-                v.getContext().startActivity(intent);
-                DamoneyHttpHelper.ViewAd(item.sn, new DamoneyHttpHelper.MyCallbackInterface() {
-                    @Override
-                    public void onResult(int nRet) {
-                        if(nRet == 0) {
-                            MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
-                                @Override
-                                public void onResult(int nRet) {
-                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            CustomToast.PointSave(fragment.getContext(), item.point);
-                                        }
-                                    });
-                                }
-                            });
-                            fragment.loadAds();
+        if(item.isUsed) {
+            holder.mBind.usedwnd.setVisibility(View.VISIBLE);
+            holder.mBind.clickable.setOnClickListener(null);
+        }
+        else{
+            holder.mBind.usedwnd.setVisibility(View.GONE);
+            holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), AdsWebView.class);
+                    intent.putExtra("url", item.sURL);
+                    v.getContext().startActivity(intent);
+                    DamoneyHttpHelper.ViewAd(item.sn, new DamoneyHttpHelper.MyCallbackInterface() {
+                        @Override
+                        public void onResult(int nRet) {
+                            if(nRet == 0) {
+                                MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
+                                    @Override
+                                    public void onResult(int nRet) {
+                                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                CustomToast.PointSave(fragment.getContext(), item.point);
+                                            }
+                                        });
+                                    }
+                                });
+                                fragment.loadAds();
+                            }
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        }
     }
 
     @Override

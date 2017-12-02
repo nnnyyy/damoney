@@ -1,12 +1,12 @@
 package com.dacom.damoney;
 
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,7 +53,11 @@ public class CouponRecyclerAdapter extends RecyclerView.Adapter<CouponRecyclerAd
                 //  쿠폰 다운로드
                 //  이것도 서버에서 처리해야 하나 시간이 없으니 이렇게 일단 처리
                 if(MyPassport.getInstance().isExistCoupon(item.sn)) {
-                    fragment.showCouponUseWnd();
+                    Intent intent = new Intent(fragment.getContext(), CouponUseActivity.class);
+                    intent.putExtra("title", item.title);
+                    intent.putExtra("subtitle", item.sDesc);
+                    intent.putExtra("iconpath", item.iconPath);
+                    fragment.getContext().startActivity(intent);
                 }
                 else {
                     Toast.makeText(fragment.getContext(), "쿠폰을 다운로드 했습니다.", Toast.LENGTH_SHORT).show();

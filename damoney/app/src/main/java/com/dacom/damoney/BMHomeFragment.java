@@ -26,6 +26,7 @@ import java.text.NumberFormat;
 public class BMHomeFragment extends Fragment implements AdsResultListener{
     FragmentBmhomeBinding mBind;
     AdsManager adsMan;
+    boolean bDirectShowAds = false;
     public BMHomeFragment() {
         // Required empty public constructor
     }
@@ -115,6 +116,27 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 mainAct.changeFragment(R.id.bonus_item);
             }
         });
+
+        mBind.animationTextureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoCharacterInfo();
+            }
+        });
+        mBind.tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoCharacterInfo();
+            }
+        });
+
+        mBind.btnAdsDistribute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity mainAct = (MainActivity)getActivity();
+                mainAct.changeFragment(R.id.btn_ads_distribute);
+            }
+        });
     }
 
     private void setupAnim() {
@@ -123,6 +145,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
 
     private void refreshInfo() {
         mBind.tvLevel.setText("Lv." + MyPassport.getInstance().nLevel);
+        mBind.tvName.setText(MyPassport.getInstance().sNick);
         mBind.expbar.setMax(MyPassport.getInstance().nExpMax);
         mBind.expbar.setProgress(MyPassport.getInstance().nCurExp);
         String sNextLevel = "다음 레벨업까지 " + (MyPassport.getInstance().nExpMax - MyPassport.getInstance().nCurExp) + "xp 남음";
@@ -144,6 +167,19 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     @Override
     public void onAdsLoaded() {
         mBind.btnShowAds.setEnabled(true);
+        if(bDirectShowAds) {
+            bDirectShowAds = false;
+            final StringBuilder buf = new StringBuilder();
+            DamoneyHttpHelper.GetAd(buf, new DamoneyHttpHelper.MyCallbackInterface() {
+                @Override
+                public void onResult(int nRet) {
+                    if(nRet == 0) {
+                        String sSerial = buf.toString();
+                        adsMan.startFullAds(sSerial);
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -171,5 +207,14 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 }
             });
         }
+    }
+
+    public void setViewAdsByNoti() {
+        bDirectShowAds = true;
+    }
+
+    private void GoCharacterInfo() {
+        Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
+        getContext().startActivity(intent);
     }
 }

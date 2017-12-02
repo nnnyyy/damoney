@@ -20,6 +20,7 @@ import com.dacom.damoney.databinding.FragmentBmbonusmainBinding;
  */
 public class BMBonusMainFragment extends FragmentEx {
     FragmentBmbonusmainBinding mBind;
+    BonusManager bm;
 
     public BMBonusMainFragment() {
         // Required empty public constructor
@@ -43,7 +44,17 @@ public class BMBonusMainFragment extends FragmentEx {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        changeChildFragment(0);
+        bm = new BonusManager();
+        DamoneyHttpHelper.getBonusInfo(bm, new DamoneyHttpHelper.MyCallbackInterface() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet == 0) {
+                    changeChildFragment(0);
+                }
+                else
+                    onBtnBack(mBind.getRoot());
+            }
+        });
     }
 
     public void onBtnBack(View v) {
@@ -72,4 +83,6 @@ public class BMBonusMainFragment extends FragmentEx {
         super.onBack(context);
         ((MainActivity)context).changeNav(R.id.act_home);
     }
+
+    public BonusManager getBM() { return bm; }
 }
