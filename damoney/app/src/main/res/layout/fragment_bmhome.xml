@@ -78,15 +78,25 @@
                 />
             <LinearLayout
                 android:id="@+id/bonus_item"
-                android:layout_width="100dp"
-                android:layout_height="180dp"
+                android:layout_width="110dp"
+                android:layout_height="240dp"
                 android:orientation="vertical"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="8dp"
-                android:background="#77000000"
-                />
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="보너스 상품"
+                    android:gravity="center"/>
+                <com.dacom.damoney.VerticalScrollView
+                    android:id="@+id/vsv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </com.dacom.damoney.VerticalScrollView>
+            </LinearLayout>
         </RelativeLayout>
 
         <!--하단 상태바-->

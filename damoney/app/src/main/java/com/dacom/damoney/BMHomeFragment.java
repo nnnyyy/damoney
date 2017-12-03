@@ -18,6 +18,7 @@ import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentBmhomeBinding;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 
 /**
@@ -41,6 +42,24 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         setupButtonEvent();
         setupAnim();
         refreshInfo();
+
+        final BonusManager bm = new BonusManager();
+        DamoneyHttpHelper.getBonusInfo(bm, new DamoneyHttpHelper.MyCallbackInterface() {
+            @Override
+            public void onResult(int nRet) {
+                if(nRet == 0) {
+                    ArrayList<BonusItemBase> a = bm.getBonusList();
+                    for(int i = 0 ; i < a.size() ; ++i) {
+                        BonusItemBase item = a.get(i);
+                        if(item.type == BonusItemBase.BIType.BI_SECTION) continue;
+                        BonusItemData data = (BonusItemData)item;
+                        mBind.vsv.add(data.iconPath, data.name, data.publisher);
+                    }
+
+                    mBind.vsv.start();
+                }
+            }
+        });
 
         return mBind.getRoot();
     }

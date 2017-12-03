@@ -149,7 +149,7 @@ public class CharacterAnimator {
         // ptViewRealSize 는 기기에 배당된 실제 TextureView 픽셀 사이즈
         // 캐릭터 하나당 width 가 1/4를 차지하는게 가장 이상적
         int ptd = (int) Util.convertPixelsToDp(ptViewRealSize.x, mContext);
-        int nRecommFrameW = (int)Util.convertDpToPixel(ptd / 5 * 2, mContext);;
+        int nRecommFrameW = (int)Util.convertDpToPixel(ptd / 3, mContext);;
         int nRecommFrameH = (int)((float)nRecommFrameW * ( 1.0 / fRatio));
         int nRecommW = nRecommFrameW * count_per_row;
         int nRecommH = nRecommFrameH * count_per_col;
