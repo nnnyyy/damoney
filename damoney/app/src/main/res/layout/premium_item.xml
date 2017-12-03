@@ -53,6 +53,7 @@
                         android:orientation="horizontal"
                         >
                         <TextView
+                            android:id="@+id/tvSubTitle"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             tools:text="설치형"
@@ -84,16 +85,6 @@
                         />
                 </LinearLayout>
             </LinearLayout>
-            <TextView
-                android:id="@+id/usedwnd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="이미 사용된 광고 입니다."
-                android:background="#7f000000"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                />
         </RelativeLayout>
 
         <ImageView

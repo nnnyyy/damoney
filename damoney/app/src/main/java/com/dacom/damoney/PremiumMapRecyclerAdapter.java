@@ -48,11 +48,15 @@ public class PremiumMapRecyclerAdapter extends RecyclerView.Adapter<PremiumMapRe
         holder.mBind.setItem(item);
         Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
         if(item.isUsed) {
-            holder.mBind.usedwnd.setVisibility(View.VISIBLE);
+            holder.mBind.ivThumbnail.setAlpha(0.35f);
+            holder.mBind.tvTitle.setAlpha(0.35f);
+            holder.mBind.tvSubTitle.setAlpha(0.35f);
             holder.mBind.clickable.setOnClickListener(null);
         }
         else{
-            holder.mBind.usedwnd.setVisibility(View.GONE);
+            holder.mBind.ivThumbnail.setAlpha(1.0f);
+            holder.mBind.tvTitle.setAlpha(1.0f);
+            holder.mBind.tvSubTitle.setAlpha(1.0f);
             holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

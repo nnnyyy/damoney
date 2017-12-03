@@ -171,7 +171,7 @@ public class CharacterAnimator {
                 .with(spriteSheetDrawer)
                 .tween()
                 .tweenLoop(true)
-                .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH )/2)
+                .transform((ptViewRealSize.x - nRecommFrameW )/2, (ptViewRealSize.y - nRecommFrameH ))
                 .end();
 
         currentObject = bitmapDisplay;
