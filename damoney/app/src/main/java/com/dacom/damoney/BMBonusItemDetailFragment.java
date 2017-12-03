@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dacom.damoney.databinding.FragmentBonusDetailBinding;
+import com.squareup.picasso.Picasso;
 
 
 /**
@@ -39,6 +40,10 @@ public class BMBonusItemDetailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         selectedGachaNo = ((BMBonusMainFragment)getParentFragment()).getGachaNo();
+        BonusItemData dataInfo = BonusManager.selectedData;
+        mBind.tvTitle.setText(dataInfo.name);
+        mBind.tvSubTitle.setText(dataInfo.publisher);
+        Picasso.with(getContext()).load(Global.BASE_URL+dataInfo.iconPath).into(mBind.ivThumbnail);
         loadCompleteList();
         loadMyList();
     }
@@ -63,8 +68,8 @@ public class BMBonusItemDetailFragment extends Fragment {
 
     protected void loadMyList() {
         BMBonusMainFragment f = (BMBonusMainFragment)getParentFragment();
-        BonusCompleteListRecyclerAdapter adapter = (BonusCompleteListRecyclerAdapter)mBind.rvCompletelist.getAdapter();
-        adapter.AddList(f.getBM().getGachaList(selectedGachaNo));
+        BonusDetailMyListRecyclerAdapter adapter = (BonusDetailMyListRecyclerAdapter)mBind.rvMyitemlist.getAdapter();
+        adapter.AddList(f.getBM().getMyGachaList());
         adapter.notifyDataSetChanged();
     }
 }

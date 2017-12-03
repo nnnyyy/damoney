@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dacom.damoney.databinding.BonusDetailCompleteBinding;
+import com.dacom.damoney.databinding.BonusDetailMineBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class BonusDetailMyListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        BonusDetailCompleteBinding bind = BonusDetailCompleteBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        BonusDetailMineBinding bind = BonusDetailMineBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new BonusItemCompleteHolder(bind.getRoot());
     }
 
@@ -38,7 +39,9 @@ public class BonusDetailMyListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final BonusItemCompleteHolder sholder = (BonusItemCompleteHolder)holder;
-        sholder.mBind.tvTitle.setText("" + aItemList.get(position));
+        int itemid = aItemList.get(position);
+        final GachaBoxInfo info = BonusManager.getGacha(itemid);
+        Picasso.with(sholder.mBind.getRoot().getContext()).load(Global.BASE_URL+info.iconpath).into(sholder.mBind.ivThumbnail);
     }
 
     @Override
@@ -61,7 +64,7 @@ public class BonusDetailMyListRecyclerAdapter extends RecyclerView.Adapter<Recyc
     }
 
     public class BonusItemCompleteHolder extends RecyclerView.ViewHolder {
-        final BonusDetailCompleteBinding mBind;
+        final BonusDetailMineBinding mBind;
 
         public BonusItemCompleteHolder(View itemView) {
             super(itemView);

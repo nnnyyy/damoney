@@ -59,16 +59,6 @@ public class BMBonusMainFragment extends FragmentEx {
         });
     }
 
-    public void onBtnBack(View v) {
-        if(curchildFragmentIdx == 1) {
-            changeChildFragment(0);
-        }
-        else {
-            MainActivity context = (MainActivity)v.getContext();
-            onBack(context);
-        }
-    }
-
     public void setGachaNo(int no) {
         selectedGachaNo = no;
     }
@@ -96,10 +86,20 @@ public class BMBonusMainFragment extends FragmentEx {
         curchildFragmentIdx = menuid;
     }
 
+    public void onBtnBack(View v) {
+        MainActivity context = (MainActivity)v.getContext();
+        onBack(context);
+    }
+
     @Override
     public void onBack(Context context) {
         super.onBack(context);
-        ((MainActivity)context).changeNav(R.id.act_home);
+        if(curchildFragmentIdx == 1) {
+            changeChildFragment(0);
+        }
+        else {
+            ((MainActivity)context).changeNav(R.id.act_home);
+        }
     }
 
     public BonusManager getBM() { return bm; }

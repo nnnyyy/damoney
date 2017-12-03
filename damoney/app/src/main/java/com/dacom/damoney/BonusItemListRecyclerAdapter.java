@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.dacom.damoney.databinding.BonusDataBinding;
 import com.dacom.damoney.databinding.BonusSectionBinding;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -59,12 +60,23 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
         holder.mBind.tvTitle.setText("요구레벨: " + item.level);
     }
 
-    private void bindDataHolder(BonusItemDataHolder holder, final BonusItemData item) {
+    private void bindDataHolder(final
+                                BonusItemDataHolder holder, final BonusItemData item) {
         holder.mBind.setItem(item);
-        Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail);
+        Picasso.with(fragment.getContext()).load(Global.BASE_URL + item.iconPath).into(holder.mBind.ivThumbnail, new Callback() {
+            @Override
+            public void onSuccess() {
+            }
+
+            @Override
+            public void onError() {
+                holder.mBind.ivThumbnail.setImageResource(R.drawable.icon_coin);
+            }
+        });
         holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                BonusManager.selectedData = item;
                 ((BMBonusMainFragment)fragment).setGachaNo(item.no);
                 ((BMBonusMainFragment)fragment).changeChildFragment(1);
             }

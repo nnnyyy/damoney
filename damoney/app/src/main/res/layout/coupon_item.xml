@@ -40,12 +40,9 @@
                     android:id="@+id/tvTitle"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
-                    android:textStyle="bold"
                     tools:text="Title Title Title Title Title"
                     android:text="@{item.title}"
-                    android:gravity="center_vertical"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="8dp"
+                    style="@style/Item.Title"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -57,8 +54,7 @@
                         android:layout_height="match_parent"
                         tools:text="무료 사이즈 업그레이드"
                         android:text="@{item.sDesc}"
-                        android:gravity="center_vertical"
-                        android:layout_marginLeft="8dp"
+                        style="@style/Item.SubTitle"
                         />
                 </LinearLayout>
             </LinearLayout>

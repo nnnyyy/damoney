@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dacom.damoney.databinding.BonusDetailCompleteBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,6 +42,14 @@ public class BonusCompleteListRecyclerAdapter extends RecyclerView.Adapter<Recyc
         int gachaid = aItemList.get(position);
         final GachaBoxInfo info = BonusManager.getGacha(gachaid);
         sholder.mBind.tvTitle.setText(info.sName);
+        Picasso.with(sholder.mBind.getRoot().getContext()).load(Global.BASE_URL + info.iconpath).into(sholder.mBind.ivThumbnail);
+        BonusManager bm = ((BMBonusMainFragment)fragment).getBM();
+        if( !bm.hasGacha(gachaid) ) {
+            sholder.mBind.ivThumbnail.setAlpha(0.35f);
+        }
+        else {
+            sholder.mBind.ivThumbnail.setAlpha(1.0f);
+        }
     }
 
     @Override

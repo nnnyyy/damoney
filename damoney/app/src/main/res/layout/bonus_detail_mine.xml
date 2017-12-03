@@ -9,13 +9,14 @@
             type="com.dacom.damoney.GoodsItem" />
     </data>
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Section"
-            />
+        android:layout_width="80dp"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/iv_thumbnail"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_coin"/>
     </LinearLayout>
 </layout>

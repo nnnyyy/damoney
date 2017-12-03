@@ -14,6 +14,7 @@ import java.util.HashSet;
 
 public class BonusManager {
     public static HashMap<Integer, GachaBoxInfo> mmGachaList = new HashMap<>();
+    public static BonusItemData selectedData;
     public static void loadGachaList(JSONArray aList) throws JSONException {
         int len = aList.length();
         for(int i = 0 ; i < len ; ++i) {
@@ -32,15 +33,19 @@ public class BonusManager {
         return mmGachaList.get(id);
     }
 
+    protected ArrayList<BonusItemBase> aBonusData;
+    protected HashMap<Integer, BonusItemBase> mmBonusData;
+    protected HashSet<Integer> mReqLevelSet;
+    protected HashMap<Integer/* id */, Integer /* cnt */> mmMyList;
+    protected ArrayList<Integer> aMyList;
+
     public BonusManager() {
         aBonusData = new ArrayList<>();
         mReqLevelSet = new HashSet<>();
         mmBonusData = new HashMap<>();
+        mmMyList = new HashMap<>();
+        aMyList = new ArrayList<>();
     }
-
-    protected ArrayList<BonusItemBase> aBonusData;
-    protected HashMap<Integer, BonusItemBase> mmBonusData;
-    protected HashSet<Integer> mReqLevelSet;
 
     public void addSection(int reqLevel) {
         if(mReqLevelSet.contains(reqLevel)) {
@@ -68,6 +73,22 @@ public class BonusManager {
         if(aBonusData != null) {
             aBonusData.clear();
         }
+
+        if(mReqLevelSet != null) {
+            mReqLevelSet.clear();
+        }
+
+        if(mmBonusData != null) {
+            mmBonusData.clear();
+        }
+
+        if(mmMyList != null) {
+            mmMyList.clear();
+        }
+
+        if(aMyList != null) {
+            aMyList.clear();
+        }
     }
 
     public ArrayList<BonusItemBase> getBonusList() { return aBonusData; }
@@ -78,5 +99,18 @@ public class BonusManager {
     }
 
     public void addMyGacha(int sn, int itemid) {
+        if(mmMyList.containsKey(itemid)) {
+            mmMyList.put(itemid, mmMyList.get(itemid) + 1);
+        }
+        else {
+            mmMyList.put(itemid, 1);
+            aMyList.add(itemid);
+        }
     }
+
+    public boolean hasGacha(int itemid) {
+        return mmMyList.containsKey(itemid);
+    }
+
+    public ArrayList<Integer> getMyGachaList() { return aMyList; }
 }
