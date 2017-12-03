@@ -81,12 +81,14 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             }
         });
         mBind.animationTextureView.tickStart();
+        mBind.vsv.start();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         mBind.animationTextureView.tickStop();
+        mBind.vsv.stop();
     }
 
     private void setupAds() {
