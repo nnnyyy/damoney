@@ -47,7 +47,8 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
-                            style="@style/Item.TitleSmall"
+                            style="@style/Item.TitleSmall.Bottom"
+                            android:maxLines="1"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
@@ -55,12 +56,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            style="@style/Item.SubTitleSmall"
+                            style="@style/Item.SubTitleSmall.Top"
                             android:text="너의너의"
                             tools:text="너의너의"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#909090"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -89,7 +97,8 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
-                            style="@style/Item.TitleSmall"
+                            style="@style/Item.TitleSmall.Bottom"
+                            android:maxLines="1"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
@@ -97,12 +106,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            style="@style/Item.SubTitleSmall"
+                            style="@style/Item.SubTitleSmall.Top"
                             android:text="너의너의"
                             tools:text="너의너의"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#909090"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -131,7 +147,8 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
-                            style="@style/Item.TitleSmall"
+                            style="@style/Item.TitleSmall.Bottom"
+                            android:maxLines="1"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
@@ -139,7 +156,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            style="@style/Item.SubTitleSmall"
+                            style="@style/Item.SubTitleSmall.Top"
                             android:text="너의너의"
                             tools:text="너의너의"/>
                     </LinearLayout>

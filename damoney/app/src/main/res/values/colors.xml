@@ -10,5 +10,6 @@
     <color name="colorSub">#f9dbae</color>
     <color name="colorMainFont">#9b6949</color>
     <color name="cashshop_selected">#624949</color>
+    <color name="fragment_title">#624949</color>
     <color name="cashshop_selected_back">#ececec</color>
 </resources>

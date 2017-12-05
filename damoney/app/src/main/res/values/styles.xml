@@ -36,8 +36,13 @@
     <style name="Item.TitleSmall">
         <item name="android:textSize">10dp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginLeft">8dp</item>
+    </style>
+    <style name="Item.TitleSmall.CenterV">
+        <item name="android:gravity">center_vertical</item>
+    </style>
+    <style name="Item.TitleSmall.Bottom">
+        <item name="android:gravity">bottom</item>
     </style>
     <style name="Item.SubTitle">
         <item name="android:textSize">12dp</item>
@@ -46,7 +51,10 @@
     </style>
     <style name="Item.SubTitleSmall">
         <item name="android:textSize">8dp</item>
-        <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginLeft">8dp</item>
+    </style>
+    <style name="Item.SubTitleSmall.Top">
+        <item name="android:gravity">top</item>
+        <item name="android:layout_marginTop">4dp</item>
     </style>
 </resources>
