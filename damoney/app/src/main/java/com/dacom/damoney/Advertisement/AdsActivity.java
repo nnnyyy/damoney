@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.MediaController;
 
+import com.dacom.damoney.DamoneyHttpHelper;
 import com.dacom.damoney.Global;
 import com.dacom.damoney.R;
 import com.dacom.damoney.databinding.ActivityAdsBinding;
@@ -57,8 +58,17 @@ public class AdsActivity extends AppCompatActivity {
 
     public void onBtnSel1(View v) {
         finish();
-        if(AdsManager.listener != null)
-            AdsManager.listener.onAdsFinished(0);
+        DamoneyHttpHelper.ViewMainAd(AdsManager.mSerial, new DamoneyHttpHelper.MyCallbackInterface() {
+            @Override
+            public void onResult(int nRet) {
+                finish();
+                if(nRet == 0 && AdsManager.listener != null)
+                    AdsManager.listener.onAdsFinished(0);
+                else {
+                    AdsManager.listener.onAdsFinished(-1);
+                }
+            }
+        });
     }
 
     public void onBtnSel2(View v) {

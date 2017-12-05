@@ -71,6 +71,9 @@ public class AdsTouchActivity extends AppCompatActivity {
                                 finish();
                                 if(nRet == 0 && AdsManager.listener != null)
                                     AdsManager.listener.onAdsFinished(0);
+                                else {
+                                    AdsManager.listener.onAdsFinished(-1);
+                                }
                             }
                         });
                     }
