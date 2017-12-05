@@ -183,6 +183,8 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             Intent intent = new Intent(getContext(), LevelUpActivity.class);
             getContext().startActivity(intent);
         }
+
+        refreshCoin();
     }
 
     @Override
@@ -237,5 +239,24 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     private void GoCharacterInfo() {
         Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
         getContext().startActivity(intent);
+    }
+
+    private void refreshCoin() {
+        mBind.ivcoin1.setVisibility(View.INVISIBLE);
+        mBind.ivcoin2.setVisibility(View.INVISIBLE);
+        mBind.ivcoin3.setVisibility(View.INVISIBLE);
+
+        final int point = MyPassport.getInstance().nPoint;
+        if(point > 0) {
+            mBind.ivcoin1.setVisibility(View.VISIBLE);
+        }
+
+        if(point > 1000) {
+            mBind.ivcoin2.setVisibility(View.VISIBLE);
+        }
+
+        if(point > 3000) {
+            mBind.ivcoin3.setVisibility(View.VISIBLE);
+        }
     }
 }

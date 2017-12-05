@@ -30,8 +30,8 @@
                 android:orientation="horizontal"
                 >
                 <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_margin="8dp"
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
@@ -43,7 +43,7 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:textSize="23dp"
+                    android:textSize="18dp"
                     android:text="Lv. 10"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
@@ -57,7 +57,7 @@
                     android:text="noname"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:textSize="23dp"
+                    android:textSize="18dp"
                     android:layout_marginLeft="8dp"
                     android:textColor="#624949"
                     />
@@ -68,27 +68,52 @@
             android:layout_height="0dp"
             android:layout_weight="8"
             >
+
             <com.daasuu.library.FPSTextureView
                 android:id="@+id/animation_texture_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:FPSAnimator_fps="24"
-                android:padding="20dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_gravity="center"
-                />
+                android:padding="20dp"
+                app:FPSAnimator_fps="24" />
             <RelativeLayout
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 >
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:id="@+id/ivcoin1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_marginBottom="40dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/main_coin_icon_1"
+                    android:src="@drawable/coin_stack"
+                    android:layout_marginLeft="30dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"/>
+                    />
+                <ImageView
+                    android:id="@+id/ivcoin3"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="70dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/coin_stack"
+                    android:layout_marginLeft="30dp"
+                    android:layout_alignParentBottom="true"
+                    />
+                <ImageView
+                    android:id="@+id/ivcoin2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginLeft="60dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/coin_stack"
+                    android:layout_alignParentBottom="true"
+                    />
             </RelativeLayout>
             <LinearLayout
                 android:id="@+id/bonus_item"
@@ -103,7 +128,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="보너스 상품"
+                    android:text="추가 보너스"
+                    android:textColor="#438786"
+                    android:textStyle="bold"
                     android:layout_marginBottom="8dp"
                     android:gravity="center"/>
                 <com.dacom.damoney.VerticalScrollView
@@ -164,7 +191,7 @@
                         android:layout_marginRight="8dp"
                         android:gravity="bottom"
                         android:text="다음 레벨업까지 30xp 남음"
-                        android:textColor="#54a48c"
+                        android:textColor="#d0dfe3"
                         android:textStyle="bold" />
                 </RelativeLayout>
             </LinearLayout>

@@ -2,133 +2,149 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_edittext">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/iv1"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_coin"
-                    android:layout_marginLeft="8dp"
-                    android:padding="4dp"
-                    />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvTitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.TitleSmall"
-                        android:text="마이마이"
-                        tools:text="마이마이"/>
-                    <TextView
-                        android:id="@+id/tvSubTitle1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.SubTitleSmall"
-                        android:text="너의너의"
-                        tools:text="너의너의"/>
-                </LinearLayout>
-            </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_edittext_gray">
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edittext">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/iv2"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_coin"
-                    android:layout_marginLeft="8dp"
-                    android:padding="4dp"
-                    />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvTitle2"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv1"
+                        android:layout_width="36dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_coin"
+                        android:layout_marginLeft="8dp"
+                        android:padding="4dp"
+                        />
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.TitleSmall"
-                        android:text="마이마이"
-                        tools:text="마이마이"/>
-                    <TextView
-                        android:id="@+id/tvSubTitle2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.SubTitleSmall"
-                        android:text="너의너의"
-                        tools:text="너의너의"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTitle1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="4dp"
+                            style="@style/Item.TitleSmall"
+                            android:text="마이마이"
+                            tools:text="마이마이"/>
+                        <TextView
+                            android:id="@+id/tvSubTitle1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            style="@style/Item.SubTitleSmall"
+                            android:text="너의너의"
+                            tools:text="너의너의"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/iv3"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_coin"
-                    android:layout_marginLeft="8dp"
-                    android:padding="4dp"
-                    />
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tvTitle3"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv2"
+                        android:layout_width="36dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_coin"
+                        android:layout_marginLeft="8dp"
+                        android:padding="4dp"
+                        />
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.TitleSmall"
-                        android:text="마이마이"
-                        tools:text="마이마이"/>
-                    <TextView
-                        android:id="@+id/tvSubTitle3"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTitle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="4dp"
+                            style="@style/Item.TitleSmall"
+                            android:text="마이마이"
+                            tools:text="마이마이"/>
+                        <TextView
+                            android:id="@+id/tvSubTitle2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            style="@style/Item.SubTitleSmall"
+                            android:text="너의너의"
+                            tools:text="너의너의"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/iv3"
+                        android:layout_width="36dp"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_coin"
+                        android:layout_marginLeft="8dp"
+                        android:padding="4dp"
+                        />
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        style="@style/Item.SubTitleSmall"
-                        android:text="너의너의"
-                        tools:text="너의너의"/>
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tvTitle3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginRight="4dp"
+                            style="@style/Item.TitleSmall"
+                            android:text="마이마이"
+                            tools:text="마이마이"/>
+                        <TextView
+                            android:id="@+id/tvSubTitle3"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            style="@style/Item.SubTitleSmall"
+                            android:text="너의너의"
+                            tools:text="너의너의"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
