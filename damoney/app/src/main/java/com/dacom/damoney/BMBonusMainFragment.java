@@ -69,10 +69,12 @@ public class BMBonusMainFragment extends FragmentEx {
         Fragment f = null;
         switch(menuid) {
             case 0:
+                f = new BMBonusTowerFragment();
+                break;
+            case 1:
                 f = new BMBonusItemFragment();
                 break;
-
-            case 1:
+            case 2:
                 f = new BMBonusItemDetailFragment();
                 break;
         }
