@@ -113,4 +113,21 @@ public class BonusManager {
     }
 
     public ArrayList<Integer> getMyGachaList() { return aMyList; }
+
+    public int getCompleteRate( int bonusNo ) {
+        BonusItemData data = (BonusItemData)mmBonusData.get(bonusNo);
+        int nMaxSize = data.aGacha.size();
+        int nCompletedCnt = 0;
+        for(int i = 0 ; i < nMaxSize ; ++i) {
+            int gid = data.aGacha.get(i);
+            for(int j = 0 ; j < aMyList.size() ; ++j) {
+                if(gid == aMyList.get(j)) {
+                    nCompletedCnt++;
+                    continue;
+                }
+            }
+        }
+
+        return (int)(((float)nCompletedCnt / nMaxSize) * 100.0f);
+    }
 }

@@ -46,6 +46,7 @@ public class BMBonusItemDetailFragment extends Fragment {
         Picasso.with(getContext()).load(Global.BASE_URL+dataInfo.iconPath).into(mBind.ivThumbnail);
         loadCompleteList();
         loadMyList();
+        refreshUI();
     }
 
     private void setupRecyclerView() {
@@ -71,5 +72,18 @@ public class BMBonusItemDetailFragment extends Fragment {
         BonusDetailMyListRecyclerAdapter adapter = (BonusDetailMyListRecyclerAdapter)mBind.rvMyitemlist.getAdapter();
         adapter.AddList(f.getBM().getMyGachaList());
         adapter.notifyDataSetChanged();
+    }
+
+    protected void refreshUI() {
+        BMBonusMainFragment f = (BMBonusMainFragment)getParentFragment();
+        int rate = f.getBM().getCompleteRate(selectedGachaNo);
+        if(rate == 100) {
+            mBind.btnBonusGet.setText("받기");
+            mBind.btnBonusGet.setEnabled(true);
+        }
+        else {
+            mBind.btnBonusGet.setText("" + rate + "%");
+            mBind.btnBonusGet.setEnabled(false);
+        }
     }
 }
