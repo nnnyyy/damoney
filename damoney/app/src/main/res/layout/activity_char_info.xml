@@ -5,59 +5,159 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context="com.dacom.damoney.GetRewardActivity"
     >
     <RelativeLayout
         android:id="@+id/touchclose"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:layout_margin="16dp"
         android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:background="@drawable/rounded_edittext"
         >
         <LinearLayout
-            android:layout_centerInParent="true"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:background="@drawable/rounded_edittext"
-            android:orientation="horizontal"
-            >
-            <ImageButton
-                android:layout_gravity="center_vertical"
-                android:id="@+id/btn_left"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/btn_back"
-                android:background="@android:color/transparent"
-                />
-            <ImageView
-                android:id="@+id/iv_character"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:scaleType="fitCenter"
-                android:src="@drawable/login_char"
-                android:background="@android:color/transparent"
-                />
-            <ImageButton
-                android:layout_gravity="center_vertical"
-                android:id="@+id/btn_right"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/btn_forward"
-                android:background="@android:color/transparent"
-                />
-        </LinearLayout>
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="16dp"
-            >
-            <Button
-                android:id="@+id/btn_change"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:orientation="vertical"
+                android:background="@drawable/mainback">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageButton
+                        android:id="@+id/btn_exit"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentRight="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/popupbox_close"
+                        android:background="@android:color/transparent"
+                        android:padding="10dp"
+                        />
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:orientation="horizontal"
+                    >
+                    <ImageButton
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/btn_left"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/charsel_btn_back"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        android:layout_marginLeft="20dp"
+                        />
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        >
+                        <ImageView
+                            android:id="@+id/iv_character"
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/login_char"
+                            android:background="@android:color/transparent"
+                            android:layout_centerHorizontal="true"
+                            />
+                    </RelativeLayout>
+                    <ImageButton
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/btn_right"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/charsel_btn_forward"
+                        android:scaleType="fitCenter"
+                        android:background="@android:color/transparent"
+                        android:layout_marginRight="20dp"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 스탯 레이아웃 시작 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="변경"/>
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lv. 배돌"
+                    style="@style/Item.Title"
+                    android:gravity="center"
+                    />
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/cashshop_bar2"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="right"
+                        android:text="캐시 획득 보너스 : "
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:gravity="left"
+                        android:text="100%"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="right"
+                        android:text="아이템 확률 보너스 : "
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:gravity="left"
+                        android:text="100%"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="right"
+                        android:text="경험치 획득 보너스 : "
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="4"
+                        android:gravity="left"
+                        android:text="100%"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- 스탯 레이아웃 끝 -->
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

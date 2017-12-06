@@ -62,15 +62,16 @@ public class CharacterInfoActivity extends AppCompatActivity {
             }
         });
 
-        mBind.btnChange.setOnClickListener(new View.OnClickListener() {
+        mBind.btnExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertManager.ShowOk(CharacterInfoActivity.this, "", "캐릭터가 변경 되었습니다.", "닫기", new AlertManager.OnClickListener() {
+                finish();
+                /*AlertManager.ShowOk(CharacterInfoActivity.this, "", "캐릭터가 변경 되었습니다.", "닫기", new AlertManager.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        finish();
+
                     }
-                });
+                });*/
             }
         });
     }
@@ -86,6 +87,6 @@ public class CharacterInfoActivity extends AppCompatActivity {
         }
 
         mBind.ivCharacter.setImageResource(aCharacters.get(selectedIndex).res_id);
-        mBind.btnChange.setEnabled(aCharacters.get(selectedIndex).bOpen);
+        //mBind.btnExit.setEnabled(aCharacters.get(selectedIndex).bOpen);
     }
 }

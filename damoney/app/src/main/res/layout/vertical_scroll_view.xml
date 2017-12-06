@@ -48,7 +48,9 @@
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
                             style="@style/Item.TitleSmall.Bottom"
-                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
@@ -98,7 +100,9 @@
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
                             style="@style/Item.TitleSmall.Bottom"
-                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
@@ -148,7 +152,9 @@
                             android:layout_weight="1"
                             android:layout_marginRight="4dp"
                             style="@style/Item.TitleSmall.Bottom"
-                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
                             android:text="마이마이"
                             tools:text="마이마이"/>
                         <TextView
