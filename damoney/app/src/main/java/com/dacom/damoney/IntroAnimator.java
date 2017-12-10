@@ -44,7 +44,7 @@ public class IntroAnimator {
                 ptViewRealSize = new Point(width, height);
                 mTexView.removeAllChildren();
 
-                loadAnim(R.drawable.intro, 7, 5, 31);
+                loadAnim(R.drawable.intronew, 6, 5, 27);
             }
         });
     }

@@ -17,19 +17,12 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/bonus_map_floor_4" />
             <LinearLayout
+                android:id="@+id/ll_bonus_item_icon_list"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_centerHorizontal="true"
                 >
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:padding="2dp"
-                    android:layout_margin="2dp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/icon_coin"/>
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>

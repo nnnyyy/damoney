@@ -36,12 +36,14 @@ public class BonusManager {
     protected ArrayList<BonusItemBase> aBonusData;
     protected HashMap<Integer, BonusItemBase> mmBonusData;
     protected HashSet<Integer> mReqLevelSet;
+    protected ArrayList<Integer> aBonusLevelList;
     protected HashMap<Integer/* id */, Integer /* cnt */> mmMyList;
     protected ArrayList<Integer> aMyList;
 
     public BonusManager() {
         aBonusData = new ArrayList<>();
         mReqLevelSet = new HashSet<>();
+        aBonusLevelList = new ArrayList<>();
         mmBonusData = new HashMap<>();
         mmMyList = new HashMap<>();
         aMyList = new ArrayList<>();
@@ -52,6 +54,7 @@ public class BonusManager {
             return;
         }
         mReqLevelSet.add(reqLevel);
+        aBonusLevelList.add(reqLevel);
         BonusItemSection newSection = new BonusItemSection();
         newSection.level = reqLevel;
         aBonusData.add(newSection);
@@ -76,6 +79,10 @@ public class BonusManager {
 
         if(mReqLevelSet != null) {
             mReqLevelSet.clear();
+        }
+
+        if(aBonusLevelList != null) {
+            aBonusLevelList.clear();
         }
 
         if(mmBonusData != null) {
@@ -129,5 +136,9 @@ public class BonusManager {
         }
 
         return (int)(((float)nCompletedCnt / nMaxSize) * 100.0f);
+    }
+
+    public ArrayList<Integer> getReqLevelSet() {
+        return aBonusLevelList;
     }
 }
