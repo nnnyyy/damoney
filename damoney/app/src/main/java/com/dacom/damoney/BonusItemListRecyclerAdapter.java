@@ -78,7 +78,7 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
             public void onClick(View v) {
                 BonusManager.selectedData = item;
                 ((BMBonusMainFragment)fragment).setGachaNo(item.no);
-                ((BMBonusMainFragment)fragment).changeChildFragment(1);
+                ((BMBonusMainFragment)fragment).changeChildFragment(2);
             }
         });
     }

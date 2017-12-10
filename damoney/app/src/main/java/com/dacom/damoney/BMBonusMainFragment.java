@@ -99,6 +99,9 @@ public class BMBonusMainFragment extends FragmentEx {
         if(curchildFragmentIdx == 1) {
             changeChildFragment(0);
         }
+        else if(curchildFragmentIdx == 2) {
+            changeChildFragment(1);
+        }
         else {
             ((MainActivity)context).changeNav(R.id.act_home);
         }

@@ -17,6 +17,7 @@ import com.dacom.damoney.databinding.TowerTemplateBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -25,6 +26,7 @@ import java.util.Iterator;
  * A simple {@link Fragment} subclass.
  */
 public class BMBonusTowerFragment extends Fragment {
+    static int lastScroll = -1;
     FragmentBonusTowerBinding mBind;
     BonusManager bm;
 
@@ -44,8 +46,45 @@ public class BMBonusTowerFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if(lastScroll == -1) {
+            mBind.towerScroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    mBind.towerScroll.scrollTo(0, mBind.towerScroll.getBottom());
+                    lastScroll = mBind.towerScroll.getBottom();
+                }
+            });
+        }
+        else {
+            mBind.towerScroll.post(new Runnable() {
+                @Override
+                public void run() {
+                    mBind.towerScroll.scrollTo(0, lastScroll);
+                }
+            });
+        }
 
         loadList();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Log.d("BTF - onResume", "scroll value : " + lastScroll);
+        mBind.towerScroll.post(new Runnable() {
+            @Override
+            public void run() {
+                mBind.towerScroll.scrollTo(0, lastScroll);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        lastScroll = -1;
     }
 
     protected void loadList() {
@@ -69,12 +108,23 @@ public class BMBonusTowerFragment extends Fragment {
             }
         }
 
-        Iterator<?> lsiter = mLevelSet.iterator();
+        ArrayList<Integer> mLevelSetClone = (ArrayList<Integer>)mLevelSet.clone();
+        Collections.reverse(mLevelSetClone);
+        Iterator<?> lsiter = mLevelSetClone.iterator();
         while(lsiter.hasNext()) {
-            int level = (Integer)lsiter.next();
+            final int level = (Integer)lsiter.next();
             Log.d("--- Level ---" , "" + level);
             ArrayList<BonusItemData> aDataList = map.get(level);
             TowerTemplateBinding bind = makeTowerFloor(level, aDataList.size());
+            bind.touchArea.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BonusManager.selectedLevel = level;
+                    lastScroll = mBind.towerScroll.getScrollY();
+                    Log.d("BTF - touch", "scroll value : " + mBind.towerScroll.getScrollY());
+                    ((BMBonusMainFragment)getParentFragment()).changeChildFragment(1);
+                }
+            });
             Iterator<?> iter2 = aDataList.iterator();
             while(iter2.hasNext()) {
                 BonusItemData d = (BonusItemData)iter2.next();

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * Created by nnnyyy on 2017-11-24.
@@ -15,6 +16,7 @@ import java.util.HashSet;
 public class BonusManager {
     public static HashMap<Integer, GachaBoxInfo> mmGachaList = new HashMap<>();
     public static BonusItemData selectedData;
+    public static int selectedLevel;
     public static void loadGachaList(JSONArray aList) throws JSONException {
         int len = aList.length();
         for(int i = 0 ; i < len ; ++i) {
@@ -140,5 +142,27 @@ public class BonusManager {
 
     public ArrayList<Integer> getReqLevelSet() {
         return aBonusLevelList;
+    }
+
+    public HashMap<Integer, ArrayList<BonusItemBase>> makeBonusListPerLevel() {
+        Iterator<?> iter = getBonusList().iterator();
+        HashMap<Integer, ArrayList<BonusItemBase>> map = new HashMap<>();
+
+        while(iter.hasNext()){
+            BonusItemBase item = (BonusItemBase)iter.next();
+            if(item.type == BonusItemBase.BIType.BI_SECTION) continue;
+            BonusItemData data = (BonusItemData)item;
+            if(!map.containsKey(data.reqLevel)) {
+                ArrayList<BonusItemBase> aDataList = new ArrayList<>();
+                aDataList.add(data);
+                map.put(data.reqLevel, aDataList);
+            }
+            else {
+                ArrayList<BonusItemBase> aDataList = map.get(data.reqLevel);
+                aDataList.add(data);
+            }
+        }
+
+        return map;
     }
 }
