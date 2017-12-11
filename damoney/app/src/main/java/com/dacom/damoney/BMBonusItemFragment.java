@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.dacom.damoney.databinding.FragmentPbuylistBinding;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,9 +49,9 @@ public class BMBonusItemFragment extends Fragment {
 
     protected void loadList() {
         BMBonusMainFragment f = (BMBonusMainFragment)getParentFragment();
-
+        ArrayList<BonusItemBase> aDataList = f.getBM().makeBonusListPerLevel().get(BonusManager.selectedLevel);
         BonusItemListRecyclerAdapter adapter = (BonusItemListRecyclerAdapter)mBind.goodsList.getAdapter();
-        adapter.AddList(f.getBM().getBonusList());
+        adapter.AddList(aDataList);
         adapter.notifyDataSetChanged();
     }
 }
