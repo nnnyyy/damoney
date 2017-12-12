@@ -68,15 +68,15 @@ exports.initBonusItemInfo = function() {
     bonusItemInfo.push(createBonusItemInfo(7, 'SONY', '플레이스테이션 슬림 1TB', 7, '/images/bonus/test.png', [1002,1003,1007,1001,1008,2002,2004,2001,3003]));
     bonusItemInfo.push(createBonusItemInfo(8, '샤넬', '17FW 캐비어 백', 10, '/images/bonus/test.png', [1000,1002,1007,1009,2003,2002,2004,3001,3002]));
     bonusItemInfo.push(createBonusItemInfo(9, 'BMW', '미니 쿠퍼', 10, '/images/bonus/test.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));*/
-    bonusItemInfo.push(createBonusItemInfo(0, '맥심 모카커피', '맥심', 1, '/images/bonus/b1.png', [1000,1001,1002,1003,1004,1007,1008,1009,2003]));
-    bonusItemInfo.push(createBonusItemInfo(1, '김혜자 돈까스 치킨 도시락', 'YouUs', 1, '/images/bonus/b2.png', [1001,1002,1003,1004,1005,1007,1008,1009,2001]));
-    bonusItemInfo.push(createBonusItemInfo(2, '바나나 우유', '빙그레', 1, '/images/bonus/b3.png', [1000,1001,1002,1003,1004,1007,1008,2001,2003]));
-    bonusItemInfo.push(createBonusItemInfo(3, '영화 관람권 2매', '메가박스', 2, '/images/bonus/b4.png', [1002,1003,1004,1005,1006,1007,1008,2002,2004]));
-    bonusItemInfo.push(createBonusItemInfo(4, '뿌링클 콜라 세트', 'BHC', 2, '/images/bonus/b5.png', [1001,1004,1005,1006,1007,1008,1009,2001,2002]));
-    bonusItemInfo.push(createBonusItemInfo(5, '스트로베리 생크림케이크', '투썸 플레이스', 3, '/images/bonus/b6.png', [1003,1004,1007,1008,1009,2003,2002,2004,3001]));
-    bonusItemInfo.push(createBonusItemInfo(6, '화이트골드 320T/커피/커피믹스', '맥심', 3, '/images/bonus/b7.png', [1002,1003,1007,1008,1009,2001,2002,2003,3002]));
-    bonusItemInfo.push(createBonusItemInfo(7, '섬진강 메뚜기 쌀 20KG', '농협', 4, '/images/bonus/b8.png', [1002,1003,1007,1001,1008,2002,2004,2001,3003]));
-    bonusItemInfo.push(createBonusItemInfo(8, '준비중', '준비중', 5, '/images/bonus/b9.png', [1000,1002,1007,1009,2003,2002,2004,3001,3002]));
+    bonusItemInfo.push(createBonusItemInfo(0, '맥심 모카커피', '맥심', 1, '/images/bonus/b01.png', [1000,1001,1002,1003,1004,1007,1008,1009,2003]));
+    bonusItemInfo.push(createBonusItemInfo(1, '김혜자 돈까스 치킨 도시락', 'YouUs', 1, '/images/bonus/b02.png', [1001,1002,1003,1004,1005,1007,1008,1009,2001]));
+    bonusItemInfo.push(createBonusItemInfo(2, '바나나 우유', '빙그레', 1, '/images/bonus/b03.png', [1000,1001,1002,1003,1004,1007,1008,2001,2003]));
+    bonusItemInfo.push(createBonusItemInfo(3, '영화 관람권 2매', '메가박스', 2, '/images/bonus/b04.png', [1002,1003,1004,1005,1006,1007,1008,2002,2004]));
+    bonusItemInfo.push(createBonusItemInfo(4, '뿌링클 콜라 세트', 'BHC', 2, '/images/bonus/b05.png', [1001,1004,1005,1006,1007,1008,1009,2001,2002]));
+    bonusItemInfo.push(createBonusItemInfo(5, '스트로베리 생크림케이크', '투썸 플레이스', 3, '/images/bonus/b06.png', [1003,1004,1007,1008,1009,2003,2002,2004,3001]));
+    bonusItemInfo.push(createBonusItemInfo(6, '화이트골드 320T/커피/커피믹스', '맥심', 3, '/images/bonus/b07.png', [1002,1003,1007,1008,1009,2001,2002,2003,3002]));
+    bonusItemInfo.push(createBonusItemInfo(7, '섬진강 메뚜기 쌀 20KG', '농협', 4, '/images/bonus/b08.png', [1002,1003,1007,1001,1008,2002,2004,2001,3003]));
+    bonusItemInfo.push(createBonusItemInfo(8, '준비중', '준비중', 5, '/images/bonus/b09.png', [1000,1002,1007,1009,2003,2002,2004,3001,3002]));
     bonusItemInfo.push(createBonusItemInfo(9, '준비중', '준비중', 6, '/images/bonus/b10.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
     bonusItemInfo.push(createBonusItemInfo(10, '준비중', '준비중', 7, '/images/bonus/b11.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
     bonusItemInfo.push(createBonusItemInfo(11, '설화수 자음2종 기초세트', '아모레퍼시픽', 8, '/images/bonus/b12.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
@@ -98,6 +98,7 @@ exports.initBonusItemInfo = function() {
     bonusItemInfo.push(createBonusItemInfo(27, '가죽 미니 탑 핸들 백', 'GUCCI', 18, '/images/bonus/b28.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
     bonusItemInfo.push(createBonusItemInfo(28, '클래식 블랙 캐비어', 'CHANEL', 19, '/images/bonus/b29.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
     bonusItemInfo.push(createBonusItemInfo(29, '2017 스토닉 자동차', '기아자동차', 20, '/images/bonus/b30.png', [1001,1004,1008,2003,2002,2004,3001,3002,3003]));
+
 
 
 
