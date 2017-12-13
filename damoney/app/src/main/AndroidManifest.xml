@@ -60,6 +60,9 @@
         <activity
             android:name=".CharacterInfoActivity"
             android:theme="@style/AppTheme.Translucent" />
+        <activity
+            android:name=".HelpPageActivity"
+            android:theme="@style/AppTheme.Translucent" />
         <activity android:name=".CreateCharacterActivity"></activity>
         <receiver android:name=".Push.PushBroadcastReceiver"></receiver>
     </application>

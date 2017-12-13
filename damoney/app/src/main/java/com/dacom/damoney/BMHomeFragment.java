@@ -237,7 +237,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void GoCharacterInfo() {
-        Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
+        Intent intent = new Intent(getContext(), HelpPageActivity.class);
         getContext().startActivity(intent);
     }
 

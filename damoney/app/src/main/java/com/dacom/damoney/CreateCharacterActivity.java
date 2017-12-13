@@ -84,7 +84,7 @@ public class CreateCharacterActivity extends AppCompatActivity {
         }
 
         mBind.ivCharacter.setImageResource(aCharacters.get(selectedIndex).res_id);
-        //mBind.btnExit.setEnabled(aCharacters.get(selectedIndex).bOpen);
+        mBind.btnStartApp.setEnabled(aCharacters.get(selectedIndex).bOpen);
     }
 
     protected void requestSignup() {
