@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.dacom.damoney.AlertManager.AlertManager;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.ActivityCharInfoBinding;
 
 import java.util.ArrayList;
@@ -45,6 +46,8 @@ public class CharacterInfoActivity extends AppCompatActivity {
         aCharacters.add(new CharInfo(R.drawable.cc_hidden_2, false));
         aCharacters.add(new CharInfo(R.drawable.cc_hidden_3, false));
         mBind.ivCharacter.setImageResource(aCharacters.get(selectedIndex).res_id);
+
+        mBind.lvInfo.setText("Lv." + MyPassport.getInstance().nLevel + " " + MyPassport.getInstance().sNick);
     }
 
     protected void setupButtonEvent() {

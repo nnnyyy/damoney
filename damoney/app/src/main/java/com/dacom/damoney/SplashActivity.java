@@ -86,6 +86,7 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
             @Override
             public void run() {
                 CharacterAnimator.getInstance().clear();
+                animator.clear();
             }
         });
         MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {

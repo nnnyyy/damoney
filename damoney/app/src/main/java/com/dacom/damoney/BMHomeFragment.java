@@ -158,6 +158,13 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                 mainAct.changeFragment(R.id.btn_ads_distribute);
             }
         });
+
+        mBind.btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoHelpPage();
+            }
+        });
     }
 
     private void setupAnim() {
@@ -237,6 +244,11 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
     }
 
     private void GoCharacterInfo() {
+        Intent intent = new Intent(getContext(), CharacterInfoActivity.class);
+        getContext().startActivity(intent);
+    }
+
+    private void GoHelpPage() {
         Intent intent = new Intent(getContext(), HelpPageActivity.class);
         getContext().startActivity(intent);
     }

@@ -10,8 +10,8 @@
             android:id="@+id/iv_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/helppage_1"
+            android:scaleType="fitXY"
+            android:background="@drawable/helppage_1"
             />
     </RelativeLayout>
 </layout>

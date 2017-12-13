@@ -109,7 +109,18 @@ public class IntroAnimator {
 
         } catch (OutOfMemoryError err) {
             Log.e("IntroAnimator","Loading Failed : " + err);
+            if( aelistener != null ) {
+                aelistener.onAnimationEnd();
+            }
             return;
         }
+    }
+
+    public void clear() {
+        if(mTexView != null) {
+            mTexView.clearAnimation();
+            mTexView.removeAllChildren();
+        }
+
     }
 }

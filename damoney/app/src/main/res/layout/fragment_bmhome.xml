@@ -24,44 +24,55 @@
             android:layout_height="56dp"
             android:orientation="horizontal"
             >
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                >
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_margin="8dp"
-                    android:layout_gravity="center"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/home_user_profile"
-                    />
-                <TextView
-                    android:id="@+id/tvLevel"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_help"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginLeft="16dp"/>
+                <LinearLayout
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="18dp"
-                    android:text="Lv. 10"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical"
-                    android:textColor="#624949"
+                    android:orientation="horizontal"
+                    >
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_margin="8dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/home_user_profile"
+                        />
+                    <TextView
+                        android:id="@+id/tvLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="18dp"
+                        android:text="Lv. 10"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:textColor="#624949"
 
-                    />
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="noname"
-                    android:textStyle="bold"
-                    android:gravity="center_vertical"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="8dp"
-                    android:textColor="#624949"
-                    />
-            </LinearLayout>
+                        />
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="noname"
+                        android:textStyle="bold"
+                        android:gravity="center_vertical"
+                        android:textSize="18dp"
+                        android:layout_marginLeft="8dp"
+                        android:textColor="#624949"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -224,7 +235,6 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <ImageButton
-                android:id="@+id/btn_show_ads"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -234,6 +244,7 @@
                 android:layout_margin="24dp"
                 />
             <ImageButton
+                android:id="@+id/btn_show_ads"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
