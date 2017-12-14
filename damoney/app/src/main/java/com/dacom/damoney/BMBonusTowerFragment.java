@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.dacom.damoney.databinding.FragmentBonusTowerBinding;
 import com.dacom.damoney.databinding.TowerBonusItemIconBinding;
 import com.dacom.damoney.databinding.TowerTemplateBinding;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -140,14 +141,25 @@ public class BMBonusTowerFragment extends Fragment {
         TowerTemplateBinding bind = DataBindingUtil.inflate(inflater, R.layout.tower_template, mBind.llTowerRoot, false);
         mBind.llTowerRoot.addView(bind.getRoot());
         bind.ivFloorImage.setImageResource(R.drawable.bonus_map_floor_1);
+        bind.tvLv.setText("Lv. " + level);
         return bind;
     }
 
     private void addTowerItem(TowerTemplateBinding parent_bind, BonusItemData d) {
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(inflater == null) return;
-        TowerBonusItemIconBinding bind = DataBindingUtil.inflate(inflater, R.layout.tower_bonus_item_icon, parent_bind.llBonusItemIconList, false);
+        final TowerBonusItemIconBinding bind = DataBindingUtil.inflate(inflater, R.layout.tower_bonus_item_icon, parent_bind.llBonusItemIconList, false);
         parent_bind.llBonusItemIconList.addView(bind.getRoot());
-        Picasso.with(getContext()).load(Global.BASE_URL + d.iconPath).into(bind.ivThumbnail);
+        Picasso.with(getContext()).load(Global.BASE_URL + d.iconPath).into(bind.ivThumbnail, new Callback() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError() {
+                bind.ivThumbnail.setImageResource(R.drawable.icon_coin);
+            }
+        });
     }
 }

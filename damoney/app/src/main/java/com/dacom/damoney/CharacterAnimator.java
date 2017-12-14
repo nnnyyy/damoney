@@ -104,10 +104,10 @@ public class CharacterAnimator {
     protected FPSTextureView getTextureView() { return textureView; }
 
     protected void loadAnims() {
-        loadAnim(CharacterState.CS_QUESTION, R.drawable.c0_question, 5, 5, 22);
+        //loadAnim(CharacterState.CS_QUESTION, R.drawable.c0_question, 5, 5, 22);
         loadAnim(CharacterState.CS_IDLE, R.drawable.c0_idle, 4, 3, 12);
-        loadAnim(CharacterState.CS_EAT, R.drawable.c0_eat, 5, 4, 20);
-        loadAnim(CharacterState.CS_GREAT, R.drawable.c0_great, 4, 3, 12);
+        //loadAnim(CharacterState.CS_EAT, R.drawable.c0_eat, 5, 4, 20);
+        //loadAnim(CharacterState.CS_GREAT, R.drawable.c0_great, 4, 3, 12);
     }
 
     protected void loadAnim(CharacterState state, int resId, int cnt_per_row, int cnt_per_col, int frameCnt) {

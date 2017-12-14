@@ -10,7 +10,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
+import com.dacom.damoney.AlertManager.AlertManager;
+import com.dacom.damoney.Push.DamoneyPushManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentPprofileMainBinding;
 
@@ -31,6 +34,22 @@ public class BMPProfieldMainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBind = DataBindingUtil.inflate(inflater, R.layout.fragment_pprofile_main, container, false);
+        DamoneyPushManager.loadPushSettings(getContext());
+        mBind.swtAds.setChecked(DamoneyPushManager.bEnableAdsPUsh);
+        mBind.swtAds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Storage.saveBoolean(getContext(), DamoneyPushManager.PK_ADS, isChecked);
+                if(isChecked) {
+                    AlertManager.ShowOk(getContext(), "알림", "푸쉬 메시지가 설정 되었습니다.", "닫기", new AlertManager.OnClickListener() {
+                        @Override
+                        public void onClick(View v, int which) {
+                            DamoneyPushManager.Reserv(getContext(), DamoneyPushManager.FIVE_MIN);
+                        }
+                    });
+                }
+            }
+        });
         return mBind.getRoot();
     }
 

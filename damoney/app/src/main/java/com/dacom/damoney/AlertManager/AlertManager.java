@@ -19,7 +19,7 @@ import com.dacom.damoney.R;
 
 public class AlertManager {
     public interface OnClickListener {
-        public void onClick(View v);
+        public void onClick(View v, int which);
     }
     public static void ShowOk(Context context , String sTitle, String sMsg, String sOkText, final AlertManager.OnClickListener listener) {
         final Dialog dialog = new Dialog(context);
@@ -35,7 +35,7 @@ public class AlertManager {
             public void onClick(View v) {
                 dialog.dismiss();
                 if( listener != null ) {
-                    listener.onClick(v);
+                    listener.onClick(v, 1);
                 }
             }
         });
@@ -54,18 +54,35 @@ public class AlertManager {
         alert.show();*/
     }
 
-    public static void ShowYesNo(Context context , String sTitle, String sMsg, String sOkText, String sNoText, DialogInterface.OnClickListener listener) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        TextView tv = new TextView(context);
-        tv.setText(sMsg);
-        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-        tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT));
-        builder.setTitle(sTitle);
-        builder.setPositiveButton(sOkText, listener);
-        builder.setNegativeButton(sNoText, listener);
-        builder.setCancelable(false);
-        builder.setView(tv);
-        AlertDialog alert = builder.create();
-        alert.show();
+    public static void ShowYesNo(Context context , String sTitle, String sMsg, String sOkText, String sNoText, final AlertManager.OnClickListener listener) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.alert_format_yesno);
+        TextView tvMsg = (TextView)dialog.findViewById(R.id.tvMsg);
+        tvMsg.setText(sMsg);
+        Button btnOk = (Button)dialog.findViewById(R.id.tvOkBtn);
+        btnOk.setText(sOkText);
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if(listener !=null)
+                    listener.onClick(v, 1);
+            }
+        });
+
+        Button btnNo = (Button)dialog.findViewById(R.id.tvNoBtn);
+        btnNo.setText(sNoText);
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                if(listener !=null)
+                    listener.onClick(v, 0);
+            }
+        });
+
+        dialog.show();
     }
 }

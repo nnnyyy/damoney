@@ -16,9 +16,21 @@ public class Storage {
         editor.apply();
     }
 
+    public static void saveBoolean(Context context, String sKey, boolean bData) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(sKey, bData);
+        editor.apply();
+    }
+
     public static String load(Context context, String sKey) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(sKey, "");
+    }
+
+    public static boolean loadBoolean(Context context, String sKey) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(sKey, false);
     }
 
     public static boolean have(Context context, String sKey) {

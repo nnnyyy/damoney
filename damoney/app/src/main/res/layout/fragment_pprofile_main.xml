@@ -176,6 +176,7 @@
             android:text="> 웹에서 광고 노출"
             />
         <Switch
+            android:id="@+id/swt_ads"
             android:layout_alignParentRight="true"
             android:layout_marginRight="8dp"
             android:layout_width="wrap_content"

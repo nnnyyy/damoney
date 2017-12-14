@@ -10,13 +10,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_lv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:text="lv."
+                android:layout_marginLeft="8dp"
+                android:textSize="18dp"/>
             <ImageView
                 android:id="@+id/iv_floor_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/bonus_map_floor_4" />
+                android:src="@drawable/bonus_map_floor_1" />
             <LinearLayout
                 android:id="@+id/ll_bonus_item_icon_list"
                 android:layout_width="wrap_content"

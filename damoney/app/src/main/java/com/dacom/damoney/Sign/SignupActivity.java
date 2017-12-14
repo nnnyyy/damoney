@@ -61,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 AlertManager.ShowOk(SignupActivity.this, "알림", "인증이 완료 되었습니다.", "닫기", new AlertManager.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(View v, int which) {
                         mBind.etPhoneAuth.setEnabled(false);
                         mBind.etPhoneAuth2.setEnabled(false);
                         mBind.btnVerifyAuthnumber.setEnabled(false);

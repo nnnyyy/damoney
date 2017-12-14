@@ -55,11 +55,12 @@ public class GoodsRecyclerAdapter extends RecyclerView.Adapter<GoodsRecyclerAdap
                     AlertManager.ShowOk(fragment.getContext(), "알림", "포인트가 부족합니다", "닫기", null);
                     return;
                 }
-                AlertManager.ShowYesNo(fragment.getContext(), "알림", "구매 하시겠습니까?", "예", "아니오", new DialogInterface.OnClickListener() {
+                AlertManager.ShowYesNo(fragment.getContext(), "알림", "구매 하시겠습니까?", "예", "아니오", new AlertManager.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if(which == DialogInterface.BUTTON_POSITIVE)
+                    public void onClick(View v, int which) {
+                        if(which == 1) {
                             BuyItem(item.sn);
+                        }
                     }
                 });
             }

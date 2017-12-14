@@ -23,7 +23,7 @@ public class PushBroadcastReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = new Notification.Builder(context);
         builder.setSmallIcon(R.drawable.icon_1).setTicker("HETT").setWhen(System.currentTimeMillis())
-                .setNumber(1).setContentTitle("푸쉬 제목").setContentText("푸쉬내용")
+                .setNumber(1).setContentTitle("다머니").setContentText("광고를 보고 포인트를 적립하세요!")
                 .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE).setContentIntent(pendingIntent).setAutoCancel(true);
         notificationmanager.notify(0, builder.build());
     }

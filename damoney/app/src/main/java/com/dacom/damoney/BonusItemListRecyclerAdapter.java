@@ -24,10 +24,12 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
 
     ArrayList<BonusItemBase> aItemList = new ArrayList<>();
     Fragment fragment;
+    BonusManager bm;
     int mLastPosition = -1;
 
     public BonusItemListRecyclerAdapter(Fragment f) {
         fragment = f;
+        bm = ((BMBonusMainFragment)fragment).getBM();
         setHasStableIds(true);
     }
 
@@ -81,6 +83,15 @@ public class BonusItemListRecyclerAdapter extends RecyclerView.Adapter<RecyclerV
                 ((BMBonusMainFragment)fragment).changeChildFragment(2);
             }
         });
+
+        int rate = bm.getCompleteRate(item.no);
+        if(rate == 100) {
+            holder.mBind.completeState.setText("완료");
+            holder.mBind.completeState.setEnabled(true);
+        }
+        else {
+            holder.mBind.completeState.setText("" + rate + "%");
+        }
     }
 
     @Override

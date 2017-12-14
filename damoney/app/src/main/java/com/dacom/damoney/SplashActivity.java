@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dacom.damoney.Push.DamoneyPushManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.Sign.SigninActivity;
 import com.dacom.damoney.databinding.ActivitySplashBinding;
@@ -38,6 +39,7 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
         Global.initBasicInfo(dm);
 
         MyPassport.getInstance().init(this);
+        DamoneyPushManager.loadPushSettings(getApplicationContext());
         setupStatusBar();
         setupIntroAnim();
     }
@@ -86,7 +88,8 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
             @Override
             public void run() {
                 CharacterAnimator.getInstance().clear();
-                animator.clear();
+                if(animator != null)
+                    animator.clear();
             }
         });
         MyPassport.getInstance().RequestInfo(new MyPassport.RequestInfoListener() {
@@ -109,6 +112,8 @@ public class SplashActivity extends AppCompatActivity implements IntroAnimator.A
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
     }

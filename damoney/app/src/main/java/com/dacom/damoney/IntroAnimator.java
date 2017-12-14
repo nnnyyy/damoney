@@ -83,7 +83,7 @@ public class IntroAnimator {
                     bitmapScaled,
                     nRecommFrameW,
                     nRecommFrameH, frameCnt, count_per_row)
-                    .frequency(2)
+                    .frequency(3)
                     .spriteLoop(false);
 
             spriteSheetDrawer.spriteAnimationEndCallBack(new AnimCallBack() {

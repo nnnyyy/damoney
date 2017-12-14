@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         boolean bAds = getIntent().getBooleanExtra("Ads", false);
 
-        if(!bAds) {
+        if(!bAds && DamoneyPushManager.bEnableAdsPUsh) {
             DamoneyPushManager.Reserv(getApplicationContext(), DamoneyPushManager.FIVE_MIN);
         }
     }
