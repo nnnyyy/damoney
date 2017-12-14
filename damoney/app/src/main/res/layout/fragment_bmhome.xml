@@ -27,11 +27,15 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <Button
+                <ImageButton
                     android:id="@+id/btn_help"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginLeft="16dp"/>
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/icon_help"
+                    android:scaleType="fitCenter"
+                    android:layout_margin="8dp"
+                    />
                 <LinearLayout
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"

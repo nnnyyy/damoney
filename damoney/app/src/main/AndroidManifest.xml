@@ -15,6 +15,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
@@ -62,7 +63,7 @@
             android:theme="@style/AppTheme.Translucent" />
         <activity
             android:name=".HelpPageActivity"
-            android:theme="@style/AppTheme.Translucent" />
+             />
         <activity android:name=".CreateCharacterActivity"></activity>
         <receiver android:name=".Push.PushBroadcastReceiver"></receiver>
     </application>

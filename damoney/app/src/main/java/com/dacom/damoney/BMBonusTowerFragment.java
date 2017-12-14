@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dacom.damoney.AlertManager.AlertManager;
+import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentBonusTowerBinding;
 import com.dacom.damoney.databinding.TowerBonusItemIconBinding;
 import com.dacom.damoney.databinding.TowerTemplateBinding;
@@ -120,16 +122,23 @@ public class BMBonusTowerFragment extends Fragment {
             bind.touchArea.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BonusManager.selectedLevel = level;
-                    lastScroll = mBind.towerScroll.getScrollY();
-                    Log.d("BTF - touch", "scroll value : " + mBind.towerScroll.getScrollY());
-                    ((BMBonusMainFragment)getParentFragment()).changeChildFragment(1);
+                    boolean bEnabled = MyPassport.getInstance().nLevel >= level;
+
+                    if(bEnabled) {
+                        BonusManager.selectedLevel = level;
+                        lastScroll = mBind.towerScroll.getScrollY();
+                        Log.d("BTF - touch", "scroll value : " + mBind.towerScroll.getScrollY());
+                        ((BMBonusMainFragment)getParentFragment()).changeChildFragment(1);
+                    }
+                    else {
+                        AlertManager.ShowOk(getContext(), "알림", "레벨이 부족합니다", "닫기",null);
+                    }
                 }
             });
             Iterator<?> iter2 = aDataList.iterator();
             while(iter2.hasNext()) {
                 BonusItemData d = (BonusItemData)iter2.next();
-                addTowerItem(bind, d);
+                addTowerItem(level, bind, d);
                 Log.d("Data" , d.name);
             }
         }
@@ -145,15 +154,18 @@ public class BMBonusTowerFragment extends Fragment {
         return bind;
     }
 
-    private void addTowerItem(TowerTemplateBinding parent_bind, BonusItemData d) {
+    private void addTowerItem(int level, TowerTemplateBinding parent_bind, BonusItemData d) {
+        boolean bEnabled = MyPassport.getInstance().nLevel >= level;
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(inflater == null) return;
         final TowerBonusItemIconBinding bind = DataBindingUtil.inflate(inflater, R.layout.tower_bonus_item_icon, parent_bind.llBonusItemIconList, false);
         parent_bind.llBonusItemIconList.addView(bind.getRoot());
+        if(!bEnabled) {
+            bind.ivThumbnail.setAlpha(0.35f);
+        }
         Picasso.with(getContext()).load(Global.BASE_URL + d.iconPath).into(bind.ivThumbnail, new Callback() {
             @Override
             public void onSuccess() {
-
             }
 
             @Override

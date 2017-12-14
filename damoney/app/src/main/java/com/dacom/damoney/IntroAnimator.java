@@ -22,6 +22,7 @@ public class IntroAnimator {
     FPSTextureView mTexView;
     Point ptViewRealSize;
     AnimEventListener aelistener;
+    Bitmap introBitmap;
 
     public interface AnimEventListener {
         public void onAnimationEnd();
@@ -73,14 +74,14 @@ public class IntroAnimator {
             int nRecommW = nRecommFrameW * count_per_row;
             int nRecommH = nRecommFrameH * count_per_col;
 
-            Bitmap bitmapScaled = Bitmap.createScaledBitmap(bitmap,
+            introBitmap = Bitmap.createScaledBitmap(bitmap,
                     nRecommW,
                     nRecommH,
                     true
             );
             bitmap.recycle();
             SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
-                    bitmapScaled,
+                    introBitmap,
                     nRecommFrameW,
                     nRecommFrameH, frameCnt, count_per_row)
                     .frequency(3)
@@ -118,6 +119,8 @@ public class IntroAnimator {
 
     public void clear() {
         if(mTexView != null) {
+            if(introBitmap != null)
+                introBitmap.recycle();
             mTexView.clearAnimation();
             mTexView.removeAllChildren();
         }

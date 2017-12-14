@@ -63,6 +63,7 @@ public class CharacterAnimator {
     FPSTextureView textureView = null;
     Point ptViewRealSize;
     DisplayObject currentObject;
+    Bitmap curBitmap;
     boolean bLoad = false;
     CharacterState reservState = CharacterState.CS_NONE;
     CharacterState curState = CharacterState.CS_NONE;
@@ -175,6 +176,7 @@ public class CharacterAnimator {
                 .end();
 
         currentObject = bitmapDisplay;
+        curBitmap = bitmapScaled;
         curState = state;
 
         getTextureView()
@@ -187,6 +189,9 @@ public class CharacterAnimator {
         if(textureView != null) {
             textureView.clearAnimation();
             textureView.removeAllChildren();
+        }
+        if(curBitmap != null) {
+            curBitmap.recycle();
         }
         mAnimMan.clear();
         currentObject = null;
