@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.dacom.damoney.AlertManager.AlertManager;
 import com.dacom.damoney.databinding.AdsDistItemBinding;
 
 import java.util.ArrayList;
@@ -37,10 +38,16 @@ public class AdsDistRecyclerAdapter extends RecyclerView.Adapter<AdsDistRecycler
 
 
     @Override
-    public void onBindViewHolder(AdsDistRecyclerAdapter.ArticleItemViewHolder holder, int position) {
+    public void onBindViewHolder(final AdsDistRecyclerAdapter.ArticleItemViewHolder holder, int position) {
         final AdsDistItem item =  aItemList.get(position);
         holder.mBind.setItem(item);
         holder.mBind.ivThumbnail.setImageResource(item.ResId);
+        holder.mBind.clickable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertManager.ShowOk(holder.mBind.getRoot().getContext(), "알림", "서비스 준비 중입니다.", "닫기", null);
+            }
+        });
     }
 
     @Override

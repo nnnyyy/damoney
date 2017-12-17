@@ -16,6 +16,7 @@
         android:layout_height="48dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
         />
     <ImageButton
         android:id="@+id/btn_exit"

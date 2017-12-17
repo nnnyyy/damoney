@@ -36,14 +36,14 @@ public class AdsTouchActivity extends AppCompatActivity {
     }
 
     private void setupDemoAds() {
-        float[] dx = { 0.39f, 0.037f, 0.048f, 0.035f, 0.16f };
-        float[] dy = { 0.14f, 0.08f, 0.045f, 0.201f, 0.50f };
+        float[] dx = { 0.35f, 0.016f, 0.027f, 0.011f, 0.153f };
+        float[] dy = { 0.129f, 0.066f, 0.031f, 0.184f, 0.464f };
         Point[] ptHilightSize = {
-                new Point(42,8),
-                new Point(64,8),
-                new Point(43,5),
+                new Point(52,10),
+                new Point(70,10),
                 new Point(47,7),
-                new Point(68,20 )
+                new Point(53,10),
+                new Point(70,22 )
         };
 
         Display display = getWindowManager().getDefaultDisplay();
