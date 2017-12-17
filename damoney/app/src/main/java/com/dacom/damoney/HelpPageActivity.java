@@ -29,6 +29,13 @@ public class HelpPageActivity extends AppCompatActivity {
         mBind.pager.setAdapter(adapter);
         mBind.indicator.setViewPager(mBind.pager);
 
+        mBind.btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         setViewPagerContents();
     }
 

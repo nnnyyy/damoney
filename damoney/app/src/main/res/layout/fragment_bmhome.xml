@@ -83,17 +83,26 @@
             android:layout_height="0dp"
             android:layout_weight="8"
             >
-
             <com.daasuu.library.FPSTextureView
                 android:id="@+id/animation_texture_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_gravity="center"
                 android:padding="20dp"
                 app:FPSAnimator_fps="24" />
+            <ImageButton
+                android:id="@+id/btn_change"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/transparent"
+                android:src="@drawable/change_button"
+                android:scaleType="fitCenter"
+                />
             <RelativeLayout
                 android:layout_width="150dp"
                 android:layout_height="match_parent"

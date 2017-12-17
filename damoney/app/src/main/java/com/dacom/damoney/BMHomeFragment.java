@@ -1,7 +1,6 @@
 package com.dacom.damoney;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -148,10 +147,16 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             }
         });
 
-        mBind.animationTextureView.setOnClickListener(new View.OnClickListener() {
+        mBind.btnChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GoCharacterInfo();
+            }
+        });
+        mBind.animationTextureView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
         mBind.tvName.setOnClickListener(new View.OnClickListener() {

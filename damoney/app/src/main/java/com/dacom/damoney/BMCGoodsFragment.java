@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dacom.damoney.AlertManager.AlertManager;
 import com.dacom.damoney.databinding.FragmentGoodsBinding;
 
 import java.util.ArrayList;
@@ -54,6 +56,19 @@ public class BMCGoodsFragment extends Fragment {
         DamoneyHttpHelper.GetItemList(0, list, new DamoneyHttpHelper.MyCallbackInterface() {
             @Override
             public void onResult(int nRet) {
+                if(nRet != 0) {
+                    AlertManager.ShowOk(getContext(), "알림", "네트워크 연결을 확인 해 주세요", "닫기", new AlertManager.OnClickListener() {
+                        @Override
+                        public void onClick(View v, int which) {
+                            Intent intent = new Intent(getContext(), SplashActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(intent);
+                        }
+                    });
+                    return;
+                }
                 new Handler(Looper.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {

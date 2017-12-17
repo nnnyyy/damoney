@@ -68,13 +68,13 @@ public class BMAdsDistFragment extends FragmentEx {
         AdsDistRecyclerAdapter adapter = (AdsDistRecyclerAdapter)mBind.rvAdList.getAdapter();
         adapter.ClearList();
         ArrayList<AdsDistItem> aList = new ArrayList<>();
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "플레이스테이션4 프로 팝니다", "승이짱 - 서울", "", 15000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "에스콰이어 소가죽 가방이요", "gsk2 - 경기남부", "", 15000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "레이번 선글라스 팝니다.", "superYG - 경기북부", "", 30000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "지스타 쿠폰 코드 팝니다", "nnnyyy - 부산", "", 1000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "LG 모니터 24인치", "부자되세요 - 인천", "", 20000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "탁구채 팝니다", "에이미 - 파주", "", 13000, true));
-        aList.add(new AdsDistItem(R.drawable.icon_coin, "에어컨 성남 분당 용인 출장수리", "에어컨전문 - 용인", "", 1200, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_7, "플레이스테이션4 프로 팝니다", "승이짱 - 서울", "", 15000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_6, "에스콰이어 소가죽 가방이요", "gsk2 - 경기남부", "", 15000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_5, "레이번 선글라스 팝니다.", "superYG - 경기북부", "", 30000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_4, "지스타 쿠폰 코드 팝니다", "nnnyyy - 부산", "", 1000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_3, "LG 모니터 24인치", "부자되세요 - 인천", "", 20000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_2, "탁구채 팝니다", "에이미 - 파주", "", 13000, true));
+        aList.add(new AdsDistItem(R.drawable.share_add_1, "에어컨 성남 분당 용인 출장수리", "에어컨전문 - 용인", "", 1200, true));
         adapter.AddList(aList);
         adapter.notifyDataSetChanged();
     }

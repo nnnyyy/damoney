@@ -36,8 +36,15 @@ public class AdsTouchActivity extends AppCompatActivity {
     }
 
     private void setupDemoAds() {
-        float[] dx = { 0.504f, 0.41f, 0.07f, 0.07f, 0.26f };
-        float[] dy = { 0.10f, 0.15f, 0.215f, 0.056f, 0.52f };
+        float[] dx = { 0.39f, 0.037f, 0.048f, 0.035f, 0.16f };
+        float[] dy = { 0.14f, 0.08f, 0.045f, 0.201f, 0.50f };
+        Point[] ptHilightSize = {
+                new Point(42,8),
+                new Point(64,8),
+                new Point(43,5),
+                new Point(47,7),
+                new Point(68,20 )
+        };
 
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
@@ -58,8 +65,8 @@ public class AdsTouchActivity extends AppCompatActivity {
                     if(curIdx < atvlist.size()) {
                         View nextView = atvlist.get(curIdx);
                         nextView.setVisibility(View.VISIBLE);
-                        Animation repeat_scale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.repeat_scale);
-                        nextView.findViewById(R.id.img).startAnimation(repeat_scale);
+                        /*Animation repeat_scale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.repeat_scale);
+                        nextView.findViewById(R.id.img).startAnimation(repeat_scale);*/
                     }
                     view.setOnClickListener(null);
                     if(CheckClickState()) {
@@ -81,13 +88,15 @@ public class AdsTouchActivity extends AppCompatActivity {
             });
             mBind.rlTouchArea.addView(bind.getRoot());
             bind.getRoot().setVisibility(View.GONE);
+            bind.root.getLayoutParams().width = (int)(((float)(ptHilightSize[i].x * size.x)) * 0.01);
+            bind.root.getLayoutParams().height = (int)(((float)(ptHilightSize[i].y * size.y)) * 0.01);
             atvlist.add(bind.getRoot());
             CheckClickState();
         }
 
         Animation repeat_scale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.repeat_scale);
         View view = atvlist.get(curIdx);
-        view.findViewById(R.id.img).startAnimation(repeat_scale);
+        //view.findViewById(R.id.img).startAnimation(repeat_scale);
         view.setVisibility(View.VISIBLE);
     }
 

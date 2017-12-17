@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.dacom.damoney.AlertManager.AlertManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.ActivityCharInfoBinding;
 
@@ -37,6 +36,7 @@ public class CharacterInfoActivity extends AppCompatActivity {
             }
         });*/
         init();
+        refreshStat();
         setupButtonEvent();
     }
 
@@ -48,6 +48,17 @@ public class CharacterInfoActivity extends AppCompatActivity {
         mBind.ivCharacter.setImageResource(aCharacters.get(selectedIndex).res_id);
 
         mBind.lvInfo.setText("Lv." + MyPassport.getInstance().nLevel + " " + MyPassport.getInstance().sNick);
+    }
+
+    protected void refreshStat() {
+        int level = MyPassport.getInstance().nLevel;
+        float bonus_cash_earn = 0.01f * level;
+        float bonus_item_earn = 0.1f * level;
+        float bonus_exp_earn = 0.1f * level;
+
+        mBind.tvBonusCashEarn.setText(String.format("%.2f%%", (100.0f + bonus_cash_earn)));
+        mBind.tvBonusItemEarnRate.setText(String.format("%.2f%%", (100.0f + bonus_item_earn)));
+        mBind.tvBonusExpEarn.setText(String.format("%.2f%%", (100.0f + bonus_exp_earn)));
     }
 
     protected void setupButtonEvent() {
@@ -65,7 +76,7 @@ public class CharacterInfoActivity extends AppCompatActivity {
             }
         });
 
-        mBind.btnExit.setOnClickListener(new View.OnClickListener() {
+        mBind.btnExit.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

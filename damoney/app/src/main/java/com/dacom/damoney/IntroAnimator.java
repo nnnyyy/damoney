@@ -13,6 +13,8 @@ import com.daasuu.library.callback.AnimCallBack;
 import com.daasuu.library.drawer.SpriteSheetDrawer;
 import com.daasuu.library.util.Util;
 
+import java.util.ArrayList;
+
 /**
  * Created by nnnyyy on 2017-11-23.
  */
@@ -80,11 +82,49 @@ public class IntroAnimator {
                     true
             );
             bitmap.recycle();
+            ArrayList<Integer> customFrameList = new ArrayList<>();
+            customFrameList.add(0);
+            customFrameList.add(1);
+            customFrameList.add(2);
+            customFrameList.add(3);
+            customFrameList.add(4);
+            customFrameList.add(5);
+            customFrameList.add(6);
+            customFrameList.add(7);
+            customFrameList.add(8);
+            customFrameList.add(9);
+            customFrameList.add(10);
+            customFrameList.add(11);
+            customFrameList.add(12);
+            customFrameList.add(13);
+            customFrameList.add(14);
+            customFrameList.add(15);
+            customFrameList.add(16);
+            customFrameList.add(17);
+            customFrameList.add(18);
+            customFrameList.add(19);
+            customFrameList.add(20);
+            customFrameList.add(21);
+            customFrameList.add(22);
+            customFrameList.add(23);
+            customFrameList.add(24);
+            customFrameList.add(25);
+            customFrameList.add(26);
+            customFrameList.add(23);
+            customFrameList.add(24);
+            customFrameList.add(25);
+            customFrameList.add(26);
+            customFrameList.add(23);
+            customFrameList.add(24);
+            customFrameList.add(25);
+            customFrameList.add(26);
+
             SpriteSheetDrawer spriteSheetDrawer = new SpriteSheetDrawer(
                     introBitmap,
                     nRecommFrameW,
                     nRecommFrameH, frameCnt, count_per_row)
-                    .frequency(3)
+                    //.customFrameList(customFrameList)
+                    .frequency(2)
                     .spriteLoop(false);
 
             spriteSheetDrawer.spriteAnimationEndCallBack(new AnimCallBack() {
