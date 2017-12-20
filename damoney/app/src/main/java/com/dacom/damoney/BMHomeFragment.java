@@ -62,6 +62,11 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
             }
         });
 
+            if(!Storage.have(getContext(), Global.KEY_FIRST_OPEN)) {
+            Storage.saveBoolean(getContext(), Global.KEY_FIRST_OPEN, false);
+            GoHelpPage();
+        }
+
         return mBind.getRoot();
     }
 

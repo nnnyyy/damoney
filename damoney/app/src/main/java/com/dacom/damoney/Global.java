@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 public class Global {
     //public static String BASE_URL = "http://10.0.2.2:3003";
     public static String BASE_URL = "http://52.79.205.198:3003";
+    public static String KEY_FIRST_OPEN = "FirstOpen";
 
     public static int screen_width;
     public static int screen_height;
