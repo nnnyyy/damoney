@@ -62,7 +62,7 @@ public class BonusManager {
         aBonusData.add(newSection);
     }
 
-    public void add(int no, String pub, String name, int reqLevel, String ipath, ArrayList<Integer> _list) {
+    public void add(int no, String pub, String name, int reqLevel, String ipath, ArrayList<Integer> _list, String _link) {
         BonusItemData newData = new BonusItemData();
         newData.no = no;
         newData.publisher = pub;
@@ -70,6 +70,7 @@ public class BonusManager {
         newData.iconPath = ipath;
         newData.aGacha = _list;
         newData.reqLevel = reqLevel;
+        newData.link = _link;
         aBonusData.add(newData);
         mmBonusData.put(no, newData);
     }

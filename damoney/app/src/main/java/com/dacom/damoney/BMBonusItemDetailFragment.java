@@ -1,6 +1,7 @@
 package com.dacom.damoney;
 
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dacom.damoney.Advertisement.AdsWebView;
 import com.dacom.damoney.databinding.FragmentBonusDetailBinding;
 import com.squareup.picasso.Picasso;
 
@@ -40,10 +42,18 @@ public class BMBonusItemDetailFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         selectedGachaNo = ((BMBonusMainFragment)getParentFragment()).getGachaNo();
-        BonusItemData dataInfo = BonusManager.selectedData;
+        final BonusItemData dataInfo = BonusManager.selectedData;
         mBind.tvTitle.setText(dataInfo.name);
         mBind.tvSubTitle.setText(dataInfo.publisher);
         Picasso.with(getContext()).load(Global.BASE_URL+dataInfo.iconPath).into(mBind.ivThumbnail);
+        mBind.ivThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AdsWebView.class);
+                intent.putExtra("url", dataInfo.link);
+                v.getContext().startActivity(intent);
+            }
+        });
         loadCompleteList();
         loadMyList();
         refreshUI();

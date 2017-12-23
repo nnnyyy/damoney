@@ -327,12 +327,13 @@ public class DamoneyHttpHelper {
                         int reqLevel = bitem.getInt("reqLevel");
                         String ipath = bitem.getString("iconpath");
                         JSONArray reqGachaList = bitem.getJSONArray("reqGachaList");
+                        String link = bitem.getString("link");
                         ArrayList<Integer> aList = new ArrayList<>();
                         for(int i2 = 0 ; i2 < reqGachaList.length() ; ++i2) {
                             aList.add(reqGachaList.getInt(i2));
                         }
                         man.addSection(reqLevel);
-                        man.add(no, pub, name, reqLevel, ipath, aList);
+                        man.add(no, pub, name, reqLevel, ipath, aList, link);
                     }
 
                     JSONArray aMyList = root.getJSONArray("mygachalist");

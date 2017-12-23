@@ -16,4 +16,5 @@ public class BonusItemData extends BonusItemBase {
     public int reqLevel;
     public String iconPath;
     public ArrayList<Integer> aGacha;
+    public String link;
 }
