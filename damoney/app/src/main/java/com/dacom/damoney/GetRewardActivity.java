@@ -25,13 +25,29 @@ public class GetRewardActivity extends AppCompatActivity {
     public void init() {
         mBind.llResult.setVisibility(View.GONE);
         mBind.gachabox.setVisibility(View.VISIBLE);
-        mBind.gachabox.setOnClickListener(new View.OnClickListener() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            open();
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        /*mBind.gachabox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBind.gachabox.setOnClickListener(null);
                 open();
             }
-        });
+        });*/
     }
 
     public void open() {

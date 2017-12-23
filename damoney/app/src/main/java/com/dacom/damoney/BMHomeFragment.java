@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.dacom.damoney.Advertisement.AdsManager;
 import com.dacom.damoney.Advertisement.AdsResultListener;
-import com.dacom.damoney.AlertManager.AlertManager;
 import com.dacom.damoney.Sign.MyPassport;
 import com.dacom.damoney.databinding.FragmentBmhomeBinding;
 
@@ -107,7 +106,18 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
         mBind.btnShowAds.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertManager.ShowYesNo(getContext(), "알림", "광고를 보고 경험치를 적립 하시겠습니까?", "예", "아니오", new AlertManager.OnClickListener() {
+                final StringBuilder buf = new StringBuilder();
+                DamoneyHttpHelper.GetAd(buf, new DamoneyHttpHelper.MyCallbackInterface() {
+                    @Override
+                    public void onResult(int nRet) {
+                        if(nRet == 0) {
+                            String sSerial = buf.toString();
+                            adsMan.startFullAds(sSerial);
+                        }
+                    }
+                });
+
+                /*AlertManager.ShowYesNo(getContext(), "알림", "광고를 보고 경험치를 적립 하시겠습니까?", "예", "아니오", new AlertManager.OnClickListener() {
                     @Override
                     public void onClick(View v, int which) {
                         if(which == 1)
@@ -124,7 +134,7 @@ public class BMHomeFragment extends Fragment implements AdsResultListener{
                             });
                         }
                     }
-                });
+                });*/
             }
         });
         mBind.btnShowAds.setEnabled(false);

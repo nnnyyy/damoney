@@ -122,7 +122,8 @@ public class BMBonusTowerFragment extends Fragment {
             bind.touchArea.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    boolean bEnabled = MyPassport.getInstance().nLevel >= level;
+                    /*boolean bEnabled = MyPassport.getInstance().nLevel >= level;*/
+                    boolean bEnabled = true;    //  테스트용으로 레벨 제한을 풀어줌.
 
                     if(bEnabled) {
                         BonusManager.selectedLevel = level;
@@ -160,9 +161,9 @@ public class BMBonusTowerFragment extends Fragment {
         if(inflater == null) return;
         final TowerBonusItemIconBinding bind = DataBindingUtil.inflate(inflater, R.layout.tower_bonus_item_icon, parent_bind.llBonusItemIconList, false);
         parent_bind.llBonusItemIconList.addView(bind.getRoot());
-        if(!bEnabled) {
+        /*if(!bEnabled) {
             bind.ivThumbnail.setAlpha(0.35f);
-        }
+        }*/
         Picasso.with(getContext()).load(Global.BASE_URL + d.iconPath).into(bind.ivThumbnail, new Callback() {
             @Override
             public void onSuccess() {
